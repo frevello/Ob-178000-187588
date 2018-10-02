@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Dominio;
 
 namespace Obligatorio.Test
 {
@@ -7,8 +8,12 @@ namespace Obligatorio.Test
     public class UsuarioTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void CrearUsuarioTest()
         {
+            Usuario usuario = new Usuario("SGarcia", "Sofia", "1234", "Garcia", "Desarollador");
         }
+
+
     }
+
 }
