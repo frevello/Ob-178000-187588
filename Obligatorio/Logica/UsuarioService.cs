@@ -88,9 +88,10 @@ namespace Logica
         {
             try
             {
-                
+               // ValidarDatosUsuarioAModificar(usuario);
+                //ModificarDatos(usuario);
             }
-            catch (Exception e)
+            catch (UsuarioServiceException e)
             {
 
             }
