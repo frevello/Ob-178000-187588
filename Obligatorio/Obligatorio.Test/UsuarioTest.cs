@@ -13,7 +13,6 @@ namespace Obligatorio.Test
             Usuario usuario = new Usuario("SGarcia", "Sofia", "1234", "Garcia", "Desarollador");
         }
 
-
     }
 
 }
