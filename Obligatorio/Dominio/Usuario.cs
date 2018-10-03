@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Excepciones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,16 +18,16 @@ namespace Dominio
         private DateTime registro;
         private DateTime ultimoIngreso;
 
-        private static int minLargoContraseña = 3;
+        private const int minLargoContraseña = 3;
 
         public Usuario(String nombreUsuario, String nombre, String contraseña, String apellido, String rol)
         {
             try
             {
-                ValidarNoVacio(nombreUsuario);
-                ValidarNoVacio(nombre);
-                ValidarNoVacio(apellido);
-                ContraseñaCorrecta(contraseña);
+                ValidarNoVacio(nombreUsuario, "ERROR: Nombre usuario vacio");
+                ValidarNoVacio(nombre, "ERROR: Nombre vacio");
+                ValidarNoVacio(apellido, "ERROR: Apellido vacio");
+                ContraseñaCorrecta(contraseña, "ERROR: Contraseña menor a 3");
 
                 this.nombreUsuario = nombreUsuario;
                 this.nombre = nombre;
@@ -35,9 +36,9 @@ namespace Dominio
                 this.registro = new DateTime();
                 this.rol = rol;
             }
-            catch(Exception e)
+            catch(UsuarioException e)
             {
-
+                throw new UsuarioException(e);
             }
             
         }
@@ -47,14 +48,20 @@ namespace Dominio
             this.ultimoIngreso = new DateTime();
         }    
 
-        private Boolean ValidarNoVacio(String nombreUsuario)
+        private void ValidarNoVacio(String campo, String mensaje)
         {
-            return nombreUsuario.Length > 0;
+            if(campo.Length == 0)
+            {
+                throw new UsuarioException(mensaje);
+            }
         }
 
-        private Boolean ContraseñaCorrecta(String contraseña)
+        private void ContraseñaCorrecta(String contraseña, String mensaje)
         {
-            return contraseña.Length > minLargoContraseña;
+            if (contraseña.Length < minLargoContraseña)
+            {
+                throw new UsuarioException(mensaje);
+            }
         }     
 
     }
