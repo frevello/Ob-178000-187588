@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Excepciones
 {
-    public class UsuarioException : Exception
+    public class UsuarioServiceException : Exception
     {
         private const string MESSAGE = "ERROR AL CREAR USUARIO";
-        public UsuarioException() : base(MESSAGE)
+        public UsuarioServiceException() : base(MESSAGE)
         {
         }
 
-        public UsuarioException(String mensaje) : base(mensaje)
+        public UsuarioServiceException(String mensaje) : base(mensaje)
         {
         }
 
-        public UsuarioException(Exception innerException) : base(MESSAGE, innerException)
+        public UsuarioServiceException(Exception innerException) : base(MESSAGE, innerException)
         {
         }
 

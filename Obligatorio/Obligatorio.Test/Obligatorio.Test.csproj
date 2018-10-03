@@ -53,7 +53,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="UsuarioServiceTest.cs" />
-    <Compile Include="UsuarioTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

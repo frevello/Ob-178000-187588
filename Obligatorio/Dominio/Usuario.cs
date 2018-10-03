@@ -9,14 +9,14 @@ namespace Dominio
 {
     public class Usuario
     {
-       
-        private String nombreUsuario;
-        private String nombre;
-        private String contraseña;
-        private String apellido;
-        private String rol;
-        private DateTime registro;
-        private DateTime ultimoIngreso;
+
+        public String nombreUsuario;
+        public String nombre;
+        public String contraseña;
+        public String apellido;
+        public String rol;
+        public DateTime registro;
+        public DateTime ultimoIngreso;
 
         private const int minLargoContraseña = 3;
 
@@ -36,23 +36,18 @@ namespace Dominio
                 this.registro = new DateTime();
                 this.rol = rol;
             }
-            catch(UsuarioException e)
+            catch(UsuarioServiceException e)
             {
-                throw new UsuarioException(e);
+                throw new UsuarioServiceException(e);
             }
             
         }
-
-        public void SetUltimoIngreso()
-        {
-            this.ultimoIngreso = new DateTime();
-        }    
 
         private void ValidarNoVacio(String campo, String mensaje)
         {
             if(campo.Length == 0)
             {
-                throw new UsuarioException(mensaje);
+                throw new UsuarioServiceException(mensaje);
             }
         }
 
@@ -60,9 +55,14 @@ namespace Dominio
         {
             if (contraseña.Length < minLargoContraseña)
             {
-                throw new UsuarioException(mensaje);
+                throw new UsuarioServiceException(mensaje);
             }
-        }     
+        }
+
+        public void SetUltimoIngreso()
+        {
+            this.ultimoIngreso = new DateTime();
+        }
 
     }
 }
