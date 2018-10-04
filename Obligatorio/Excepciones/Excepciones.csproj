@@ -38,12 +38,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-  </ItemGroup>
     <Compile Include="ProductoException.cs" />
-    <Compile Include="UsuarioException.cs" />
     <Compile Include="FileReaderException.cs" />
+    <Compile Include="UsuarioException.cs" />
     <Compile Include="UsuarioServiceException.cs" />
-
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
