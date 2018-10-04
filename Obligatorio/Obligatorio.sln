@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excepciones", "Excepciones\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{695D2445-80BD-4408-8E9F-B97184E4C61F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaz de usuario", "Interfaz de usuario\Interfaz de usuario.csproj", "{72BE2FA9-700E-49EC-BF6F-6F4EE5FED013}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{695D2445-80BD-4408-8E9F-B97184E4C61F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{695D2445-80BD-4408-8E9F-B97184E4C61F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{695D2445-80BD-4408-8E9F-B97184E4C61F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72BE2FA9-700E-49EC-BF6F-6F4EE5FED013}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72BE2FA9-700E-49EC-BF6F-6F4EE5FED013}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72BE2FA9-700E-49EC-BF6F-6F4EE5FED013}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72BE2FA9-700E-49EC-BF6F-6F4EE5FED013}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

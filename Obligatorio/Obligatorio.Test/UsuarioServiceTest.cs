@@ -76,8 +76,19 @@ namespace Obligatorio.Test
         [TestMethod]
         public void ModificarUsuarioTest()
         {
-            Usuario usuario = new Usuario("SGarcia", "Sofia", "112346", "Garcia", "Desarollador");
+            usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");
+            Usuario usuario = new Usuario("FRevello", "Revello", "1234567", "Revello", "Desarollador");
             usuarioService.ModificarUsuario(usuario);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(UsuarioServiceException))]
+        public void ModificarUsuarioDatosIncorrectosTest()
+        {
+            usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");
+            Usuario usuario = new Usuario("FRevello", "Revello", "12", "Revello", "Desarollador");
+            usuarioService.ModificarUsuario(usuario);
+        }
+
     }
 }

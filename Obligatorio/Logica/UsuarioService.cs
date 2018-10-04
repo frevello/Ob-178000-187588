@@ -32,7 +32,7 @@ namespace Logica
             }    
         }
 
-        public void TryAltaUsuario(String nombreUsuario, String nombre, String contraseña, String apellido, String rol)
+        private void TryAltaUsuario(String nombreUsuario, String nombre, String contraseña, String apellido, String rol)
         {
             if (!ExisteUsuario(nombreUsuario))
             {
@@ -41,7 +41,7 @@ namespace Logica
             }
         }
 
-        public Boolean ExisteUsuario(String nombreUsuario)
+        private Boolean ExisteUsuario(String nombreUsuario)
         {
             Boolean esta = false;
             for (int i = 0; i < this.listaUsuarios.Count() && !esta; i++)
@@ -68,7 +68,7 @@ namespace Logica
             }
         }
 
-        public void TryBajaUsuarioAdmin(Usuario usuario, String mensaje)
+        private void TryBajaUsuarioAdmin(Usuario usuario, String mensaje)
         {
             if (usuario.nombreUsuario.Equals("Admin"))
             {
@@ -76,7 +76,7 @@ namespace Logica
             }
         }
 
-        public void TryBajaUsuarioInexistente(Usuario usuario, String mensaje)
+        private void TryBajaUsuarioInexistente(Usuario usuario, String mensaje)
         {
             if (!ExisteUsuario(usuario.nombreUsuario))
             {
@@ -88,16 +88,40 @@ namespace Logica
         {
             try
             {
-               // ValidarDatosUsuarioAModificar(usuario);
-                //ModificarDatos(usuario);
+               ValidarDatosUsuarioAModificar(usuario);
+               TryModificarUsuario(usuario);
             }
             catch (UsuarioServiceException e)
             {
-
+                throw new UsuarioServiceException(e);
             }
         }
 
+        private void ValidarDatosUsuarioAModificar(Usuario usuario)
+        {
+            try
+            {
+                Usuario usuarioConModificaciones = new Usuario(usuario.nombreUsuario, usuario.nombre, usuario.contraseña, usuario.apellido, usuario.rol);
+            }
+            catch (UsuarioServiceException e)
+            {
+                throw new UsuarioServiceException(e);
+            }
+            
+        }
 
+        private void TryModificarUsuario(Usuario usuario)
+        {
+            try
+            {
+                BajaUsuario(usuario);
+                AltaUsuario(usuario.nombreUsuario, usuario.nombre, usuario.contraseña, usuario.apellido, usuario.rol);
+            }
+            catch (UsuarioServiceException e)
+            {
+                throw new UsuarioServiceException(e);
+            }
+        }
 
     }
 }
