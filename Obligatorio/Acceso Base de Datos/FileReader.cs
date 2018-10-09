@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Excepciones;
 
-namespace Acceso
+namespace AccesoDatos
 {
     public class FileReader
     {

@@ -1,10 +1,7 @@
 ﻿using Dominio;
-using Excepciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logica
 {
@@ -22,17 +19,6 @@ namespace Logica
 
 
         public void AltaUsuario(String nombreUsuario, String nombre, String contraseña, String apellido, String rol)
-        {
-            try
-            {
-                TryAltaUsuario(nombreUsuario, nombre, contraseña, apellido, rol);               
-            }catch(UsuarioServiceException e)
-            {
-                throw new UsuarioServiceException(e);
-            }    
-        }
-
-        private void TryAltaUsuario(String nombreUsuario, String nombre, String contraseña, String apellido, String rol)
         {
             if (!ExisteUsuario(nombreUsuario))
             {
@@ -56,16 +42,9 @@ namespace Logica
 
         public void BajaUsuario(Usuario usuario)
         {
-            try
-            {
-                TryBajaUsuarioAdmin(usuario, "Error: No se puede dar de baja a Admin");
-                TryBajaUsuarioInexistente(usuario, "Error: No existe el usuario");
-                this.listaUsuarios.Remove(usuario);
-            }
-            catch (UsuarioServiceException e)
-            {
-                throw new UsuarioServiceException(e);
-            }
+            TryBajaUsuarioAdmin(usuario, "Error: No se puede dar de baja a Admin");
+            TryBajaUsuarioInexistente(usuario, "Error: No existe el usuario");
+            this.listaUsuarios.Remove(usuario);
         }
 
         private void TryBajaUsuarioAdmin(Usuario usuario, String mensaje)
@@ -84,43 +63,22 @@ namespace Logica
             }
         }
 
-        public void ModificarUsuario( Usuario usuario)
+        public void ModificarUsuario(Usuario usuario)
         {
-            try
-            {
-               ValidarDatosUsuarioAModificar(usuario);
-               TryModificarUsuario(usuario);
-            }
-            catch (UsuarioServiceException e)
-            {
-                throw new UsuarioServiceException(e);
-            }
+            ValidarDatosUsuarioAModificar(usuario);
+            TryModificarUsuario(usuario);
         }
 
         private void ValidarDatosUsuarioAModificar(Usuario usuario)
         {
-            try
-            {
-                Usuario usuarioConModificaciones = new Usuario(usuario.nombreUsuario, usuario.nombre, usuario.contraseña, usuario.apellido, usuario.rol);
-            }
-            catch (UsuarioServiceException e)
-            {
-                throw new UsuarioServiceException(e);
-            }
-            
+            Usuario usuarioConModificaciones = new Usuario(usuario.nombreUsuario, usuario.nombre, usuario.contraseña, usuario.apellido, usuario.rol);
         }
 
         private void TryModificarUsuario(Usuario usuario)
         {
-            try
-            {
-                BajaUsuario(usuario);
-                AltaUsuario(usuario.nombreUsuario, usuario.nombre, usuario.contraseña, usuario.apellido, usuario.rol);
-            }
-            catch (UsuarioServiceException e)
-            {
-                throw new UsuarioServiceException(e);
-            }
+            BajaUsuario(usuario);
+            AltaUsuario(usuario.nombreUsuario, usuario.nombre, usuario.contraseña, usuario.apellido, usuario.rol);
+
         }
 
     }

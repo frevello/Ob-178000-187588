@@ -1,9 +1,4 @@
-﻿using Excepciones;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Dominio
 {
@@ -18,12 +13,10 @@ namespace Dominio
         public DateTime registro;
         public DateTime ultimoIngreso;
 
-        private const int minLargoContraseña = 3;
+        private const int MIN_LARGO_CONTRASEÑA = 3;
 
         public Usuario(String nombreUsuario, String nombre, String contraseña, String apellido, String rol)
         {
-            try
-            {
                 ValidarNoVacio(nombreUsuario, "ERROR: Nombre usuario vacio");
                 ValidarNoVacio(nombre, "ERROR: Nombre vacio");
                 ValidarNoVacio(apellido, "ERROR: Apellido vacio");
@@ -35,27 +28,21 @@ namespace Dominio
                 this.apellido = apellido;
                 this.registro = new DateTime();
                 this.rol = rol;
-            }
-            catch(UsuarioServiceException e)
-            {
-                throw new UsuarioServiceException(e);
-            }
-            
         }
 
         private void ValidarNoVacio(String campo, String mensaje)
         {
             if(campo.Length == 0)
             {
-                throw new UsuarioServiceException(mensaje);
+                throw new LargoDatoNoValidoException(mensaje);
             }
         }
 
         private void ContraseñaCorrecta(String contraseña, String mensaje)
         {
-            if (contraseña.Length < minLargoContraseña)
+            if (contraseña.Length < MIN_LARGO_CONTRASEÑA)
             {
-                throw new UsuarioServiceException(mensaje);
+                throw new LargoDatoNoValidoException(mensaje);
             }
         }
 
