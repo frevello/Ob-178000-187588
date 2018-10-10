@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AccesoDatos;
+using Logica;
 
 namespace Obligatorio.Test
 {
@@ -12,7 +13,7 @@ namespace Obligatorio.Test
         public void FileOpenTests()
         {
             FileReader reader = new FileReader();
-            reader.OpenFile(@"c:/file.txt");
+            reader.OpenFile(@"C:/Users/alumnoFI/Desktop/Files/file.txt");
         }
 
         [TestMethod]
@@ -20,20 +21,19 @@ namespace Obligatorio.Test
         public void FileOpenNotExistsTests()
         {
             FileReader reader = new FileReader();
-            reader.OpenFile(@"c:/file2.txt");
+            reader.OpenFile(@"C:/Users/alumnoFI/Desktop/Files/file2.txt");
         }
 
         [TestMethod]
-        public void ValidarFormatoArchivoTest()
+        public void CargarDataSetTest()
         {
-            FileReader reader = new FileReader();
-            reader.OpenFile(@"c:/file.txt");
-            reader.ValidarFormatoArchivo();
+            DataSetService dataSet = new DataSetService();
+            dataSet.CargarDataSet(@"C:/Users/alumnoFI/Desktop/Files/file.txt");
         }
-
+        /*
         [TestMethod]
         [ExpectedException(typeof(FileReaderException))]
-        public void ValidarFormatoArchivoSinVARDEFTest()
+        public void CargarDataSetSinVARDEFTest()
         {
             FileReader reader = new FileReader();
             reader.OpenFile(@"C:\Users\Facundo\Desktop\Files\fileSinVARDEF.txt");
@@ -42,7 +42,7 @@ namespace Obligatorio.Test
 
         [TestMethod]
         [ExpectedException(typeof(FileReaderException))]
-        public void ValidarFormatoArchivoSinTIMEenVARDEFTest()
+        public void CargarDataSetSinTIMEenVARDEFTest()
         {
             FileReader reader = new FileReader();
             reader.OpenFile(@"C:\Users\Facundo\Desktop\Files\fileSinTIMEenVARDEF.txt");
@@ -51,7 +51,7 @@ namespace Obligatorio.Test
 
         [TestMethod]
         [ExpectedException(typeof(FileReaderException))]
-        public void ValidarFormatoArchivoSinIgualTest()
+        public void CargarDataSetSinIgualTest()
         {
             FileReader reader = new FileReader();
             reader.OpenFile(@"C:\Users\Facundo\Desktop\Files\fileSinIgual.txt");
@@ -61,7 +61,7 @@ namespace Obligatorio.Test
 
         [TestMethod]
         [ExpectedException(typeof(FileReaderException))]
-        public void ValidarFormatoArchivoNoExisteVarEnVARDEFTest()
+        public void CargarDataSetNoExisteVarEnVARDEFTest()
         {
             FileReader reader = new FileReader();
             reader.OpenFile(@"C:\Users\Facundo\Desktop\Files\fileVarNoExisteEnVARDEF.txt");
@@ -70,7 +70,7 @@ namespace Obligatorio.Test
 
         [TestMethod]
         [ExpectedException(typeof(FileReaderException))]
-        public void ValidarFormatoArchivoVarNoRepetidaTest()
+        public void CargarDataSetConVarRepetidaTest()
         {
             FileReader reader = new FileReader();
             reader.OpenFile(@"C:\Users\Facundo\Desktop\Files\fileVarRepetida.txt");
@@ -79,7 +79,7 @@ namespace Obligatorio.Test
 
         [TestMethod]
         [ExpectedException(typeof(FileReaderException))]
-        public void ValidarFormatoArchivoFormatoDatoIncorrectoTest()
+        public void CargarDataSetFormatoDatoIncorrectoTest()
         {
             FileReader reader = new FileReader();
             reader.OpenFile(@"C:\Users\Facundo\Desktop\Files\fileDatoIncorrecto.txt");
@@ -88,12 +88,12 @@ namespace Obligatorio.Test
         
         [TestMethod]
         [ExpectedException(typeof(FileReaderException))]
-        public void ValidarFormatoArchivoFormatoNoTerminaRegistroTest()
+        public void CargarDataSetRegistroNoTerminaTest()
         {
             FileReader reader = new FileReader();
             reader.OpenFile(@"C:\Users\Facundo\Desktop\Files\fileNoTerminaRegistro.txt");
             reader.ValidarFormatoArchivo();
-        }
+        }*/
 
     }
 }

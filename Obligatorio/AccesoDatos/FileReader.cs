@@ -32,6 +32,7 @@ namespace AccesoDatos
              reader = new StreamReader(path);
         }
 
+
         public void ValidarFormatoArchivo()
         {
             ValidarPrimeraLinea();

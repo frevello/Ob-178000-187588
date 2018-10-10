@@ -66,6 +66,10 @@
       <Project>{990824FF-3CE5-474A-AEC2-E8562F29484D}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\InterfazUI\InterfazServiceUI.csproj">
+      <Project>{695D2445-80BD-4408-8E9F-B97184E4C61F}</Project>
+      <Name>InterfazServiceUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logica\Logica.csproj">
       <Project>{189B631B-03C7-4C88-AEB4-E5C4B68CD53B}</Project>
       <Name>Logica</Name>

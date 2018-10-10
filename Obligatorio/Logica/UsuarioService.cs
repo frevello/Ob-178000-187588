@@ -1,11 +1,12 @@
 ﻿using Dominio;
+using InterfazServiceUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Logica
 {
-    public class UsuarioService
+    public class UsuarioService: IUsuarioService
     {
 
         private List<Usuario> listaUsuarios;
