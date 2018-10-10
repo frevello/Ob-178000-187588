@@ -3,7 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logica;
-using Excepciones;
+using AccesoDatos;
 
 namespace Obligatorio.Test
 {
