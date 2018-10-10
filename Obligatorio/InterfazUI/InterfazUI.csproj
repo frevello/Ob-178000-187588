@@ -7,8 +7,8 @@
     <ProjectGuid>{695D2445-80BD-4408-8E9F-B97184E4C61F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Interfaces</RootNamespace>
-    <AssemblyName>Interfaces</AssemblyName>
+    <RootNamespace>InterfazUI</RootNamespace>
+    <AssemblyName>InterfazUI</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

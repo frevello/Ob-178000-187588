@@ -48,7 +48,7 @@
     <Compile Include="Version.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Interfaces\InterfazUI.csproj">
+    <ProjectReference Include="..\InterfazUI\InterfazUI.csproj">
       <Project>{695D2445-80BD-4408-8E9F-B97184E4C61F}</Project>
       <Name>InterfazUI</Name>
     </ProjectReference>
