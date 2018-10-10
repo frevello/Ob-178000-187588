@@ -1,9 +1,9 @@
-﻿using InterfazUI;
+﻿
 using System;
 
 namespace Dominio
 {
-    class LargoDatoNoValidoException : UsuarioException
+    public class LargoDatoNoValidoException : Exception
     {
         private const string MESSAGE = "ERROR LARGO DATO NO VALIDO";
 

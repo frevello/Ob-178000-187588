@@ -1,10 +1,7 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logica;
-using Excepciones;
 using Dominio;
+
 
 namespace Obligatorio.Test
 {
@@ -21,28 +18,28 @@ namespace Obligatorio.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UsuarioServiceException))]
+        [ExpectedException(typeof(LargoDatoNoValidoException))]
         public void AltaUsuarioNombreUsuarioVacioTest()
         {
             usuarioService.AltaUsuario("", "Sofia", "1234", "Garcia", "Desarollador");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UsuarioServiceException))]
+        [ExpectedException(typeof(LargoDatoNoValidoException))]
         public void AltaUsuarioNombreVacioTest()
         {
             usuarioService.AltaUsuario("SGarcia", "", "1234", "Garcia", "Desarollador");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UsuarioServiceException))]
+        [ExpectedException(typeof(LargoDatoNoValidoException))]
         public void AltaUsuarioApellidoVacioTest()
         {
             usuarioService.AltaUsuario("SGarcia", "Sofia", "1234", "", "Desarollador");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UsuarioServiceException))]
+        [ExpectedException(typeof(LargoDatoNoValidoException))]
         public void AltaUsuarioContraseñaMenorAMinimoTest()
         {
             usuarioService.AltaUsuario("SGarcia", "Sofia", "12", "", "Desarollador");

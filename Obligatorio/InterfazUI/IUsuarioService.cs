@@ -2,8 +2,8 @@
 
 namespace InterfazUI
 {
-    public class IUsuarioService
+    public interface IUsuarioService
     {
-      
+         
     }
 }
