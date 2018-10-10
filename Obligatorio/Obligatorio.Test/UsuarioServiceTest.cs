@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logica;
 using Dominio;
-using InterfazUI;
 
 
 namespace Obligatorio.Test
