@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logica;
 using Dominio;
+using InterfazUI;
 
 
 namespace Obligatorio.Test
@@ -79,7 +80,7 @@ namespace Obligatorio.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UsuarioServiceException))]
+        [ExpectedException(typeof(LargoDatoNoValidoException))]
         public void ModificarUsuarioDatosIncorrectosTest()
         {
             usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");

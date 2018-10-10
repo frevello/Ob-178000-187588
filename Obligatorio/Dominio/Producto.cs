@@ -1,7 +1,7 @@
 ﻿using System;
-
+ 
 namespace Dominio
-{
+{ 
     public class Producto
     {
         public String nombre;
@@ -9,16 +9,16 @@ namespace Dominio
 
         public Producto(String nombre)
         {
-                ValidarNoVacio(nombre, "ERROR: nombre vacio");
-                this.nombre = nombre;
-                this.fechaInicial = new DateTime();
+            ValidarNoVacio(nombre, "ERROR: nombre vacio");
+            this.nombre = nombre;
+            this.fechaInicial = new DateTime();
         }
 
         private void ValidarNoVacio(String campo, String mensaje)
         {
             if (campo.Length == 0)
             {
-             //   throw new ProductoException(mensaje);
+                throw new LargoDatoNoValidoException(mensaje);
             }
         }
 
