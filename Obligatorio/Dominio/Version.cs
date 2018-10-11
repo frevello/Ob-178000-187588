@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Dominio
 {
@@ -10,23 +11,38 @@ namespace Dominio
         public String estado;
         public Producto producto;
 
-        private const String formatoEtiqueta = "X.YY.ZZZ";
+        private const String formatoEtiqueta = "^\\d{1}.\\d{2}.\\d{3}$";
 
         public Version(String etiqueta, String estado, Producto producto)
         {
-                ValidarFormatoEtiqueta(etiqueta, "ERROR: formato de etiqueta invalido");
-                this.etiqueta = etiqueta;
-                this.fechaCreacion = new DateTime();
-                this.estado = estado;
-                this.producto = producto;
+            ValidarFormatoEtiqueta(etiqueta, "ERROR: Formato de etiqueta invalido");
+            ValidarCampoNoVacios(estado, "ERROR: Estado vacio");
+            this.etiqueta = etiqueta;
+            this.fechaCreacion = new DateTime();
+            this.estado = estado;
+            this.producto = producto;
         }
 
         private void ValidarFormatoEtiqueta(String campo, String mensaje)
         {
-            ///Falta validar formato
-            if (campo.Length == 0) 
+            if (campo.Length == 0 || !FormatoEtiqueta(campo))
             {
-              //  throw new ProductoException(mensaje);
+                throw new VersionEtiquetaException(mensaje);
+            }
+        }
+
+        private Boolean FormatoEtiqueta(String campo)
+        {
+            Regex regex = new Regex(formatoEtiqueta);
+            return regex.IsMatch(campo);
+
+        }
+
+        private void ValidarCampoNoVacios(String campo, String mensaje)
+        {
+            if (campo.Length == 0)
+            {
+                 throw new LargoDatoNoValidoException(mensaje);
             }
         }
 

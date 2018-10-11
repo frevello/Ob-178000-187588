@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Logica
-{
+{ 
     public class UsuarioService
     {
-
         private List<Usuario> listaUsuarios;
 
         public UsuarioService()
@@ -17,7 +16,6 @@ namespace Logica
             listaUsuarios.Add(admin);
         }
 
-
         public void AltaUsuario(String nombreUsuario, String nombre, String contraseña, String apellido, String rol)
         {
             if (!ExisteUsuario(nombreUsuario))
@@ -25,26 +23,29 @@ namespace Logica
                 Usuario usuario = new Usuario(nombreUsuario, nombre, contraseña, apellido, rol);
                 this.listaUsuarios.Add(usuario);
             }
+            else
+            {
+                throw new UsuarioServiceException("Error: Ya existe un usuario con el mismo nombre");
+            }
         }
 
         private Boolean ExisteUsuario(String nombreUsuario)
         {
-            Boolean esta = false;
-            for (int i = 0; i < this.listaUsuarios.Count() && !esta; i++)
+            if (this.listaUsuarios.FirstOrDefault(u => u.nombreUsuario == nombreUsuario) == null)
             {
-                if (nombreUsuario.Equals(this.listaUsuarios.ElementAt(i).nombreUsuario))
-                {
-                    esta = true;
-                }
+                return false;
             }
-            return esta;
+            else
+            {
+                return true;
+            }
         }
 
         public void BajaUsuario(Usuario usuario)
         {
             TryBajaUsuarioAdmin(usuario, "Error: No se puede dar de baja a Admin");
             TryBajaUsuarioInexistente(usuario, "Error: No existe el usuario");
-            this.listaUsuarios.Remove(usuario);
+            this.listaUsuarios.RemoveAll(u => u.nombreUsuario == usuario.nombreUsuario);
         }
 
         private void TryBajaUsuarioAdmin(Usuario usuario, String mensaje)
@@ -78,8 +79,6 @@ namespace Logica
         {
             BajaUsuario(usuario);
             AltaUsuario(usuario.nombreUsuario, usuario.nombre, usuario.contraseña, usuario.apellido, usuario.rol);
-
         }
-
     }
 }

@@ -45,6 +45,7 @@
     <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Version.cs" />
+    <Compile Include="VersionEtiquetaException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InterfazUI\InterfazUI.csproj">
