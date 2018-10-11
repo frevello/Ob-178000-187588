@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Creator.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="FileReaderException.cs" />
     <Compile Include="LoadDataSet.cs" />

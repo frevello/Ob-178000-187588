@@ -5,6 +5,6 @@ namespace InterfazAccesoDatos
 {
     public interface ILoadDataSet
     {
-        DataSet CargarDataSet(string path);
+        DataSet CargarDataSet();
     }
 }

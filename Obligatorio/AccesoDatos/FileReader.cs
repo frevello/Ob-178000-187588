@@ -10,7 +10,7 @@ namespace AccesoDatos
         private StreamReader reader;
         private List<string> variables = new List<string>();
         private int nroLinea = 1;
-
+        
         private const String TIME = "TIME";
         private const String VARDEF = "VARDEF";
         private const String FIN_REGISTRO = "#";
@@ -33,19 +33,27 @@ namespace AccesoDatos
         }
 
 
+        public string getNextLine()
+        {
+            return reader.ReadLine();
+        }
+
+
+
+
         public void ValidarFormatoArchivo()
         {
-            ValidarPrimeraLinea();
+          //  ValidarPrimeraLinea();
             ValidarRegistros();
         }
 
-        private void ValidarPrimeraLinea()
+      /*  private void ValidarPrimeraLinea()
         {
             String linea = reader.ReadLine();
             ValidarLineaContieneVARDEF(linea);
             ValidarLineaContieneTIME(linea);
             CargarVariablesPrimeraLinea(linea);       
-        }
+        }*/
 
         private void ValidarRegistros()
         {
@@ -59,7 +67,7 @@ namespace AccesoDatos
             }
         }
 
-        private void ValidarLineaContieneVARDEF(String line)
+     /*   private void ValidarLineaContieneVARDEF(String line)
         {
             if (!line.StartsWith(VARDEF))
             {
@@ -94,7 +102,7 @@ namespace AccesoDatos
         {
             String[] lineaSplitIgual = linea.Split('=');
             return lineaSplitIgual[1];
-        }
+        }*/
 
         private void ValidarRegistro(String linea)
         {
