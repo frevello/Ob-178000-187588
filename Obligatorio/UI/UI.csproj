@@ -46,16 +46,115 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AltaProducto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AltaProducto.Designer.cs">
+      <DependentUpon>AltaProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AltaUsuario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AltaUsuario.Designer.cs">
+      <DependentUpon>AltaUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CargarArchivo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CargarArchivo.Designer.cs">
+      <DependentUpon>CargarArchivo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatosUsuario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DatosUsuario.Designer.cs">
+      <DependentUpon>DatosUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditarProductos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditarProductos.Designer.cs">
+      <DependentUpon>EditarProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditarUsuario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditarUsuario.Designer.cs">
+      <DependentUpon>EditarUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Estadisticas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Estadisticas.Designer.cs">
+      <DependentUpon>Estadisticas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListaDataSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ListaDataSet.Designer.cs">
+      <DependentUpon>ListaDataSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuAdmin.Designer.cs">
+      <DependentUpon>MenuAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inicio de Sesion.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Inicio de Sesion.Designer.cs">
       <DependentUpon>Inicio de Sesion.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuDesarollador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuDesarollador.Designer.cs">
+      <DependentUpon>MenuDesarollador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductoVersiones.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProductoVersiones.Designer.cs">
+      <DependentUpon>ProductoVersiones.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AltaProducto.resx">
+      <DependentUpon>AltaProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AltaUsuario.resx">
+      <DependentUpon>AltaUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CargarArchivo.resx">
+      <DependentUpon>CargarArchivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatosUsuario.resx">
+      <DependentUpon>DatosUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditarProductos.resx">
+      <DependentUpon>EditarProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditarUsuario.resx">
+      <DependentUpon>EditarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Estadisticas.resx">
+      <DependentUpon>Estadisticas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inicio de Sesion.resx">
       <DependentUpon>Inicio de Sesion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListaDataSet.resx">
+      <DependentUpon>ListaDataSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuAdmin.resx">
+      <DependentUpon>MenuAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuDesarollador.resx">
+      <DependentUpon>MenuDesarollador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductoVersiones.resx">
+      <DependentUpon>ProductoVersiones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

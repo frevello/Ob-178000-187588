@@ -44,7 +44,7 @@ namespace Logica
         public void BajaUsuario(Usuario usuario)
         {
             TryBajaUsuarioAdmin(usuario, "Error: No se puede dar de baja a Admin");
-            TryBajaUsuarioInexistente(usuario, "Error: No existe el usuario");
+            TryUsuarioInexistente(usuario.nombreUsuario, "Error: No existe el usuario");
             this.listaUsuarios.RemoveAll(u => u.nombreUsuario == usuario.nombreUsuario);
         }
 
@@ -56,9 +56,9 @@ namespace Logica
             }
         }
 
-        private void TryBajaUsuarioInexistente(Usuario usuario, String mensaje)
+        private void TryUsuarioInexistente(String nombreUsuario, String mensaje)
         {
-            if (!ExisteUsuario(usuario.nombreUsuario))
+            if (!ExisteUsuario(nombreUsuario))
             {
                 throw new UsuarioServiceException(mensaje);
             }
@@ -79,6 +79,37 @@ namespace Logica
         {
             BajaUsuario(usuario);
             AltaUsuario(usuario.nombreUsuario, usuario.nombre, usuario.contraseña, usuario.apellido, usuario.rol);
+        }
+
+        public Boolean LogIn(String nombre, String contraseña)
+        {
+            TryValidarCamposVacios(nombre, contraseña);
+            TryUsuarioInexistente(nombre, "Error: No existe el usuario");
+            TryDatosCorrectos(nombre, contraseña);
+            return true;
+        }
+
+        private void TryValidarCamposVacios(String nombre, String contraseña)
+        {
+            ValidarNoVacio(nombre, "Error: Nombre de usuario vacio");
+            ValidarNoVacio(contraseña, "Error: Nombre de usuario vacio");
+        }
+
+        private void ValidarNoVacio(String campo, String mensaje)
+        {
+            if (campo.Length == 0)
+            {
+                throw new LargoDatoNoValidoException(mensaje);
+            }
+        }
+
+        private void TryDatosCorrectos(String nombre, String contraseña)
+        {
+            Usuario usuario = this.listaUsuarios.FirstOrDefault(u => u.nombreUsuario == nombre);
+            if (!usuario.contraseña.Equals(contraseña))
+            {
+                throw new UsuarioServiceException("Error: Contraseña Invalida");
+            }
         }
     }
 }

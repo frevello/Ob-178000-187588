@@ -95,5 +95,35 @@ namespace Obligatorio.Test
             usuarioService.ModificarUsuario(usuario);
         }
 
+        [TestMethod]
+        public void LogIn()
+        {
+            usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");
+            usuarioService.LogIn("FRevello", "1234");          
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(LargoDatoNoValidoException))]
+        public void LogInDatosVacios()
+        {
+            usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");
+            usuarioService.LogIn("FRevello", "");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UsuarioServiceException))]
+        public void LogInNombreIncorrecto()
+        {
+            usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");
+            usuarioService.LogIn("FRevell", "1234");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UsuarioServiceException))]
+        public void LogInContraseñaIncorrecto()
+        {
+            usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");
+            usuarioService.LogIn("FRevello", "1234254");
+        }
     }
 }

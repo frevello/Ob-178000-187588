@@ -14,7 +14,28 @@ namespace Interfaz_de_usuario
     {
         public Form1()
         {
+            this.CenterToScreen();
             InitializeComponent();
+        }
+
+        private void textTitulo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void botonIngresar_Click(object sender, EventArgs e)
+        {
+
+            //verificar usuario y ver cual se llama
+            this.Hide();
+            var MenuAdministrador = new MenuAdmin();
+            MenuAdministrador.Closed += (s, args) => this.Close();
+            MenuAdministrador.Show();
+        }
+
+        private void botonSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

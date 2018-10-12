@@ -5,7 +5,6 @@ namespace Dominio
 {
     public class Version
     {
-
         public String etiqueta;
         public DateTime fechaCreacion;
         public String estado;

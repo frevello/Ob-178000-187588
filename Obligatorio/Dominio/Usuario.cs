@@ -4,7 +4,6 @@ namespace Dominio
 {
     public class Usuario
     {
-
         public String nombreUsuario;
         public String nombre;
         public String contraseña;
