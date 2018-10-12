@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logica;
 using Dominio;
-
+using InterfazServiceUI;
 
 namespace Obligatorio.Test
 {
@@ -9,7 +9,7 @@ namespace Obligatorio.Test
     [TestClass]
     public class UsuarioServiceTest
     {
-        public UsuarioService usuarioService = new UsuarioService();
+        public IUsuarioService usuarioService = new UsuarioService();
 
         [TestMethod]
         public void AltaUsuarioTest()
