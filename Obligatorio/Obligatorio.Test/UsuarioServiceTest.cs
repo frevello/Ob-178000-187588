@@ -46,6 +46,14 @@ namespace Obligatorio.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(UsuarioServiceException))]
+        public void AltaUsuarioYaExistenteTest()
+        {
+            usuarioService.AltaUsuario("Frevello", "Facundo", "1234", "Revello", "Desarollador");
+            usuarioService.AltaUsuario("Frevello", "Facundo", "1234", "Revello", "Desarollador");
+        }
+
+        [TestMethod]
         public void BajaUsuarioTest()
         {
             Usuario usuario = new Usuario("SGarcia", "Sofia", "1234", "Garcia", "Desarollador");
@@ -73,8 +81,8 @@ namespace Obligatorio.Test
         [TestMethod]
         public void ModificarUsuarioTest()
         {
-            usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");
-            Usuario usuario = new Usuario("FRevello", "Revello", "1234567", "Revello", "Desarollador");
+            usuarioService.AltaUsuario("FacundoR", "Revello", "1234", "Revello", "Desarollador");
+            Usuario usuario = new Usuario("FacundoR", "Revello", "1234567", "Revello", "Desarollador");
             usuarioService.ModificarUsuario(usuario);
         }
 
