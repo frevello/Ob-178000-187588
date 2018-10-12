@@ -99,6 +99,10 @@ namespace Dominio
         private void AddRegistroDataSet(String nombreRegistro)
         {
             VariablesDataSet registro = new VariablesDataSet(nombreRegistro);
+            if (nombreRegistro.Equals(REGISTRO_TIME))
+            {
+                registro.ordenado = true;
+            }
             registros.Add(registro);
         }
 
@@ -128,7 +132,7 @@ namespace Dominio
 
         private float ObtenerLastDatoDeRegistroDataSet(VariablesDataSet registro, float datoRegistro)
         {
-            return registro.datosRegistro.Last();
+            return registro.datosRegistro.LastOrDefault();
         }
     }
 

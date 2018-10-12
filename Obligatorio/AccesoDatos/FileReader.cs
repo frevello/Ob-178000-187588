@@ -8,12 +8,6 @@ namespace AccesoDatos
     public class FileReader
     {
         private StreamReader reader;
-        private List<string> variables = new List<string>();
-        private int nroLinea = 1;
-        
-        private const String TIME = "TIME";
-        private const String VARDEF = "VARDEF";
-        private const String FIN_REGISTRO = "#";
 
         public void OpenFile(string path)
         {

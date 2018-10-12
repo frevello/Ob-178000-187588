@@ -72,5 +72,13 @@ namespace Obligatorio.Test
             loadDataSet.CargarDataSet();
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void CargarDataSetRegistroTimeNoOrdenadoTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileTimeNoOrdenado.txt");
+            loadDataSet.CargarDataSet();
+        }
+
     }
 }
