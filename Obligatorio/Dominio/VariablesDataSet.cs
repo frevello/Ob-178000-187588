@@ -1,17 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Dominio
 {
     public class VariablesDataSet
     {
-        public string nombreVariable;
-        public List<float> registro;
+        public String nombreVariable;
+        public List<float> datosRegistro;
+        public Boolean ordenado;
 
-        public VariablesDataSet(string nombre)
+        public VariablesDataSet(string nombre, Boolean esOrdenado = false)
         {
             nombreVariable = nombre;
-            registro = new List<float>();
+            datosRegistro = new List<float>();
+            ordenado = esOrdenado;
         }
+
+
+
 
     }
 }

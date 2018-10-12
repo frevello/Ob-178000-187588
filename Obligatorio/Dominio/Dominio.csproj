@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataSet.cs" />
+    <Compile Include="DataSetException.cs" />
     <Compile Include="LargoDatoNoValidoException.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="Usuario.cs" />

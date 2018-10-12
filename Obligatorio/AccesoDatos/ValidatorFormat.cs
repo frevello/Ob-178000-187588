@@ -24,32 +24,39 @@ namespace AccesoDatos
         {
             if (!line.StartsWith(VARDEF))
             {
-                throw new FileReaderException("ERROR: Falta VARDEF");
+                throw new ValidatorFormatException("ERROR: Falta VARDEF");
             }
         }
 
         public void ValidarRegistro(String line)
         {
-            if (line != null && !line.Equals(FIN_GRUPO_REGISTRO))
-            {
-                ValidarLineaContieneUnicoSeparadorDeDato(line);
-            }
-            
-            if (line == null)
-            {
-                throw new FileReaderException("ERROR: en linea falta fin del registro");
-            }
-
+             ValidarLineaContieneUnicoSeparadorDeDato(line);
         }
+
          private void ValidarLineaContieneUnicoSeparadorDeDato(String line)
         {
             String[] datos = line.Split(SEPARADOR_REGISTRO_DE_DATO);
             if(datos.Length != 2)
             {
-                throw new FileReaderException("ERROR: Linea debe tener un unico separador" + SEPARADOR_REGISTRO_DE_DATO);
+                throw new ValidatorFormatException("ERROR: Linea debe tener un unico separador" + SEPARADOR_REGISTRO_DE_DATO);
             }
         }
 
-       
+        public void ValidarFinRegistroCorrecto(String line)
+        {
+            if (!ExisteLinea(line))
+            {
+                throw new ValidatorFormatException("ERROR: Falta fin del registro");
+            }
+        }
+        public Boolean ExisteLinea(String line)
+        {
+            return line != null;
+        }
+
+        public Boolean EsFinGrupoRegistro(String line)
+        {
+            return line.Equals(FIN_GRUPO_REGISTRO);
+        }
     }
 }

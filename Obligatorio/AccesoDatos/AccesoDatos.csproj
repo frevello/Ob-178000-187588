@@ -46,6 +46,7 @@
     <Compile Include="LoadDataSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidatorFormat.cs" />
+    <Compile Include="ValidatorFormatException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dominio\Dominio.csproj">
