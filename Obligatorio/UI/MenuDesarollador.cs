@@ -1,4 +1,6 @@
 ﻿using Dominio;
+using InterfazServiceUI;
+using Logica;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,10 +16,23 @@ namespace Interfaz_de_usuario
     public partial class MenuDesarollador : Form
     {
         private Usuario usuario;
+        private IProductoService productoService;
         public MenuDesarollador(Usuario u)
         {
             InitializeComponent();
             this.usuario = u;
+            CargarDatosUsuario();
+            productoService = new ProductoService();
+
+            ////////
+            productoService.AltaProducto("producto1");
+            productoService.AltaProducto("producto2");
+            productoService.AltaProducto("producto3");
+
+            productoService.AltaVersion("producto1", "1.00.001", "interno");
+            productoService.AltaVersion("producto1", "2.00.002", "interno");
+            productoService.AltaVersion("producto2", "0.00.001", "interno");
+            productoService.AltaVersion("producto3", "3.00.001", "interno");
         }
 
         private void botonDatosUsuario_Click(object sender, EventArgs e)
@@ -40,7 +55,7 @@ namespace Interfaz_de_usuario
         private void CargarArchivo()
         {
             panelPrincipal.Controls.Clear();
-            CargarArchivo cargarArchivo = new CargarArchivo();
+            CargarArchivo cargarArchivo = new CargarArchivo(productoService);
             panelPrincipal.Controls.Add(cargarArchivo);
         }
 
@@ -52,7 +67,7 @@ namespace Interfaz_de_usuario
         private void CargarListaDataSet()
         {
             panelPrincipal.Controls.Clear();
-            ListaDataSet listaDataSet = new ListaDataSet();
+            ListaDataSet listaDataSet = new ListaDataSet(productoService);
             panelPrincipal.Controls.Add(listaDataSet);
         }
 

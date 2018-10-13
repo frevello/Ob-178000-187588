@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using InterfazServiceUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Logica
 { 
-    public class ProductoService
+    public class ProductoService: IProductoService
     {
         private List<Producto> listaProductos;
 
@@ -123,6 +124,15 @@ namespace Logica
         public void ModificarProducto()
         {
 
+        }
+
+        public void AddDataSet(String nombreProducto, String etiquetaVersion, DataSet dataSet)
+        {
+            TryProductoInexistente(nombreProducto, "Error: No existe el producto");
+            Producto producto = this.listaProductos.FirstOrDefault(p => p.nombre == nombreProducto);
+            TryExisteVersion(producto, etiquetaVersion, "Error: No existe la version");
+            Dominio.Version version = GetVersion(producto, etiquetaVersion);
+            version.dataset.Add(dataSet);
         }
 
        

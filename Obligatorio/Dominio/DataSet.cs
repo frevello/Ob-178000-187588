@@ -134,6 +134,19 @@ namespace Dominio
         {
             return registro.datosRegistro.LastOrDefault();
         }
+
+        public String GetNombre()
+        {
+            return this.nombre;
+        }
+      
+        public IEnumerable<String> GetNomresRegistros()
+        {
+            return this.nombreRegistros;
+        } public IEnumerable<VariablesDataSet> GetRegistros()
+        {
+            return this.registros;
+        }
     }
 
    

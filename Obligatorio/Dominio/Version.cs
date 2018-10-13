@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Dominio
@@ -9,6 +10,7 @@ namespace Dominio
         public DateTime fechaCreacion;
         public String estado;
         public Producto producto;
+        public List<DataSet> dataset;
 
         private const String formatoEtiqueta = "^\\d{1}.\\d{2}.\\d{3}$";
 
@@ -20,6 +22,7 @@ namespace Dominio
             this.fechaCreacion = new DateTime();
             this.estado = estado;
             this.producto = producto;
+            this.dataset = new List<DataSet>();
         }
 
         private void ValidarFormatoEtiqueta(String campo, String mensaje)
