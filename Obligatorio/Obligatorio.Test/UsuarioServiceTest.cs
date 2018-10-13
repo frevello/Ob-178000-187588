@@ -2,11 +2,12 @@
 using Logica;
 using Dominio;
 using InterfazServiceUI;
+using System;
 
 namespace Obligatorio.Test
 {
 
-    [TestClass]
+    [TestClass] 
     public class UsuarioServiceTest
     {
         public IUsuarioService usuarioService = new UsuarioService();
@@ -96,7 +97,7 @@ namespace Obligatorio.Test
         }
 
         [TestMethod]
-        public void LogIn()
+        public void LogInTest()
         {
             usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");
             usuarioService.LogIn("FRevello", "1234");          
@@ -104,7 +105,7 @@ namespace Obligatorio.Test
 
         [TestMethod]
         [ExpectedException(typeof(LargoDatoNoValidoException))]
-        public void LogInDatosVacios()
+        public void LogInDatosVaciosTest()
         {
             usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");
             usuarioService.LogIn("FRevello", "");
@@ -112,7 +113,7 @@ namespace Obligatorio.Test
 
         [TestMethod]
         [ExpectedException(typeof(UsuarioServiceException))]
-        public void LogInNombreIncorrecto()
+        public void LogInNombreIncorrectoTest()
         {
             usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");
             usuarioService.LogIn("FRevell", "1234");
@@ -120,10 +121,44 @@ namespace Obligatorio.Test
 
         [TestMethod]
         [ExpectedException(typeof(UsuarioServiceException))]
-        public void LogInContraseñaIncorrecto()
+        public void LogInContraseñaIncorrectoTest()
         {
             usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");
             usuarioService.LogIn("FRevello", "1234254");
+        }
+
+        [TestMethod]
+        public void GetListaUsuariosTest()
+        {
+            usuarioService.GetListaUsuarios();
+        }
+
+        [TestMethod]
+        public void GetUsuarioTest()
+        {
+            usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");
+            usuarioService.GetUsuario("FRevello");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UsuarioServiceException))]
+        public void GetUsuarioinexistenteTest()
+        {
+            usuarioService.GetUsuario("FRevello");
+        }
+
+        [TestMethod]
+        public void SetUltimoIngresoTest()
+        {
+            usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");
+            usuarioService.SetUltimoIngreso(DateTime.Now, "FRevello");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UsuarioServiceException))]
+        public void SetUltimoIngresoUsuarioInexistenteTest()
+        {
+            usuarioService.SetUltimoIngreso(DateTime.Now, "Frevello");
         }
     }
 }

@@ -15,6 +15,9 @@ namespace Interfaz_de_usuario
         public EditarProductos()
         {
             InitializeComponent();
+            
         }
+
+        
     }
 }

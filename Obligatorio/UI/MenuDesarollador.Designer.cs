@@ -54,6 +54,7 @@
             this.botonSalir.TabIndex = 25;
             this.botonSalir.Text = "Salir";
             this.botonSalir.UseVisualStyleBackColor = true;
+            this.botonSalir.Click += new System.EventHandler(this.botonSalir_Click);
             // 
             // botonEstadisticas
             // 

@@ -128,20 +128,13 @@ namespace Obligatorio.Test
         public void GetProductoInexistenteTest()
         {
             productoService.GetProducto("Abode PhotoShoot");
-        }
+        } 
 
         [TestMethod]
         public void GetListaProductoTest()
         {
             productoService.AltaProducto("Abode PhotoShoot");
-            productoService.GetListaProducto("Abode PhotoShoot");
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ProductoServiceException))]
-        public void GetListaProductoInexistenteTest()
-        {
-            productoService.GetListaProducto("Abode PhotoShoot");
+            productoService.GetListaProducto();
         }
     }
 }

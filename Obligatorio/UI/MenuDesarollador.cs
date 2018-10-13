@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,11 @@ namespace Interfaz_de_usuario
 {
     public partial class MenuDesarollador : Form
     {
-        public MenuDesarollador()
+        private Usuario usuario;
+        public MenuDesarollador(Usuario u)
         {
             InitializeComponent();
+            this.usuario = u;
         }
 
         private void botonDatosUsuario_Click(object sender, EventArgs e)
@@ -25,7 +28,7 @@ namespace Interfaz_de_usuario
         private void CargarDatosUsuario()
         {
             panelPrincipal.Controls.Clear();
-            DatosUsuario datosUsuario = new DatosUsuario();
+            DatosUsuario datosUsuario = new DatosUsuario(usuario);
             panelPrincipal.Controls.Add(datosUsuario);
         }
 
@@ -63,6 +66,11 @@ namespace Interfaz_de_usuario
             panelPrincipal.Controls.Clear();
             Estadisticas estadisticas = new Estadisticas();
             panelPrincipal.Controls.Add(estadisticas);
+        }
+
+        private void botonSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }   
 }

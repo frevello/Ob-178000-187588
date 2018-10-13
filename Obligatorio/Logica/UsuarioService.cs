@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Logica
+namespace Logica 
 {
     public class UsuarioService: IUsuarioService
     {
@@ -93,7 +93,7 @@ namespace Logica
         private void TryValidarCamposVacios(String nombre, String contraseña)
         {
             ValidarNoVacio(nombre, "Error: Nombre de usuario vacio");
-            ValidarNoVacio(contraseña, "Error: Nombre de usuario vacio");
+            ValidarNoVacio(contraseña, "Error: Contraseña de usuario vacia");
         }
 
         private void ValidarNoVacio(String campo, String mensaje)
@@ -111,6 +111,24 @@ namespace Logica
             {
                 throw new UsuarioServiceException("Error: Contraseña Invalida");
             }
+        }
+
+        public List<Usuario> GetListaUsuarios()
+        {
+            return this.listaUsuarios;
+        }
+
+        public Usuario GetUsuario(String nombreUsuario)
+        {
+            TryUsuarioInexistente(nombreUsuario, "Error: No existe el usuario");
+            return this.listaUsuarios.FirstOrDefault(u => u.nombreUsuario == nombreUsuario);
+        }
+
+        public void SetUltimoIngreso(DateTime fecha, String nombreUsuario)
+        {
+            TryUsuarioInexistente(nombreUsuario, "Error: No existe el usuario");
+            Usuario usuario = this.listaUsuarios.FirstOrDefault(u => u.nombreUsuario == nombreUsuario);
+            usuario.ultimoIngreso = fecha;
         }
     }
 }

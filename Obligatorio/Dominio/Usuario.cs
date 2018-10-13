@@ -16,17 +16,15 @@ namespace Dominio
 
         public Usuario(String nombreUsuario, String nombre, String contraseña, String apellido, String rol)
         {
-                ValidarNoVacio(nombreUsuario, "ERROR: Nombre usuario vacio");
-                ValidarNoVacio(nombre, "ERROR: Nombre vacio");
-                ValidarNoVacio(apellido, "ERROR: Apellido vacio");
-                ContraseñaCorrecta(contraseña, "ERROR: Contraseña menor a 3");
-
-                this.nombreUsuario = nombreUsuario;
-                this.nombre = nombre;
-                this.contraseña = contraseña;
-                this.apellido = apellido;
-                this.registro = new DateTime();
-                this.rol = rol;
+            ValidarNoVacio(nombreUsuario, "ERROR: Nombre usuario vacio");
+            ValidarNoVacio(nombre, "ERROR: Nombre vacio");
+            ValidarNoVacio(apellido, "ERROR: Apellido vacio");
+            ContraseñaCorrecta(contraseña, "ERROR: Contraseña menor a 3");                this.nombreUsuario = nombreUsuario;
+            this.nombre = nombre;
+            this.contraseña = contraseña;
+            this.apellido = apellido;
+            this.registro = DateTime.Now;
+            this.rol = rol;
         }
 
         private void ValidarNoVacio(String campo, String mensaje)

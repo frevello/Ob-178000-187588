@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InterfazServiceUI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,11 @@ namespace Interfaz_de_usuario
 {
     public partial class MenuAdmin : Form
     {
-        public MenuAdmin()
+        private IUsuarioService IUService;
+        public MenuAdmin(IUsuarioService IUsuarioService)
         {
             InitializeComponent();
+            IUService = IUsuarioService;
         }
 
         private void botonDatosUsuario_Click(object sender, EventArgs e)
@@ -25,7 +28,7 @@ namespace Interfaz_de_usuario
         private void CargarDatosUsuario()
         {
             panelPrincipal.Controls.Clear();
-            DatosUsuario datosUsuario = new DatosUsuario();
+            DatosUsuariosAdministrador datosUsuario = new DatosUsuariosAdministrador(IUService);
             panelPrincipal.Controls.Add(datosUsuario);
         }
 
@@ -37,7 +40,7 @@ namespace Interfaz_de_usuario
         private void CargarAltaUsuario()
         {
             panelPrincipal.Controls.Clear();
-            AltaUsuario altaUsuario = new AltaUsuario();
+            AltaUsuario altaUsuario = new AltaUsuario(IUService);
             panelPrincipal.Controls.Add(altaUsuario);
         }
 
@@ -49,7 +52,7 @@ namespace Interfaz_de_usuario
         private void CargarEditarUsuario()
         {
             panelPrincipal.Controls.Clear();
-            EditarUsuario editarUsuario = new EditarUsuario();
+            EditarUsuario editarUsuario = new EditarUsuario(IUService);
             panelPrincipal.Controls.Add(editarUsuario);
         }
 

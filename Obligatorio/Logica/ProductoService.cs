@@ -40,9 +40,8 @@ namespace Logica
             return this.listaProductos.FirstOrDefault(p => p.nombre == nombre);
         }
 
-        public List<Producto> GetListaProducto(String nombre)
+        public List<Producto> GetListaProducto()
         {
-            TryProductoInexistente(nombre, "Error: No existe el producto");
             return this.listaProductos;
         }
 

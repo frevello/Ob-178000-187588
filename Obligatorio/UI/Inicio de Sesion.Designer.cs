@@ -34,7 +34,7 @@
             this.textNombreDeUsuario = new System.Windows.Forms.Label();
             this.textContraseña = new System.Windows.Forms.Label();
             this.textBoxNombreUsuario = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxContraseña = new System.Windows.Forms.TextBox();
             this.CargarDatos = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -96,12 +96,12 @@
             this.textBoxNombreUsuario.Size = new System.Drawing.Size(120, 20);
             this.textBoxNombreUsuario.TabIndex = 5;
             // 
-            // textBox1
+            // textBoxContraseña
             // 
-            this.textBox1.Location = new System.Drawing.Point(241, 240);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(120, 20);
-            this.textBox1.TabIndex = 6;
+            this.textBoxContraseña.Location = new System.Drawing.Point(241, 240);
+            this.textBoxContraseña.Name = "textBoxContraseña";
+            this.textBoxContraseña.Size = new System.Drawing.Size(120, 20);
+            this.textBoxContraseña.TabIndex = 6;
             // 
             // CargarDatos
             // 
@@ -111,6 +111,7 @@
             this.CargarDatos.TabIndex = 7;
             this.CargarDatos.Text = "Cargar Datos";
             this.CargarDatos.UseVisualStyleBackColor = true;
+            this.CargarDatos.Click += new System.EventHandler(this.CargarDatos_Click);
             // 
             // Form1
             // 
@@ -118,7 +119,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 361);
             this.Controls.Add(this.CargarDatos);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxContraseña);
             this.Controls.Add(this.textBoxNombreUsuario);
             this.Controls.Add(this.textContraseña);
             this.Controls.Add(this.textNombreDeUsuario);
@@ -141,7 +142,7 @@
         private System.Windows.Forms.Label textNombreDeUsuario;
         private System.Windows.Forms.Label textContraseña;
         private System.Windows.Forms.TextBox textBoxNombreUsuario;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxContraseña;
         private System.Windows.Forms.Button CargarDatos;
     }
 }
