@@ -17,6 +17,7 @@ namespace InterfazServiceUI
         Dominio.Version GetVersionProducto(String nombre, String etiqueta);
         List<Dominio.Version> GetListaVersionesVersionProducto(String nombre);
         void AddDataSet(String nombreProducto, String etiquetaVersion, DataSet dataSet);
+        Dominio.DataSet GetDataSet(String nombreProducto, String etiquetaVersion, String nombreDataSet);
 
     }
 }

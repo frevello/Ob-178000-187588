@@ -55,7 +55,7 @@
             // btnSelectProducto
             // 
             this.btnSelectProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectProducto.Location = new System.Drawing.Point(34, 326);
+            this.btnSelectProducto.Location = new System.Drawing.Point(34, 311);
             this.btnSelectProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
             this.btnSelectProducto.Name = "btnSelectProducto";
             this.btnSelectProducto.Size = new System.Drawing.Size(119, 31);
@@ -130,23 +130,24 @@
             // btnSelectVersion
             // 
             this.btnSelectVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectVersion.Location = new System.Drawing.Point(214, 326);
+            this.btnSelectVersion.Location = new System.Drawing.Point(216, 311);
             this.btnSelectVersion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
             this.btnSelectVersion.Name = "btnSelectVersion";
             this.btnSelectVersion.Size = new System.Drawing.Size(119, 31);
             this.btnSelectVersion.TabIndex = 71;
             this.btnSelectVersion.Text = "Seleccionar";
             this.btnSelectVersion.UseVisualStyleBackColor = true;
+            this.btnSelectVersion.Click += new System.EventHandler(this.btnSelectVersion_Click);
             // 
             // btnVizualizarDataSet
             // 
             this.btnVizualizarDataSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVizualizarDataSet.Location = new System.Drawing.Point(395, 326);
+            this.btnVizualizarDataSet.Location = new System.Drawing.Point(430, 326);
             this.btnVizualizarDataSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
             this.btnVizualizarDataSet.Name = "btnVizualizarDataSet";
-            this.btnVizualizarDataSet.Size = new System.Drawing.Size(119, 31);
+            this.btnVizualizarDataSet.Size = new System.Drawing.Size(147, 31);
             this.btnVizualizarDataSet.TabIndex = 72;
-            this.btnVizualizarDataSet.Text = "Seleccionar";
+            this.btnVizualizarDataSet.Text = "Visualizar DataSet";
             this.btnVizualizarDataSet.UseVisualStyleBackColor = true;
             this.btnVizualizarDataSet.Click += new System.EventHandler(this.btnDataSet_Click);
             // 
