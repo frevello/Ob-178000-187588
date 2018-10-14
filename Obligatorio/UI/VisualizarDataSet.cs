@@ -84,14 +84,16 @@ namespace Interfaz_de_usuario
          
           
         }
-
         private void btnVizualizarDataSet_Click(object sender, EventArgs e)
         {
             String nombreRegistro = listBoxNombresRegistros.GetItemText(listBoxNombresRegistros.SelectedItem);
             VariablesDataSet registroVar = productoService.GetRegistro(nombreProducto, etiquetaVersion, nombreDataSet, nombreRegistro);
             VariablesDataSet registroTiempo = productoService.GetRegistro(nombreProducto, etiquetaVersion, nombreDataSet, "TIME");
             
-            Grafica grafica = new Grafica(registroTiempo.datosRegistro, registroVar.datosRegistro);
+            Grafica grafica = new Grafica(registroTiempo.datosRegistro, registroVar.datosRegistro, registroTiempo.nombreVariable, registroVar.nombreVariable);
+          //  Application.EnableVisualStyles();
+           // Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(grafica);
             grafica.Show();
         }
 

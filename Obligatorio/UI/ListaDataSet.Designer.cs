@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.textTitulo = new System.Windows.Forms.Label();
-            this.btnSelectProducto = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.listBoxProducto = new System.Windows.Forms.ListBox();
             this.listBoxVersiones = new System.Windows.Forms.ListBox();
@@ -48,18 +47,6 @@
             this.textTitulo.Text = "Visualizacion DataSet";
             this.textTitulo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.textTitulo.Click += new System.EventHandler(this.textTitulo_Click);
-            // 
-            // btnSelectProducto
-            // 
-            this.btnSelectProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectProducto.Location = new System.Drawing.Point(105, 294);
-            this.btnSelectProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
-            this.btnSelectProducto.Name = "btnSelectProducto";
-            this.btnSelectProducto.Size = new System.Drawing.Size(147, 31);
-            this.btnSelectProducto.TabIndex = 68;
-            this.btnSelectProducto.Text = "Seleccionar";
-            this.btnSelectProducto.UseVisualStyleBackColor = true;
-            this.btnSelectProducto.Click += new System.EventHandler(this.btnSelectProducto_Click);
             // 
             // label2
             // 
@@ -96,7 +83,7 @@
             // btnSelectVersion
             // 
             this.btnSelectVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectVersion.Location = new System.Drawing.Point(318, 326);
+            this.btnSelectVersion.Location = new System.Drawing.Point(318, 314);
             this.btnSelectVersion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
             this.btnSelectVersion.Name = "btnSelectVersion";
             this.btnSelectVersion.Size = new System.Drawing.Size(147, 31);
@@ -122,7 +109,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnSelectVersion);
-            this.Controls.Add(this.btnSelectProducto);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.listBoxVersiones);
             this.Controls.Add(this.listBoxProducto);
@@ -138,7 +124,6 @@
         #endregion
 
         private System.Windows.Forms.Label textTitulo;
-        private System.Windows.Forms.Button btnSelectProducto;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBoxProducto;
         private System.Windows.Forms.ListBox listBoxVersiones;

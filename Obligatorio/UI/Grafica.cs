@@ -26,16 +26,16 @@ namespace Interfaz_de_usuario
         private const int cellSizeInPixels = 40;
         private const int windowXBoundryInPixels = 20;
         private const int windowYBoundryInPixels = 40;
-        private const int drawSurfaceMaringToWindowInPixels = 40;
+        private const int drawSurfaceMaringToWindowInPixels = 10;
         private const int gridLinesMarginToLayerInPixels = 1;
 
 
-        public Grafica(List<float> pointsX, List<float> pointsY)
+        public Grafica(List<float> pointsX, List<float> pointsY, String nombreEjeX, String nombreEjeY)
         {
             
             InitializeComponent();
-            nombreEjeX = "TIME";
-            nombreEjeY = "CPU";
+            this.nombreEjeX = nombreEjeX;
+            this.nombreEjeY = nombreEjeY;
             int drawSurfaceSizeX = cellSizeInPixels * gridCellCountX;
             int drawSurfaceSizeY = cellSizeInPixels * gridCellCountY;
             CreateDrawSurface(drawSurfaceSizeX, drawSurfaceSizeY);
@@ -45,8 +45,6 @@ namespace Interfaz_de_usuario
             PaintGrid();
             CreateOrRecreateLayer(ref linesLayer);
             CrearPoints(pointsX, pointsY);
-
-
 
             PaintLines();
         }
@@ -74,6 +72,7 @@ namespace Interfaz_de_usuario
             int windowSizeY = drawSurfaceSizeY + drawSurfaceMaringToWindowInPixels * 2;
             MaximumSize = new Size(windowSizeX + windowXBoundryInPixels, windowSizeY + windowYBoundryInPixels);
             AutoScrollMargin = new Size(drawSurfaceMaringToWindowInPixels, drawSurfaceMaringToWindowInPixels);
+           
         }
         private void CrearPoints(List<float> pointsX, List<float> pointsY)
         {
@@ -192,6 +191,11 @@ namespace Interfaz_de_usuario
             {
                 layer = new Bitmap(drawSurface.Width, drawSurface.Height);
             }
+        }
+
+        private void Grafica_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

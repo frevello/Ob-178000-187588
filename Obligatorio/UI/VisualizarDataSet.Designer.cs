@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label4 = new System.Windows.Forms.Label();
-            this.btnSelect = new System.Windows.Forms.Button();
             this.listBoxNombresRegistros = new System.Windows.Forms.ListBox();
             this.textTitulo = new System.Windows.Forms.Label();
             this.btnVizualizarDataSet = new System.Windows.Forms.Button();
@@ -48,18 +47,6 @@
             this.label4.Size = new System.Drawing.Size(163, 20);
             this.label4.TabIndex = 78;
             this.label4.Text = "Seleccionar Variable";
-            // 
-            // btnSelect
-            // 
-            this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelect.Location = new System.Drawing.Point(128, 289);
-            this.btnSelect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(121, 31);
-            this.btnSelect.TabIndex = 77;
-            this.btnSelect.Text = "Seleccionar";
-            this.btnSelect.UseVisualStyleBackColor = true;
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // listBoxNombresRegistros
             // 
@@ -86,7 +73,7 @@
             // btnVizualizarDataSet
             // 
             this.btnVizualizarDataSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVizualizarDataSet.Location = new System.Drawing.Point(326, 326);
+            this.btnVizualizarDataSet.Location = new System.Drawing.Point(326, 316);
             this.btnVizualizarDataSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
             this.btnVizualizarDataSet.Name = "btnVizualizarDataSet";
             this.btnVizualizarDataSet.Size = new System.Drawing.Size(147, 31);
@@ -120,7 +107,7 @@
             // btnVolver
             // 
             this.btnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVolver.Location = new System.Drawing.Point(113, 326);
+            this.btnVolver.Location = new System.Drawing.Point(113, 316);
             this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(147, 31);
@@ -138,7 +125,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.listBoxDataSet);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.listBoxNombresRegistros);
             this.Controls.Add(this.textTitulo);
             this.Name = "VisualizarDataSet";
@@ -151,7 +137,6 @@
         #endregion
 
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.ListBox listBoxNombresRegistros;
         private System.Windows.Forms.Label textTitulo;
         private System.Windows.Forms.Button btnVizualizarDataSet;

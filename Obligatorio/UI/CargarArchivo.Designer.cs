@@ -34,7 +34,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.listBoxVersiones = new System.Windows.Forms.ListBox();
             this.btnCargarArchivo = new System.Windows.Forms.Button();
-            this.btnSelectProducto = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textTitulo
@@ -104,30 +103,17 @@
             this.btnCargarArchivo.UseVisualStyleBackColor = true;
             this.btnCargarArchivo.Click += new System.EventHandler(this.btnCargarArchivo_Click);
             // 
-            // btnSelectProducto
-            // 
-            this.btnSelectProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectProducto.Location = new System.Drawing.Point(381, 163);
-            this.btnSelectProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
-            this.btnSelectProducto.Name = "btnSelectProducto";
-            this.btnSelectProducto.Size = new System.Drawing.Size(204, 31);
-            this.btnSelectProducto.TabIndex = 63;
-            this.btnSelectProducto.Text = "Seleccionar Producto";
-            this.btnSelectProducto.UseVisualStyleBackColor = true;
-            this.btnSelectProducto.Click += new System.EventHandler(this.btnSelectProducto_Click);
-            // 
             // CargarArchivo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnSelectProducto);
             this.Controls.Add(this.btnCargarArchivo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.listBoxVersiones);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBoxProducto);
             this.Controls.Add(this.textTitulo);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CargarArchivo";
             this.Size = new System.Drawing.Size(593, 369);
             this.ResumeLayout(false);
@@ -143,6 +129,5 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBoxVersiones;
         private System.Windows.Forms.Button btnCargarArchivo;
-        private System.Windows.Forms.Button btnSelectProducto;
     }
 }
