@@ -16,11 +16,13 @@ namespace Interfaz_de_usuario
     public partial class Form1 : Form
     {
         private IUsuarioService IUsuarioService;
+        private IProductoService IProductoService;
         public Form1()
         {
             this.CenterToScreen();
             InitializeComponent();
             IUsuarioService = new UsuarioService();
+            IProductoService = new ProductoService();
         }
 
         private void textTitulo_Click(object sender, EventArgs e)
@@ -68,7 +70,7 @@ namespace Interfaz_de_usuario
         private void IngresarAdmin()
         {
             this.Hide();
-            var MenuAdministrador = new MenuAdmin(IUsuarioService);
+            var MenuAdministrador = new MenuAdmin(IUsuarioService, IProductoService);
             MenuAdministrador.Closed += (s, args) => this.Close();
             MenuAdministrador.Show();
         }
@@ -97,15 +99,19 @@ namespace Interfaz_de_usuario
             catch (UsuarioServiceException m)
             {
                 MessageBox.Show("Ya fueron cargados los datos");
-            }
-            
-            
+            } 
         }
 
         private void TryCargarDatos()
         {
             IUsuarioService.AltaUsuario("Frevello", "Facundo", "1234", "Revello", "Desarollador");
             IUsuarioService.AltaUsuario("Sgarcia", "Sofia", "1234", "Garcia", "Desarollador");
+            IProductoService.AltaProducto("Adobe PhotoShoot", DateTime.Now);
+            IProductoService.AltaVersion("Adobe PhotoShoot", "1.00.000", "Interna", DateTime.Now);
+            IProductoService.AltaVersion("Adobe PhotoShoot", "1.00.001", "Interna", DateTime.Now);
+            IProductoService.AltaProducto("Adobe Illustrator", DateTime.Now);
+            IProductoService.AltaVersion("Adobe Illustrator", "1.00.000", "Interna", DateTime.Now);
+            IProductoService.AltaProducto("Adobe Reader", DateTime.Now);
         }
     }
 }

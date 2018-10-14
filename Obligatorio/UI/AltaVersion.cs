@@ -12,28 +12,27 @@ using Dominio;
 
 namespace Interfaz_de_usuario
 {
-    public partial class EditarProductos : UserControl
+    public partial class AltaVersion : UserControl
     {
         private IProductoService IPService;
         private BindingList<String> listaProductos;
         private Producto productoSeleccionado;
-        public EditarProductos(IProductoService IProductoService)
+        public AltaVersion(IProductoService IProductoService)
         {
             InitializeComponent();
             IPService = IProductoService;
-            listaProductos = new BindingList<string>();
+            listaProductos = new BindingList<String>();
             productoSeleccionado = null;
             CargarDatos();
         }
 
         private void CargarDatos()
         {
-            listaProductos.Clear();
-            CargarListaUsuarios();
+            CargarListaProductos();
             SetListaUsuarios();
         }
 
-        private void CargarListaUsuarios()
+        private void CargarListaProductos()
         {
             for (int i = 0; i < IPService.GetListaProducto().Count; i++)
             {
@@ -50,28 +49,25 @@ namespace Interfaz_de_usuario
         {
             String producto = this.listBoxProductos.GetItemText(this.listBoxProductos.SelectedItem);
             productoSeleccionado = IPService.GetProducto(producto);
-            CargarDatosProductos();
+            String mensaje = "Producto seleccionado ";
+            mensaje += productoSeleccionado.nombre;
+            MessageBox.Show(mensaje);
         }
 
-        private void CargarDatosProductos()
-        {
-            this.textNombreUsuario.Text = productoSeleccionado.nombre;
-            this.dateTimeFechaCreacion.Value = productoSeleccionado.fechaInicial;
-        }
-
-        private void butonActualizarProducto_Click(object sender, EventArgs e)
+        private void botonIngresarVersion_Click(object sender, EventArgs e)
         {
             try
             {
                 TryProductoSeleccionado("Error: No se selecciono un producto");
-                TryModificarProducto();
-                SetDatosFinales();
+                TryAltaVersion();
+                MessageBox.Show("Usuario actualizado correctamente");
+                VaciarCampos();
             }
             catch (Exception m)
             {
                 MessageBox.Show(m.Message);
             }
-        }
+        }  
 
         private void TryProductoSeleccionado(String mensaje)
         {
@@ -81,23 +77,16 @@ namespace Interfaz_de_usuario
             }
         }
 
-        private void TryModificarProducto()
+        private void TryAltaVersion()
         {
-            IPService.ModificarProducto(productoSeleccionado.nombre, this.textNombreUsuario.Text, this.dateTimeFechaCreacion.Value);
-            //modificar fecha version igual a la del producto
-        }
-
-        private void SetDatosFinales()
-        {
-            MessageBox.Show("Producto actualizado correctamente");
-            productoSeleccionado = null;
-            CargarDatos();
-            VaciarCampos();
+            IPService.AltaVersion(productoSeleccionado.nombre, this.textEtiqueta.Text, this.comboBoxTipoVersion.Text, this.dateTimeFechaCreacion.Value);
         }
 
         private void VaciarCampos()
         {
-            this.textNombreUsuario.Text = "";
+            productoSeleccionado = null;
+            this.textEtiqueta.Text = "";
+            this.dateTimeFechaCreacion.Value = DateTime.Now;
         }
     }
 }

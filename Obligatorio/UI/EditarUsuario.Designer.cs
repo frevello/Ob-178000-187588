@@ -44,7 +44,7 @@
             this.textNombreUsuario = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.botonIngresarUsuario = new System.Windows.Forms.Button();
+            this.botonSeleccionarUsuario = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxDesarolladores = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
@@ -189,9 +189,9 @@
             this.label3.Location = new System.Drawing.Point(3, 171);
             this.label3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 10);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(110, 16);
+            this.label3.Size = new System.Drawing.Size(107, 16);
             this.label3.TabIndex = 59;
-            this.label3.Text = "Nombre Usuario:";
+            this.label3.Text = "Nombre usuario:";
             // 
             // label2
             // 
@@ -204,25 +204,25 @@
             this.label2.TabIndex = 58;
             this.label2.Text = "Usuario Seleccionado";
             // 
-            // botonIngresarUsuario
+            // botonSeleccionarUsuario
             // 
-            this.botonIngresarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonIngresarUsuario.Location = new System.Drawing.Point(289, 136);
-            this.botonIngresarUsuario.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            this.botonIngresarUsuario.Name = "botonIngresarUsuario";
-            this.botonIngresarUsuario.Size = new System.Drawing.Size(153, 25);
-            this.botonIngresarUsuario.TabIndex = 57;
-            this.botonIngresarUsuario.Text = "Seleccionar Desarollador";
-            this.botonIngresarUsuario.UseVisualStyleBackColor = true;
-            this.botonIngresarUsuario.Click += new System.EventHandler(this.botonIngresarUsuario_Click);
+            this.botonSeleccionarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonSeleccionarUsuario.Location = new System.Drawing.Point(289, 136);
+            this.botonSeleccionarUsuario.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.botonSeleccionarUsuario.Name = "botonSeleccionarUsuario";
+            this.botonSeleccionarUsuario.Size = new System.Drawing.Size(153, 25);
+            this.botonSeleccionarUsuario.TabIndex = 57;
+            this.botonSeleccionarUsuario.Text = "Seleccionar Desarollador";
+            this.botonSeleccionarUsuario.UseVisualStyleBackColor = true;
+            this.botonSeleccionarUsuario.Click += new System.EventHandler(this.botonIngresarUsuario_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(2, 40);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(162, 16);
+            this.label1.Size = new System.Drawing.Size(175, 18);
             this.label1.TabIndex = 56;
             this.label1.Text = "Seleccionar Desarollador";
             // 
@@ -251,7 +251,7 @@
             this.Controls.Add(this.textNombreUsuario);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.botonIngresarUsuario);
+            this.Controls.Add(this.botonSeleccionarUsuario);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBoxDesarolladores);
             this.Controls.Add(this.botonEliminar);
@@ -282,7 +282,7 @@
         private System.Windows.Forms.TextBox textNombreUsuario;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button botonIngresarUsuario;
+        private System.Windows.Forms.Button botonSeleccionarUsuario;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBoxDesarolladores;
     }

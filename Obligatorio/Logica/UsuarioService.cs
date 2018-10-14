@@ -67,6 +67,7 @@ namespace Logica
 
         public void ModificarUsuario(Usuario usuario)
         {
+            TryUsuarioInexistente(usuario.nombreUsuario, "Error: No existe el usuario");
             ValidarDatosUsuarioAModificar(usuario);
             TryModificarUsuario(usuario);
         }

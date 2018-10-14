@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.botonEditarProducto = new System.Windows.Forms.Button();
+            this.botonAltaVersion = new System.Windows.Forms.Button();
             this.panelPrincipal = new System.Windows.Forms.Panel();
             this.botonSalir = new System.Windows.Forms.Button();
             this.botonAltaProducto = new System.Windows.Forms.Button();
@@ -37,19 +37,20 @@
             this.botonDatosUsuario = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.botonProductoVersiones = new System.Windows.Forms.Button();
+            this.botonEditarProducto = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // botonEditarProducto
+            // botonAltaVersion
             // 
-            this.botonEditarProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonEditarProducto.Location = new System.Drawing.Point(33, 233);
-            this.botonEditarProducto.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
-            this.botonEditarProducto.Name = "botonEditarProducto";
-            this.botonEditarProducto.Size = new System.Drawing.Size(153, 25);
-            this.botonEditarProducto.TabIndex = 19;
-            this.botonEditarProducto.Text = "Editar Producto";
-            this.botonEditarProducto.UseVisualStyleBackColor = true;
-            this.botonEditarProducto.Click += new System.EventHandler(this.botonEditarProducto_Click);
+            this.botonAltaVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonAltaVersion.Location = new System.Drawing.Point(33, 198);
+            this.botonAltaVersion.Margin = new System.Windows.Forms.Padding(3, 3, 3, 12);
+            this.botonAltaVersion.Name = "botonAltaVersion";
+            this.botonAltaVersion.Size = new System.Drawing.Size(153, 25);
+            this.botonAltaVersion.TabIndex = 19;
+            this.botonAltaVersion.Text = "Alta Versión";
+            this.botonAltaVersion.UseVisualStyleBackColor = true;
+            this.botonAltaVersion.Click += new System.EventHandler(this.botonEditarProducto_Click);
             // 
             // panelPrincipal
             // 
@@ -61,7 +62,7 @@
             // botonSalir
             // 
             this.botonSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonSalir.Location = new System.Drawing.Point(33, 319);
+            this.botonSalir.Location = new System.Drawing.Point(33, 328);
             this.botonSalir.Margin = new System.Windows.Forms.Padding(3, 3, 3, 25);
             this.botonSalir.Name = "botonSalir";
             this.botonSalir.Size = new System.Drawing.Size(153, 25);
@@ -73,8 +74,8 @@
             // botonAltaProducto
             // 
             this.botonAltaProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonAltaProducto.Location = new System.Drawing.Point(33, 190);
-            this.botonAltaProducto.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            this.botonAltaProducto.Location = new System.Drawing.Point(33, 158);
+            this.botonAltaProducto.Margin = new System.Windows.Forms.Padding(3, 3, 3, 12);
             this.botonAltaProducto.Name = "botonAltaProducto";
             this.botonAltaProducto.Size = new System.Drawing.Size(153, 25);
             this.botonAltaProducto.TabIndex = 16;
@@ -85,8 +86,8 @@
             // botonEditarUsuario
             // 
             this.botonEditarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonEditarUsuario.Location = new System.Drawing.Point(33, 147);
-            this.botonEditarUsuario.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            this.botonEditarUsuario.Location = new System.Drawing.Point(33, 118);
+            this.botonEditarUsuario.Margin = new System.Windows.Forms.Padding(3, 3, 3, 12);
             this.botonEditarUsuario.Name = "botonEditarUsuario";
             this.botonEditarUsuario.Size = new System.Drawing.Size(153, 25);
             this.botonEditarUsuario.TabIndex = 15;
@@ -97,8 +98,8 @@
             // botonAltaUsuario
             // 
             this.botonAltaUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonAltaUsuario.Location = new System.Drawing.Point(33, 104);
-            this.botonAltaUsuario.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            this.botonAltaUsuario.Location = new System.Drawing.Point(33, 78);
+            this.botonAltaUsuario.Margin = new System.Windows.Forms.Padding(3, 3, 3, 12);
             this.botonAltaUsuario.Name = "botonAltaUsuario";
             this.botonAltaUsuario.Size = new System.Drawing.Size(153, 25);
             this.botonAltaUsuario.TabIndex = 14;
@@ -109,8 +110,8 @@
             // botonDatosUsuario
             // 
             this.botonDatosUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonDatosUsuario.Location = new System.Drawing.Point(33, 61);
-            this.botonDatosUsuario.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            this.botonDatosUsuario.Location = new System.Drawing.Point(33, 38);
+            this.botonDatosUsuario.Margin = new System.Windows.Forms.Padding(3, 3, 3, 12);
             this.botonDatosUsuario.Name = "botonDatosUsuario";
             this.botonDatosUsuario.Size = new System.Drawing.Size(153, 25);
             this.botonDatosUsuario.TabIndex = 13;
@@ -121,9 +122,9 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(18, 22);
+            this.label1.Location = new System.Drawing.Point(28, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(187, 23);
+            this.label1.Size = new System.Drawing.Size(161, 23);
             this.label1.TabIndex = 12;
             this.label1.Text = "Menu Principal";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -131,22 +132,35 @@
             // botonProductoVersiones
             // 
             this.botonProductoVersiones.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonProductoVersiones.Location = new System.Drawing.Point(33, 276);
-            this.botonProductoVersiones.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
+            this.botonProductoVersiones.Location = new System.Drawing.Point(33, 278);
+            this.botonProductoVersiones.Margin = new System.Windows.Forms.Padding(3, 3, 3, 12);
             this.botonProductoVersiones.Name = "botonProductoVersiones";
             this.botonProductoVersiones.Size = new System.Drawing.Size(153, 25);
             this.botonProductoVersiones.TabIndex = 20;
-            this.botonProductoVersiones.Text = "Ver Productos/Versiones";
+            this.botonProductoVersiones.Text = "Editar Versiones";
             this.botonProductoVersiones.UseVisualStyleBackColor = true;
             this.botonProductoVersiones.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // botonEditarProducto
+            // 
+            this.botonEditarProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonEditarProducto.Location = new System.Drawing.Point(33, 238);
+            this.botonEditarProducto.Margin = new System.Windows.Forms.Padding(3, 3, 3, 12);
+            this.botonEditarProducto.Name = "botonEditarProducto";
+            this.botonEditarProducto.Size = new System.Drawing.Size(153, 25);
+            this.botonEditarProducto.TabIndex = 21;
+            this.botonEditarProducto.Text = "Editar Producto";
+            this.botonEditarProducto.UseVisualStyleBackColor = true;
+            this.botonEditarProducto.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // MenuAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 361);
-            this.Controls.Add(this.botonProductoVersiones);
             this.Controls.Add(this.botonEditarProducto);
+            this.Controls.Add(this.botonProductoVersiones);
+            this.Controls.Add(this.botonAltaVersion);
             this.Controls.Add(this.panelPrincipal);
             this.Controls.Add(this.botonSalir);
             this.Controls.Add(this.botonAltaProducto);
@@ -163,7 +177,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button botonEditarProducto;
+        private System.Windows.Forms.Button botonAltaVersion;
         private System.Windows.Forms.Panel panelPrincipal;
         private System.Windows.Forms.Button botonSalir;
         private System.Windows.Forms.Button botonAltaProducto;
@@ -172,5 +186,6 @@
         private System.Windows.Forms.Button botonDatosUsuario;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button botonProductoVersiones;
+        private System.Windows.Forms.Button botonEditarProducto;
     }
 }

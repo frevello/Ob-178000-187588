@@ -28,6 +28,7 @@ namespace Interfaz_de_usuario
             {
                 IngresarUsuario();
                 MessageBox.Show("Usuario ingresado correctamente");
+                VaciarCampos();
             }
             catch (UsuarioServiceException m)
             {
@@ -42,6 +43,15 @@ namespace Interfaz_de_usuario
         private void IngresarUsuario()
         {
             IUService.AltaUsuario(this.textBoxNombreUsuario.Text, this.textBoxNombre.Text, this.textBoxContraseña.Text, this.textBoxApellido.Text, "Desarollador");
+        }
+
+        private void VaciarCampos()
+        {
+            this.textBoxNombreUsuario.Text = "";
+            this.textBoxNombre.Text = "";
+            this.textBoxApellido.Text = "";
+            this.textBoxContraseña.Text = "";
+            string ultimoIngresoString = "";
         }
     }
 }

@@ -61,9 +61,9 @@
             this.textNombreDeUsuario.Location = new System.Drawing.Point(72, 58);
             this.textNombreDeUsuario.Margin = new System.Windows.Forms.Padding(3, 0, 3, 15);
             this.textNombreDeUsuario.Name = "textNombreDeUsuario";
-            this.textNombreDeUsuario.Size = new System.Drawing.Size(159, 20);
+            this.textNombreDeUsuario.Size = new System.Drawing.Size(156, 20);
             this.textNombreDeUsuario.TabIndex = 14;
-            this.textNombreDeUsuario.Text = "Nombre de Usuario:";
+            this.textNombreDeUsuario.Text = "Nombre de usuario:";
             // 
             // label2
             // 
@@ -105,9 +105,9 @@
             this.label5.Location = new System.Drawing.Point(72, 233);
             this.label5.Margin = new System.Windows.Forms.Padding(3, 0, 3, 15);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(173, 20);
+            this.label5.Size = new System.Drawing.Size(170, 20);
             this.label5.TabIndex = 18;
-            this.label5.Text = "Fecha Ultimo Ingreso:";
+            this.label5.Text = "Fecha ultimo ingreso:";
             // 
             // label6
             // 
@@ -116,9 +116,9 @@
             this.label6.Location = new System.Drawing.Point(72, 198);
             this.label6.Margin = new System.Windows.Forms.Padding(3, 0, 3, 15);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(128, 20);
+            this.label6.Size = new System.Drawing.Size(122, 20);
             this.label6.TabIndex = 19;
-            this.label6.Text = "Fecha Registro:";
+            this.label6.Text = "Fecha registro:";
             // 
             // textBoxNombreUsuario
             // 

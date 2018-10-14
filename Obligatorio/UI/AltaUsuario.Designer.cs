@@ -108,9 +108,9 @@
             this.textNombreDeUsuario.Location = new System.Drawing.Point(70, 70);
             this.textNombreDeUsuario.Margin = new System.Windows.Forms.Padding(3, 0, 3, 15);
             this.textNombreDeUsuario.Name = "textNombreDeUsuario";
-            this.textNombreDeUsuario.Size = new System.Drawing.Size(159, 20);
+            this.textNombreDeUsuario.Size = new System.Drawing.Size(156, 20);
             this.textNombreDeUsuario.TabIndex = 27;
-            this.textNombreDeUsuario.Text = "Nombre de Usuario:";
+            this.textNombreDeUsuario.Text = "Nombre de usuario:";
             // 
             // textTitulo
             // 
