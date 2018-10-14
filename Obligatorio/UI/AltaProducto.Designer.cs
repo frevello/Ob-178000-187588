@@ -142,9 +142,9 @@
             this.labelTipoVesión.Location = new System.Drawing.Point(13, 272);
             this.labelTipoVesión.Margin = new System.Windows.Forms.Padding(3, 15, 3, 10);
             this.labelTipoVesión.Name = "labelTipoVesión";
-            this.labelTipoVesión.Size = new System.Drawing.Size(88, 16);
+            this.labelTipoVesión.Size = new System.Drawing.Size(86, 16);
             this.labelTipoVesión.TabIndex = 69;
-            this.labelTipoVesión.Text = "Tipo Version:";
+            this.labelTipoVesión.Text = "Tipo versión:";
             // 
             // comboBoxTipoVersion
             // 
@@ -183,7 +183,7 @@
             this.dateTimeFechaCreacion.Size = new System.Drawing.Size(193, 20);
             this.dateTimeFechaCreacion.TabIndex = 73;
             // 
-            // textBoxNombreProducto
+            // AltaProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -201,7 +201,7 @@
             this.Controls.Add(this.labelNombreProducto);
             this.Controls.Add(this.labelDatosProducto);
             this.Controls.Add(this.textTitulo);
-            this.Name = "textBoxNombreProducto";
+            this.Name = "AltaProducto";
             this.Size = new System.Drawing.Size(445, 300);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -77,9 +77,9 @@
             this.labelFechaLanzamiento.Location = new System.Drawing.Point(3, 245);
             this.labelFechaLanzamiento.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.labelFechaLanzamiento.Name = "labelFechaLanzamiento";
-            this.labelFechaLanzamiento.Size = new System.Drawing.Size(128, 16);
+            this.labelFechaLanzamiento.Size = new System.Drawing.Size(124, 16);
             this.labelFechaLanzamiento.TabIndex = 64;
-            this.labelFechaLanzamiento.Text = "Fecha Lanzamiento:";
+            this.labelFechaLanzamiento.Text = "Fecha lanzamiento:";
             // 
             // textNombreUsuario
             // 
@@ -95,9 +95,9 @@
             this.labelNombreProducto.Location = new System.Drawing.Point(2, 209);
             this.labelNombreProducto.Margin = new System.Windows.Forms.Padding(3, 0, 3, 10);
             this.labelNombreProducto.Name = "labelNombreProducto";
-            this.labelNombreProducto.Size = new System.Drawing.Size(117, 16);
+            this.labelNombreProducto.Size = new System.Drawing.Size(116, 16);
             this.labelNombreProducto.TabIndex = 62;
-            this.labelNombreProducto.Text = "Nombre Producto:";
+            this.labelNombreProducto.Text = "Nombre producto:";
             // 
             // labelProductoSeleccionado
             // 

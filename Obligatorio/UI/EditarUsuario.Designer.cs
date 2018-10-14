@@ -189,9 +189,9 @@
             this.label3.Location = new System.Drawing.Point(3, 171);
             this.label3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 10);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(110, 16);
+            this.label3.Size = new System.Drawing.Size(107, 16);
             this.label3.TabIndex = 59;
-            this.label3.Text = "Nombre Usuario:";
+            this.label3.Text = "Nombre usuario:";
             // 
             // label2
             // 

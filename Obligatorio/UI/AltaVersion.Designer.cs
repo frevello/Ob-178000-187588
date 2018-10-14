@@ -112,9 +112,9 @@
             this.labelTipoVesión.Location = new System.Drawing.Point(4, 274);
             this.labelTipoVesión.Margin = new System.Windows.Forms.Padding(3, 15, 3, 10);
             this.labelTipoVesión.Name = "labelTipoVesión";
-            this.labelTipoVesión.Size = new System.Drawing.Size(88, 16);
+            this.labelTipoVesión.Size = new System.Drawing.Size(86, 16);
             this.labelTipoVesión.TabIndex = 82;
-            this.labelTipoVesión.Text = "Tipo Version:";
+            this.labelTipoVesión.Text = "Tipo versión:";
             // 
             // label4
             // 
@@ -148,9 +148,9 @@
             this.labelEtiqueta.Location = new System.Drawing.Point(4, 194);
             this.labelEtiqueta.Margin = new System.Windows.Forms.Padding(3, 0, 3, 10);
             this.labelEtiqueta.Name = "labelEtiqueta";
-            this.labelEtiqueta.Size = new System.Drawing.Size(106, 16);
+            this.labelEtiqueta.Size = new System.Drawing.Size(104, 16);
             this.labelEtiqueta.TabIndex = 78;
-            this.labelEtiqueta.Text = "Fecha Creación:";
+            this.labelEtiqueta.Text = "Fecha creación:";
             // 
             // botonIngresarVersion
             // 
