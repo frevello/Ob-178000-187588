@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSetException.cs" />
+    <Compile Include="DataSetServiceException.cs" />
     <Compile Include="DataSetService.cs" />
     <Compile Include="ProductoService.cs" />
     <Compile Include="ProductoServiceException.cs" />

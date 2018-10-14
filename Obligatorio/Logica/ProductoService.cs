@@ -226,7 +226,7 @@ namespace Logica
             return dataSet.GetRegistros().FirstOrDefault(r => r.nombreVariable == nombreRegistro);
         }
 
-        private void TryExiteDataSet(DataSet dataSet)
+        private void TryExiteDataSet(DataSet dataSet) ///////// ya esta pasado
         {
            if(dataSet == null)
             {

@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Dominio;
 using System.Collections.Generic;
+using Logica;
 
 namespace Obligatorio.Test
 {
@@ -12,118 +13,121 @@ namespace Obligatorio.Test
         [TestMethod]
         public void CargarDataSetTest()
         {
-            throw new NotImplementedException();
+            DataSetService dataSet = new DataSetService();
+            dataSet.CargarDataSet(@"../../../DataSetFiles/file.txt");
         }
 
         [TestMethod]
-        public IEnumerable<VariablesDataSet> GetRegistrosTest(DataSet dataSet)
+        public IEnumerable<VariablesDataSet> GetRegistrosTest()
         {
-            throw new NotImplementedException();
+            DataSetService dataSetService = new DataSetService();
+            Dominio.DataSet dataSet = new DataSet("DataSet1");
+            return dataSetService.GetRegistros(dataSet);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DataSetException))]
-        public IEnumerable<VariablesDataSet> GetRegistrosNoExisteDataSetTest(DataSet dataSet)
-        {
-            throw new NotImplementedException();
-        }
-
-        [TestMethod]
-        public VariablesDataSet GetRegistroTest(DataSet dataSet, String nombreRegistro)
+        [ExpectedException(typeof(DataSetServiceException))]
+        public IEnumerable<VariablesDataSet> GetRegistrosNoExisteDataSetTest()
         {
             throw new NotImplementedException();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DataSetException))]
-        public VariablesDataSet GetRegistroNoExisteRegistroTest(DataSet dataSet, String nombreRegistro)
+        public VariablesDataSet GetRegistroTest()
         {
             throw new NotImplementedException();
         }
 
         [TestMethod]
-        public String GetNombreDataSetTest(DataSet dataSet)
+        [ExpectedException(typeof(DataSetServiceException))]
+        public VariablesDataSet GetRegistroNoExisteRegistroTest()
         {
             throw new NotImplementedException();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DataSetException))]
-        public String GetNombreDataSetNoExisteDataSetTest(DataSet dataSet)
-        {
-            throw new NotImplementedException();
-        }
-        [TestMethod]
-        public String GetRegistrosDataSetTest(DataSet dataSet)
+        public String GetNombreDataSetTest()
         {
             throw new NotImplementedException();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DataSetException))]
-        public String GetRegistrosDataSetNoExisteDataSetTest(DataSet dataSet)
+        [ExpectedException(typeof(DataSetServiceException))]
+        public String GetNombreDataSetNoExisteDataSetTest()
         {
             throw new NotImplementedException();
         }
         [TestMethod]
-        public IEnumerable<String> GetNombreRegistrosDataSetTest(DataSet dataSet)
-        {
-            throw new NotImplementedException();
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(DataSetException))]
-        public IEnumerable<String> GetNombresRegistrosDataSetNoExisteDataSetTest(DataSet dataSet)
+        public String GetRegistrosDataSetTest()
         {
             throw new NotImplementedException();
         }
 
         [TestMethod]
-        public float GetPromedioRegistroTest(DataSet dataSet, String nombreRegistro)
+        [ExpectedException(typeof(DataSetServiceException))]
+        public String GetRegistrosDataSetNoExisteDataSetTest()
+        {
+            throw new NotImplementedException();
+        }
+        [TestMethod]
+        public IEnumerable<String> GetNombreRegistrosDataSetTest()
         {
             throw new NotImplementedException();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DataSetException))]
-        public float GetPromedioRegistroNoExiteRegistroTest(DataSet dataSet, String nombreRegistro)
+        [ExpectedException(typeof(DataSetServiceException))]
+        public IEnumerable<String> GetNombresRegistrosDataSetNoExisteDataSetTest()
         {
             throw new NotImplementedException();
         }
 
         [TestMethod]
-        public float GetMinimoRegistroTest(DataSet dataSet, String nombreRegistro)
+        public float GetPromedioRegistroTest()
         {
             throw new NotImplementedException();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DataSetException))]
-        public float GetMinimoRegistroNoExiteRegistroTest(DataSet dataSet, String nombreRegistro)
-        {
-            throw new NotImplementedException();
-        }
-        [TestMethod]
-        public float GetMaximoRegistroTest(DataSet dataSet, String nombreRegistro)
+        [ExpectedException(typeof(DataSetServiceException))]
+        public float GetPromedioRegistroNoExiteRegistroTest()
         {
             throw new NotImplementedException();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DataSetException))]
-        public float GetMaximoRegistroNoExisteRegistroTest(DataSet dataSet, String nombreRegistro)
-        {
-            throw new NotImplementedException();
-        }
-        [TestMethod]
-        public float GetCantidadRegistrosTest(DataSet dataSet)
+        public float GetMinimoRegistroTest()
         {
             throw new NotImplementedException();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DataSetException))]
-        public float GetCantidadRegistrosNoExisteTest(DataSet dataSet)
+        [ExpectedException(typeof(DataSetServiceException))]
+        public float GetMinimoRegistroNoExiteRegistroTest()
+        {
+            throw new NotImplementedException();
+        }
+        [TestMethod]
+        public float GetMaximoRegistroTest()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DataSetServiceException))]
+        public float GetMaximoRegistroNoExisteRegistroTest()
+        {
+            throw new NotImplementedException();
+        }
+        [TestMethod]
+        public float GetCantidadRegistrosTest()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DataSetServiceException))]
+        public float GetCantidadRegistrosNoExisteTest()
         {
             throw new NotImplementedException();
         }
