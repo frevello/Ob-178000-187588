@@ -66,14 +66,8 @@ namespace Logica
 
         public Boolean ExisteProducto(String nombre)
         {
-            if (this.listaProductos.FirstOrDefault(p => p.nombre == nombre) == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return this.listaProductos.FirstOrDefault(p => p.nombre == nombre) != null;
+            
         }
 
         public void AltaVersion(String nombreProducto, String etiqueta, String estado, DateTime fecha)

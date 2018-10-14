@@ -142,10 +142,6 @@
     <Compile Include="NoFlickerPanel.Designer.cs">
       <DependentUpon>NoFlickerPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProductoVersiones.cs" />
-    <Compile Include="ProductoVersiones.Designer.cs">
-      <DependentUpon>ProductoVersiones.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VisualizarDataSet.cs">

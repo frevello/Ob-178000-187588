@@ -26,7 +26,7 @@ namespace Interfaz_de_usuario
             this.textBoxNombreUsuario.Text = usuario.nombreUsuario;
             this.textBoxNombre.Text = usuario.nombre;
             this.textBoxApellido.Text = usuario.apellido;
-            this.textBoxContraseña.Text = usuario.apellido;
+            this.textBoxContraseña.Text = usuario.contraseña;
             string ultimoIngresoString = usuario.ultimoIngreso.ToString("MM/dd/yyyy HH:mm:ss.fff");
             this.textBoxFechaUltimoIngreso.Text = ultimoIngresoString;
             string registroString = usuario.registro.ToString("MM/dd/yyyy HH:mm:ss.fff");

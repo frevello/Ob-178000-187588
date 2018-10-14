@@ -79,7 +79,7 @@ namespace Interfaz_de_usuario
         {
             IUsuarioService.SetUltimoIngreso(DateTime.Now, this.textBoxNombreUsuario.Text);
             this.Hide();
-            var MenuDesarollador = new MenuDesarollador(IUsuarioService.GetUsuario(this.textBoxNombreUsuario.Text));
+            var MenuDesarollador = new MenuDesarollador(IUsuarioService.GetUsuario(this.textBoxNombreUsuario.Text), IProductoService);
             MenuDesarollador.Closed += (s, args) => this.Close();
             MenuDesarollador.Show();
         }
@@ -112,6 +112,16 @@ namespace Interfaz_de_usuario
             IProductoService.AltaProducto("Adobe Illustrator", DateTime.Now);
             IProductoService.AltaVersion("Adobe Illustrator", "1.00.000", "Interna", DateTime.Now);
             IProductoService.AltaProducto("Adobe Reader", DateTime.Now);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxContraseña_TextChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }

@@ -42,11 +42,5 @@ namespace Dominio
                 throw new LargoDatoNoValidoException(mensaje);
             }
         }
-
-        public void SetUltimoIngreso()
-        {
-            this.ultimoIngreso = new DateTime();
-        }
-
     }
 }
