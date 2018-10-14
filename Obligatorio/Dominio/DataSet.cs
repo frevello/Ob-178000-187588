@@ -10,6 +10,7 @@ namespace Dominio
         private List<String> nombreRegistros;
         private List<VariablesDataSet> registros;
         private const String REGISTRO_TIME = "TIME";
+        private const int MINIMO_REGISTROS = 2;
         
 
         public DataSet(String path)
@@ -22,6 +23,7 @@ namespace Dominio
         public void CargarRegistrosVARDEF(String[] registrosVARDEF)
         {
             ValidarExisteRegistroTIME(registrosVARDEF);
+            ValidarExistenMinimoDeVariables(registrosVARDEF);
             AddNombresRegistros(registrosVARDEF);
         }
 
@@ -29,6 +31,14 @@ namespace Dominio
         {
             if (!registrosVARDEF.Contains(REGISTRO_TIME)){
                 throw new DataSetException("ERROR: No esta definido el registro TIME");
+            }
+        }
+
+        private void ValidarExistenMinimoDeVariables(String[] registrosVARDEF)
+        {
+            if (registrosVARDEF.Length < MINIMO_REGISTROS)
+            {
+                throw new DataSetException("ERROR: No tiene el minimo (" + MINIMO_REGISTROS + ") de registros");
             }
         }
 

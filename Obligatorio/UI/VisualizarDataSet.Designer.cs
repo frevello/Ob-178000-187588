@@ -32,14 +32,17 @@
             this.btnSelect = new System.Windows.Forms.Button();
             this.listBoxNombresRegistros = new System.Windows.Forms.ListBox();
             this.textTitulo = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnVizualizarDataSet = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.listBoxDataSet = new System.Windows.Forms.ListBox();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(4, 72);
+            this.label4.Location = new System.Drawing.Point(322, 61);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(163, 20);
@@ -49,23 +52,25 @@
             // btnSelect
             // 
             this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelect.Location = new System.Drawing.Point(30, 300);
+            this.btnSelect.Location = new System.Drawing.Point(128, 289);
             this.btnSelect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(110, 31);
+            this.btnSelect.Size = new System.Drawing.Size(121, 31);
             this.btnSelect.TabIndex = 77;
             this.btnSelect.Text = "Seleccionar";
             this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // listBoxNombresRegistros
             // 
             this.listBoxNombresRegistros.FormattingEnabled = true;
             this.listBoxNombresRegistros.ItemHeight = 16;
-            this.listBoxNombresRegistros.Location = new System.Drawing.Point(30, 96);
+            this.listBoxNombresRegistros.Location = new System.Drawing.Point(326, 85);
             this.listBoxNombresRegistros.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxNombresRegistros.Name = "listBoxNombresRegistros";
-            this.listBoxNombresRegistros.Size = new System.Drawing.Size(110, 196);
+            this.listBoxNombresRegistros.Size = new System.Drawing.Size(147, 196);
             this.listBoxNombresRegistros.TabIndex = 76;
+            this.listBoxNombresRegistros.SelectedIndexChanged += new System.EventHandler(this.listBoxNombresRegistros_SelectedIndexChanged);
             // 
             // textTitulo
             // 
@@ -78,18 +83,60 @@
             this.textTitulo.Text = "Visualizacion DataSet";
             this.textTitulo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // panel1
+            // btnVizualizarDataSet
             // 
-            this.panel1.Location = new System.Drawing.Point(174, 68);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(402, 285);
-            this.panel1.TabIndex = 79;
+            this.btnVizualizarDataSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVizualizarDataSet.Location = new System.Drawing.Point(326, 326);
+            this.btnVizualizarDataSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
+            this.btnVizualizarDataSet.Name = "btnVizualizarDataSet";
+            this.btnVizualizarDataSet.Size = new System.Drawing.Size(147, 31);
+            this.btnVizualizarDataSet.TabIndex = 81;
+            this.btnVizualizarDataSet.Text = "Graficar";
+            this.btnVizualizarDataSet.UseVisualStyleBackColor = true;
+            this.btnVizualizarDataSet.Click += new System.EventHandler(this.btnVizualizarDataSet_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(109, 61);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(163, 20);
+            this.label3.TabIndex = 80;
+            this.label3.Text = "Seleccionar DataSet";
+            // 
+            // listBoxDataSet
+            // 
+            this.listBoxDataSet.FormattingEnabled = true;
+            this.listBoxDataSet.ItemHeight = 16;
+            this.listBoxDataSet.Location = new System.Drawing.Point(113, 85);
+            this.listBoxDataSet.Margin = new System.Windows.Forms.Padding(4);
+            this.listBoxDataSet.Name = "listBoxDataSet";
+            this.listBoxDataSet.Size = new System.Drawing.Size(147, 196);
+            this.listBoxDataSet.TabIndex = 79;
+            this.listBoxDataSet.SelectedIndexChanged += new System.EventHandler(this.listBoxDataSet_SelectedIndexChanged);
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVolver.Location = new System.Drawing.Point(113, 326);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(147, 31);
+            this.btnVolver.TabIndex = 82;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // VisualizarDataSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.btnVolver);
+            this.Controls.Add(this.btnVizualizarDataSet);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.listBoxDataSet);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.listBoxNombresRegistros);
@@ -107,6 +154,9 @@
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.ListBox listBoxNombresRegistros;
         private System.Windows.Forms.Label textTitulo;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnVizualizarDataSet;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListBox listBoxDataSet;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

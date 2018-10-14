@@ -135,15 +135,26 @@ namespace Logica
             version.dataset.Add(dataSet);
         }
 
-        public Dominio.DataSet GetDataSet(String nombreProducto, String etiquetaVersion, String nombreDataSet)
+        public DataSet GetDataSet(String nombreProducto, String etiquetaVersion, String nombreDataSet)
         {
-            TryProductoInexistente(nombreProducto, "Error: No existe el producto");
-            Producto producto = this.listaProductos.FirstOrDefault(p => p.nombre == nombreProducto);
-            TryExisteVersion(producto, etiquetaVersion, "Error: No existe la version");
+            Producto producto = GetProducto(nombreProducto);
             Dominio.Version version = GetVersion(producto, etiquetaVersion);
             return version.dataset.FirstOrDefault(d => d.GetNombre() == nombreDataSet);
         }
 
-       
+        public VariablesDataSet GetRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro)
+        {
+            DataSet dataSet = this.GetDataSet(nombreProducto, etiquetaVersion, nombreDataSet);
+            TryExiteDataSet(dataSet);
+            return dataSet.GetRegistros().FirstOrDefault(r => r.nombreVariable == nombreRegistro);
+        }
+
+        private void TryExiteDataSet(DataSet dataSet)
+        {
+           if(dataSet == null)
+            {
+                throw new ProductoServiceException("ERROR: DataSet no existe");
+            }
+        }
     }
 }

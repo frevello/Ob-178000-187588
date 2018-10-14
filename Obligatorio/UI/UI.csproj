@@ -94,6 +94,12 @@
     <Compile Include="Estadisticas.Designer.cs">
       <DependentUpon>Estadisticas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Grafica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Grafica.Designer.cs">
+      <DependentUpon>Grafica.cs</DependentUpon>
+    </Compile>
     <Compile Include="ListaDataSet.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -117,6 +123,12 @@
     </Compile>
     <Compile Include="MenuDesarollador.Designer.cs">
       <DependentUpon>MenuDesarollador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NoFlickerPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NoFlickerPanel.Designer.cs">
+      <DependentUpon>NoFlickerPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductoVersiones.cs">
       <SubType>UserControl</SubType>
@@ -155,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Estadisticas.resx">
       <DependentUpon>Estadisticas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grafica.resx">
+      <DependentUpon>Grafica.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio de Sesion.resx">
       <DependentUpon>Inicio de Sesion.cs</DependentUpon>

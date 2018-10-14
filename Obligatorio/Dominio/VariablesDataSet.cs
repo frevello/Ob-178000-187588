@@ -9,7 +9,7 @@ namespace Dominio
         public List<float> datosRegistro;
         public Boolean ordenado;
 
-        public VariablesDataSet(string nombre, Boolean esOrdenado = false)
+        public VariablesDataSet(String nombre, Boolean esOrdenado = false)
         {
             nombreVariable = nombre;
             datosRegistro = new List<float>();

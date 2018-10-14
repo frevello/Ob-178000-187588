@@ -16,19 +16,18 @@ namespace Interfaz_de_usuario
         private IProductoService productoService;
         private List<String> productos;
         private BindingList<String> versiones;
-        private BindingList<String> dataSets;
         private String nombreProducto;
         private String etiquetaVersion;
-        private String nombreDataSet;
+        private Panel panelPrincipal;
 
-        public ListaDataSet(IProductoService iProductoService)
+        public ListaDataSet(IProductoService iProductoService, Panel panelpricipal)
         {
             productoService = iProductoService;
+            this.panelPrincipal = panelpricipal;
             productos = new List<string>();
             nombreProducto = null;
             versiones = new BindingList<string>();
             etiquetaVersion = null;
-            dataSets = new BindingList<string>();
             InitializeComponent();
             CargarListBoxProductos();
         }
@@ -75,7 +74,7 @@ namespace Interfaz_de_usuario
         {
             for (int i = 0; i < productoService.GetListaVersionesVersionProducto(nombreProducto).Count; i++)
             {
-                versiones.Add(productoService.GetListaVersionesVersionProducto(nombreProducto)[i].etiqueta);
+                 versiones.Add(productoService.GetListaVersionesVersionProducto(nombreProducto)[i].etiqueta);
             }
         }
         private void SetListaVersiones()
@@ -86,30 +85,7 @@ namespace Interfaz_de_usuario
         private void btnSelectVersion_Click(object sender, EventArgs e)
         {
             etiquetaVersion = listBoxVersiones.GetItemText(listBoxVersiones.SelectedItem);
-            CargarListBoxDataSets();
-        }
-        private void CargarListBoxDataSets()
-        {
-            dataSets.Clear();
-            CargarListaDataSets();
-            SetListaDataSets();
-        }
-        private void CargarListaDataSets()
-        {
-            for (int i = 0; i < productoService.GetVersionProducto(nombreProducto, etiquetaVersion).dataset.Count; i++)
-            {
-                versiones.Add(productoService.GetVersionProducto(nombreProducto, etiquetaVersion).dataset[i].GetNombre());
-            }
-        }
-        private void SetListaDataSets()
-        {
-            this.listBoxDataSet.DataSource = dataSets;
-        }
-
-        private void btnDataSet_Click(object sender, EventArgs e)
-        {
-            nombreDataSet = listBoxDataSet.GetItemText(listBoxDataSet.SelectedItem);
-            if (nombreProducto != null && etiquetaVersion != null && dataSets != null)
+            if (nombreProducto != null && etiquetaVersion != null)
             {
                 IrAVisualizarDataSet();
             }
@@ -118,11 +94,24 @@ namespace Interfaz_de_usuario
                 MessageBox.Show("Debe Seleccionar un producto, una version y un dataSet");
             }
         }
+        
 
         private void IrAVisualizarDataSet()
         {
-            Dominio.DataSet dataSet = productoService.GetDataSet(nombreProducto, etiquetaVersion, nombreDataSet);
-            VisualizarDataSet visualiar = new VisualizarDataSet(productoService, dataSet);
+            VisualizarDataSet visualiar = new VisualizarDataSet(productoService,nombreProducto, etiquetaVersion, panelPrincipal);
+            this.panelPrincipal.Controls.Clear();
+            panelPrincipal.Controls.Add(visualiar);
+        }
+
+        private void textTitulo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBoxProducto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            nombreProducto = listBoxProducto.GetItemText(listBoxProducto.SelectedItem);
+            CargarListBoxVersiones();
         }
     }
 }

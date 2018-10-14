@@ -67,7 +67,7 @@ namespace Interfaz_de_usuario
         private void CargarListaDataSet()
         {
             panelPrincipal.Controls.Clear();
-            ListaDataSet listaDataSet = new ListaDataSet(productoService);
+            ListaDataSet listaDataSet = new ListaDataSet(productoService, panelPrincipal);
             panelPrincipal.Controls.Add(listaDataSet);
         }
 
