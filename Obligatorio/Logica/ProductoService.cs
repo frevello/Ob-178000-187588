@@ -149,7 +149,31 @@ namespace Logica
         private void TryDatosNuevoProducto(String nombreProductoViejo, String nombreProductoNuevo, DateTime nuevaFecha)
         {
             TryFechaCorrecta(nuevaFecha, "Error: La fecha debe ser posterior al 2000");
+            TryFechaVersiones(nuevaFecha, nombreProductoViejo, "Error: La fecha del producto debe ser posterior a las versiones");
             Producto producto = new Producto(nombreProductoNuevo, nuevaFecha);
+        }
+
+        private void TryFechaVersiones(DateTime nuevaFecha, String nombreProductoViejo, String mensaje)
+        {
+            DateTime menorFecha = GetMenorFechaVersion(nombreProductoViejo);
+            if (nuevaFecha < menorFecha && GetListaVersionesVersionProducto(nombreProductoViejo).Count != 0)
+            {
+                throw new VersionException(mensaje);
+            }
+        }
+
+        private DateTime GetMenorFechaVersion(String nombreProductoViejo)
+        {
+            DateTime fechaMenor = DateTime.Now;
+            List<Dominio.Version> listaV = GetListaVersionesVersionProducto(nombreProductoViejo);
+            for (int i = 0; i < listaV.Count; i++)
+            {
+                if (listaV[i].fechaCreacion < fechaMenor)
+                {
+                    fechaMenor = listaV[i].fechaCreacion;
+                }
+            }
+            return fechaMenor;
         }
 
         private void TryNombreNuevoProducto(String nombreProductoViejo, String nombreProductoNuevo)

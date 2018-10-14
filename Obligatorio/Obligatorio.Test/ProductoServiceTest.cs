@@ -57,6 +57,16 @@ namespace Obligatorio.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(VersionException))]
+        public void ModificarProductoFechaVersionPosteriorTest()
+        {
+            DateTime fecha = DateTime.ParseExact("2001-10-10 14:40:52,531", "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture);
+            productoService.AltaProducto("Abode PhotoShoot", DateTime.Now);
+            productoService.AltaVersion("Abode PhotoShoot", "1.00.000", "Interna", DateTime.Now);
+            productoService.ModificarProducto("Abode PhotoShoot", "Abode PhotoShoot", fecha);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ProductoServiceException))]
         public void ModificarProductoFechaIncorrectaTest()
         {
