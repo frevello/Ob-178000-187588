@@ -13,6 +13,11 @@ namespace Logica
         public UsuarioService()
         {
             this.listaUsuarios = new List<Usuario>();
+            SetUsuarioAdministrador();
+        }
+
+        private void SetUsuarioAdministrador()
+        {
             Usuario admin = new Usuario("Admin", "Admin", "Admin", "Admin", "Administrador");
             listaUsuarios.Add(admin);
         }
@@ -21,8 +26,7 @@ namespace Logica
         {
             if (!ExisteUsuario(nombreUsuario))
             {
-                Usuario usuario = new Usuario(nombreUsuario, nombre, contraseña, apellido, rol);
-                this.listaUsuarios.Add(usuario);
+                AgregarUsuario(nombreUsuario, nombre, contraseña, apellido, rol);
             }
             else
             {
@@ -30,16 +34,15 @@ namespace Logica
             }
         }
 
+        private void AgregarUsuario(String nombreUsuario, String nombre, String contraseña, String apellido, String rol)
+        {
+            Usuario usuario = new Usuario(nombreUsuario, nombre, contraseña, apellido, rol);
+            this.listaUsuarios.Add(usuario);
+        }
+
         private Boolean ExisteUsuario(String nombreUsuario)
         {
-            if (this.listaUsuarios.FirstOrDefault(u => u.nombreUsuario == nombreUsuario) == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return this.listaUsuarios.FirstOrDefault(u => u.nombreUsuario == nombreUsuario) != null;
         }
 
         public void BajaUsuario(Usuario usuario)
