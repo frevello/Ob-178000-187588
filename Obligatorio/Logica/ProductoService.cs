@@ -156,5 +156,23 @@ namespace Logica
                 throw new ProductoServiceException("ERROR: DataSet no existe");
             }
         }
+
+        public float GetPromedioRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro)
+        {
+            VariablesDataSet variableDataSet = GetRegistro(nombreProducto, etiquetaVersion, nombreDataSet, nombreRegistro);
+            return variableDataSet.datosRegistro.Average();
+        }
+
+        public float GetMinimoRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro)
+        {
+            VariablesDataSet variableDataSet = GetRegistro(nombreProducto, etiquetaVersion, nombreDataSet, nombreRegistro);
+            return variableDataSet.datosRegistro.Min();
+        }
+        public float GetMaximoRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro)
+        {
+            VariablesDataSet variableDataSet = GetRegistro(nombreProducto, etiquetaVersion, nombreDataSet, nombreRegistro);
+            return variableDataSet.datosRegistro.Max();
+        }
+
     }
 }

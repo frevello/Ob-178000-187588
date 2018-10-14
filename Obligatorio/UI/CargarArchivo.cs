@@ -84,7 +84,8 @@ namespace Interfaz_de_usuario
 
         private void listBoxDesarolladores_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            nombreProducto = listBoxProducto.GetItemText(listBoxProducto.SelectedItem);
+            CargarLitBoxVersiones(nombreProducto);
         }
 
         private void btnSelectProducto_Click(object sender, EventArgs e)

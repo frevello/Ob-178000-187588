@@ -87,5 +87,12 @@ namespace Obligatorio.Test
             ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileSinMinimoRegistros.txt");
             loadDataSet.CargarDataSet();
         }
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void CargarDataSetTimeMenorQueCeroTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileTimeMenorQueCero.txt");
+            loadDataSet.CargarDataSet();
+        }
     }
 }

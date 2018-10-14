@@ -62,6 +62,7 @@ namespace Dominio
             {
                 KeyValuePair<String, float> registro = grupoRegistro.ElementAt(i);
                 ValidarExisteNombreRegistro(registro.Key);
+                ValidarVariableTimeSeaMayorCero(registro);
             }
         }
 
@@ -78,6 +79,20 @@ namespace Dominio
             return nombreRegistros.Contains(nombreRegistro);
         }
 
+        private void ValidarVariableTimeSeaMayorCero(KeyValuePair<String, float> registro)
+        {
+            if (registro.Key.Equals("TIME"))
+            {
+                ValidarMayorCero(registro.Value);
+            }
+        }
+        private void ValidarMayorCero(float datoRegistro)
+        {
+            if (datoRegistro < 0)
+            {
+                throw new DataSetException("ERROR: Variable TIME menor que Cero");
+            }
+        }
         private void AddTodosLosRegistros(IEnumerable<KeyValuePair<String, float>> grupoRegistro)
         {
             for (int i = 0; i < grupoRegistro.Count(); i++)

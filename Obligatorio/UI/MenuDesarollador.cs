@@ -79,7 +79,7 @@ namespace Interfaz_de_usuario
         private void CargarEstadisticas()
         {
             panelPrincipal.Controls.Clear();
-            Estadisticas estadisticas = new Estadisticas();
+            Estadisticas estadisticas = new Estadisticas(productoService);
             panelPrincipal.Controls.Add(estadisticas);
         }
 

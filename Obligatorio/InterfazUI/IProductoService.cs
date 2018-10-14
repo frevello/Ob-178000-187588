@@ -19,6 +19,9 @@ namespace InterfazServiceUI
         void AddDataSet(String nombreProducto, String etiquetaVersion, DataSet dataSet);
         Dominio.DataSet GetDataSet(String nombreProducto, String etiquetaVersion, String nombreDataSet);
         VariablesDataSet GetRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro);
+        float GetPromedioRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro);
+        float GetMinimoRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro);
+        float GetMaximoRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro);
 
 
     }
