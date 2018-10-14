@@ -142,9 +142,7 @@
     <Compile Include="NoFlickerPanel.Designer.cs">
       <DependentUpon>NoFlickerPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProductoVersiones.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="ProductoVersiones.cs" />
     <Compile Include="ProductoVersiones.Designer.cs">
       <DependentUpon>ProductoVersiones.cs</DependentUpon>
     </Compile>
