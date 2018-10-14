@@ -16,14 +16,20 @@ namespace Interfaz_de_usuario
     public partial class EditarUsuario : UserControl
     {
         private IUsuarioService IUService;
-        private List<String> listaUsuarios;
+        private BindingList<String> listaUsuarios;
         private Usuario usuario;
         public EditarUsuario(IUsuarioService IUsuarioService)
         {
             IUService = IUsuarioService;
-            listaUsuarios = new List<string>();
+            listaUsuarios = new BindingList<string>();
             usuario = null;
             InitializeComponent();
+            CargarDatos();
+        }
+
+        private void CargarDatos()
+        {
+            listaUsuarios.Clear();
             CargarListaUsuarios();
             SetListaUsuarios();
         }
@@ -67,6 +73,7 @@ namespace Interfaz_de_usuario
         {
             try
             {
+                TryUsuarioSeleccionado("Error: No se selecciono un usuario");
                 TryActualizarUsuario();
                 MessageBox.Show("Usuario actualizado correctamente");
             }
@@ -82,7 +89,7 @@ namespace Interfaz_de_usuario
 
         private void TryActualizarUsuario()
         {
-            Usuario u = new Usuario(this.textNombreUsuario.Text, this.textNombre.Text, this.textContraseña.Text, this.textApellido.Text, "Desarollador");
+            Usuario u = new Usuario(usuario.nombreUsuario, this.textNombre.Text, this.textContraseña.Text, this.textApellido.Text, "Desarollador");
             IUService.ModificarUsuario(u);
             VaciarCampos();
         }
@@ -103,11 +110,29 @@ namespace Interfaz_de_usuario
         {
             try
             {
+                TryUsuarioSeleccionado("Error: No se selecciono un usuario");
                 TryEliminarUsuario();
+                SetDatosFinales();    
             }
             catch (UsuarioServiceException m)
             {
                 MessageBox.Show(m.Message);
+            }
+        }
+
+        private void SetDatosFinales()
+        {
+
+            MessageBox.Show("Usuario eliminado exitosamente");
+            CargarDatos();
+            usuario = null;
+        }
+
+        private void TryUsuarioSeleccionado(String mensaje)
+        {
+            if (usuario == null)
+            {
+                throw new UsuarioServiceException(mensaje);
             }
         }
 

@@ -12,12 +12,12 @@ namespace Dominio
 
         private const String formatoEtiqueta = "^\\d{1}.\\d{2}.\\d{3}$";
 
-        public Version(String etiqueta, String estado, Producto producto)
+        public Version(String etiqueta, String estado, Producto producto, DateTime fecha)
         {
             ValidarFormatoEtiqueta(etiqueta, "ERROR: Formato de etiqueta invalido");
             ValidarCampoNoVacios(estado, "ERROR: Estado vacio");
             this.etiqueta = etiqueta;
-            this.fechaCreacion = new DateTime();
+            this.fechaCreacion = fecha;
             this.estado = estado;
             this.producto = producto;
         }

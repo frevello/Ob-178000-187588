@@ -97,6 +97,15 @@ namespace Obligatorio.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(UsuarioServiceException))]
+        public void ModificarUsuarioInexistenteTest()
+        {
+            usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");
+            Usuario usuario = new Usuario("FacundoR", "Revello", "12745", "Revello", "Desarollador");
+            usuarioService.ModificarUsuario(usuario);
+        }
+
+        [TestMethod]
         public void LogInTest()
         {
             usuarioService.AltaUsuario("FRevello", "Revello", "1234", "Revello", "Desarollador");

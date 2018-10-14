@@ -14,10 +14,13 @@ namespace Interfaz_de_usuario
     public partial class MenuAdmin : Form
     {
         private IUsuarioService IUService;
-        public MenuAdmin(IUsuarioService IUsuarioService)
+        private IProductoService IPService;
+        public MenuAdmin(IUsuarioService IUsuarioService, IProductoService IProductoService)
         {
             InitializeComponent();
             IUService = IUsuarioService;
+            IPService = IProductoService;
+            CargarDatosUsuario();
         }
 
         private void botonDatosUsuario_Click(object sender, EventArgs e)
@@ -69,20 +72,20 @@ namespace Interfaz_de_usuario
         private void CargarAltaProducto()
         {
             panelPrincipal.Controls.Clear();
-            AltaProducto altaProducto = new AltaProducto();
+            AltaProducto altaProducto = new AltaProducto(IPService);
             panelPrincipal.Controls.Add(altaProducto);
         }
 
         private void botonEditarProducto_Click(object sender, EventArgs e)
         {
-            CargarEditarProducto();
+            CargarAltaVersion();
         }
 
-        private void CargarEditarProducto()
+        private void CargarAltaVersion()
         {
             panelPrincipal.Controls.Clear();
-            EditarProductos editarProducto = new EditarProductos();
-            panelPrincipal.Controls.Add(editarProducto);
+            AltaVersion altaVersion = new AltaVersion(IPService);
+            panelPrincipal.Controls.Add(altaVersion);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -93,8 +96,20 @@ namespace Interfaz_de_usuario
         private void CargarProductoVersiones()
         {
             panelPrincipal.Controls.Clear();
-            ProductoVersiones productoVersiones = new ProductoVersiones();
-            panelPrincipal.Controls.Add(productoVersiones);
+            EditarVersiones editarVersiones = new EditarVersiones(IPService);
+            panelPrincipal.Controls.Add(editarVersiones);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            CargarEditarProducto();
+        }
+
+        private void CargarEditarProducto()
+        {
+            panelPrincipal.Controls.Clear();
+            EditarProductos editarProducto = new EditarProductos(IPService);
+            panelPrincipal.Controls.Add(editarProducto);
         }
     }
     

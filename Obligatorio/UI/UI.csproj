@@ -58,6 +58,12 @@
     <Compile Include="AltaUsuario.Designer.cs">
       <DependentUpon>AltaUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="AltaVersion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AltaVersion.Designer.cs">
+      <DependentUpon>AltaVersion.cs</DependentUpon>
+    </Compile>
     <Compile Include="CargarArchivo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -87,6 +93,12 @@
     </Compile>
     <Compile Include="EditarUsuario.Designer.cs">
       <DependentUpon>EditarUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditarVersiones.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditarVersiones.Designer.cs">
+      <DependentUpon>EditarVersiones.cs</DependentUpon>
     </Compile>
     <Compile Include="Estadisticas.cs">
       <SubType>UserControl</SubType>
@@ -118,12 +130,6 @@
     <Compile Include="MenuDesarollador.Designer.cs">
       <DependentUpon>MenuDesarollador.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProductoVersiones.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ProductoVersiones.Designer.cs">
-      <DependentUpon>ProductoVersiones.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AltaProducto.resx">
@@ -131,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AltaUsuario.resx">
       <DependentUpon>AltaUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AltaVersion.resx">
+      <DependentUpon>AltaVersion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CargarArchivo.resx">
       <DependentUpon>CargarArchivo.cs</DependentUpon>
@@ -147,6 +156,9 @@
     <EmbeddedResource Include="EditarUsuario.resx">
       <DependentUpon>EditarUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditarVersiones.resx">
+      <DependentUpon>EditarVersiones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Estadisticas.resx">
       <DependentUpon>Estadisticas.cs</DependentUpon>
     </EmbeddedResource>
@@ -161,9 +173,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuDesarollador.resx">
       <DependentUpon>MenuDesarollador.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProductoVersiones.resx">
-      <DependentUpon>ProductoVersiones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -9,11 +9,11 @@ namespace Dominio
         public DateTime fechaInicial;
         private List<Version> listaVersion;
 
-        public Producto(String nombre)
+        public Producto(String nombre, DateTime fecha)
         {
             ValidarNoVacio(nombre, "ERROR: nombre vacio");
             this.nombre = nombre;
-            this.fechaInicial = new DateTime();
+            this.fechaInicial = fecha;
             this.listaVersion = new List<Version>();
         }
 

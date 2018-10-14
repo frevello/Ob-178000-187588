@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using InterfazServiceUI;
 using System.Text;
 using System.Threading.Tasks;
-
+ 
 namespace Logica
-{ 
-    public class ProductoService
+{
+    public class ProductoService : IProductoService
     {
         private List<Producto> listaProductos;
 
@@ -16,11 +17,12 @@ namespace Logica
             this.listaProductos = new List<Producto>();
         }
 
-        public void AltaProducto(String nombre)
+        public void AltaProducto(String nombre, DateTime fecha)
         {
             if (!ExisteProducto(nombre))
             {
-                AgregarProducto(nombre);
+                TryFechaCorrecta(fecha, "Error: El año debe ser posterior al 2000");
+                AgregarProducto(nombre, fecha);
             }
             else
             {
@@ -28,9 +30,17 @@ namespace Logica
             }
         }
 
-        private void AgregarProducto(String nombre)
+        private void TryFechaCorrecta(DateTime fecha, String mensaje)
         {
-            Producto producto = new Producto(nombre);
+            if (fecha.Year < 2000)
+            {
+                throw new ProductoServiceException(mensaje);
+            }
+        }
+
+        private void AgregarProducto(String nombre, DateTime fecha)
+        {
+            Producto producto = new Producto(nombre, fecha);
             this.listaProductos.Add(producto);
         }
 
@@ -65,12 +75,13 @@ namespace Logica
             }
         }
 
-        public void AltaVersion(String nombreProducto, String etiqueta, String estado)
+        public void AltaVersion(String nombreProducto, String etiqueta, String estado, DateTime fecha)
         {
             TryProductoInexistente(nombreProducto, "Error: No existe el producto");
             Producto producto = this.listaProductos.FirstOrDefault(p => p.nombre == nombreProducto);
             TryVersionUnica(producto, etiqueta, "Error: Ya existe esa version para el producto");
-            AgregarVersion(producto, etiqueta, estado);
+            TryFechaCreacion(producto, fecha, "Error: La fecha debe ser posterior o igual a la del producto");
+            AgregarVersion(producto, etiqueta, estado, fecha);
         }
 
         private void TryVersionUnica(Producto producto, String etiqueta, String mensaje)
@@ -81,9 +92,17 @@ namespace Logica
             }
         }
 
-        private void AgregarVersion(Producto producto, String etiqueta, String estado)
+        private void TryFechaCreacion(Producto producto, DateTime fecha, String mensaje)
         {
-            Dominio.Version version = new Dominio.Version(etiqueta, estado, producto);
+            if (producto.fechaInicial > fecha)
+            {
+                throw new VersionException(mensaje);
+            }
+        }
+
+        private void AgregarVersion(Producto producto, String etiqueta, String estado, DateTime fecha)
+        {
+            Dominio.Version version = new Dominio.Version(etiqueta, estado, producto, fecha);
             producto.GetVersiones().Add(version);
         }
 
@@ -103,7 +122,7 @@ namespace Logica
             }
         }
 
-        public Dominio.Version GetVersion(Producto producto, String etiqueta)
+        private Dominio.Version GetVersion(Producto producto, String etiqueta)
         {
             return producto.GetVersiones().FirstOrDefault(v => v.etiqueta == etiqueta);
         }
@@ -120,11 +139,78 @@ namespace Logica
             return producto.GetVersiones();
         }
 
-        public void ModificarProducto()
+        public void ModificarProducto(String nombreProductoViejo, String nombreProductoNuevo, DateTime nuevaFecha)
         {
-
+            TryDatosNuevoProducto(nombreProductoViejo, nombreProductoNuevo, nuevaFecha);
+            TryNombreNuevoProducto(nombreProductoViejo, nombreProductoNuevo);
+            ModificarDatos(nombreProductoViejo, nombreProductoNuevo, nuevaFecha);
         }
 
-       
+        private void TryDatosNuevoProducto(String nombreProductoViejo, String nombreProductoNuevo, DateTime nuevaFecha)
+        {
+            TryFechaCorrecta(nuevaFecha, "Error: La fecha debe ser posterior al 2000");
+            Producto producto = new Producto(nombreProductoNuevo, nuevaFecha);
+        }
+
+        private void TryNombreNuevoProducto(String nombreProductoViejo, String nombreProductoNuevo)
+        {
+            if (!nombreProductoViejo.Equals(nombreProductoNuevo))
+            {
+                TryNombreProductoAModificar(nombreProductoNuevo);
+            }
+        }
+
+        private void TryNombreProductoAModificar(String nombreProductoNuevo)
+        {
+            if (ExisteProducto(nombreProductoNuevo))
+            {
+                throw new ProductoServiceException("Error: ya existe un Producto con ese nombre");
+            }
+        }
+
+        private void ModificarDatos(String nombreProductoViejo, String nombreProductoNuevo, DateTime nuevaFecha)
+        {
+            Producto producto = this.listaProductos.FirstOrDefault(p => p.nombre == nombreProductoViejo);
+            producto.nombre = nombreProductoNuevo;
+            producto.fechaInicial = nuevaFecha;
+        }
+
+        public void ModificarVersion(String nombreProducto, String etiquetaVieja, String etiquetaNueva, String estado, DateTime fecha)
+        {
+            TryDatosNuevosVersion(nombreProducto, etiquetaNueva, estado, fecha);
+            TryEtiquetaNuevaVersion(etiquetaVieja, etiquetaNueva, nombreProducto);
+            ModificarDatosVersion(nombreProducto, etiquetaVieja, etiquetaNueva, estado, fecha);
+        }
+
+        private void TryDatosNuevosVersion(String nombreProducto, String etiquetaNueva, String estado, DateTime fecha)
+        {
+            Producto prod = this.listaProductos.FirstOrDefault(p => p.nombre == nombreProducto);
+            TryFechaCreacion(prod, fecha, "Error: La fecha debe ser posterior o igual a la del producto");
+            Dominio.Version v = new Dominio.Version(etiquetaNueva, estado, prod, fecha);
+        }
+
+        private void TryEtiquetaNuevaVersion(String etiquetaVieja, String etiquetaNueva, String nombreProducto)
+        {
+            if (!etiquetaVieja.Equals(etiquetaNueva))
+            {
+                TryEtiquetaVersionAModificar(nombreProducto, etiquetaNueva);
+            }
+        }
+
+        private void TryEtiquetaVersionAModificar(String nombreProducto, String etiquetaNueva)
+        {
+            if (GetVersion(this.listaProductos.FirstOrDefault(p => p.nombre == nombreProducto), etiquetaNueva) != null)
+            {
+                throw new VersionException("Error: ya existe una Version para este producto con esa etiqueta");
+            }
+        }
+
+        private void ModificarDatosVersion(String nombreProducto, String etiquetaVieja, String etiquetaNueva, String estado, DateTime fecha)
+        {
+            Dominio.Version v = GetVersion(this.listaProductos.FirstOrDefault(p => p.nombre == nombreProducto), etiquetaVieja);
+            v.estado = estado;
+            v.etiqueta = etiquetaNueva;
+            v.fechaCreacion = fecha;
+        }
     }
 }
