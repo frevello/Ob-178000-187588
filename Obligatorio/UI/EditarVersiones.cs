@@ -52,8 +52,7 @@ namespace Interfaz_de_usuario
         {
             try
             {
-                TryProductoSeleccionado("Error: No se selecciono un producto");
-                SetDatosVersiones();
+                TrySeleccionarVersionMetodoGeneral();
             }
             catch (Exception m)
             {
@@ -61,11 +60,10 @@ namespace Interfaz_de_usuario
             }
         }
 
-        private void botonSeleccionarProducto_Click(object sender, EventArgs e)
+        private void TrySeleccionarVersionMetodoGeneral()
         {
-            String producto = this.listBoxProductos.GetItemText(this.listBoxProductos.SelectedItem);
-            productoSeleccionado = IPService.GetProducto(producto);
-            CargarDatosVersiones();
+            TryProductoSeleccionado("Error: No se selecciono un producto");
+            SetDatosVersiones();
         }
 
         private void TryProductoSeleccionado(String mensaje)
@@ -74,6 +72,27 @@ namespace Interfaz_de_usuario
             {
                 throw new Exception(mensaje);
             }
+        }
+
+        private void SetDatosVersiones()
+        {
+            String version = this.listBoxVersiones.GetItemText(this.listBoxVersiones.SelectedItem);
+            versionSeleccionada = IPService.GetVersionProducto(productoSeleccionado.nombre, version);
+            SetDatos();
+        }
+
+        private void SetDatos()
+        {
+            this.textEtiqueta.Text = versionSeleccionada.etiqueta;
+            this.dateTimeFechaCreacion.Value = versionSeleccionada.fechaCreacion;
+            this.comboBoxTipoVersion.Text = versionSeleccionada.estado;
+        }
+
+        private void botonSeleccionarProducto_Click(object sender, EventArgs e)
+        {
+            String producto = this.listBoxProductos.GetItemText(this.listBoxProductos.SelectedItem);
+            productoSeleccionado = IPService.GetProducto(producto);
+            CargarDatosVersiones();
         }
 
         private void CargarDatosVersiones()
@@ -97,19 +116,9 @@ namespace Interfaz_de_usuario
             this.listBoxVersiones.DataSource = listaVersiones;
         }
         
-        private void SetDatosVersiones()
-        {
-            String version = this.listBoxVersiones.GetItemText(this.listBoxVersiones.SelectedItem);
-            versionSeleccionada = IPService.GetVersionProducto(productoSeleccionado.nombre, version);
-            SetDatos();
-        }
+       
 
-        private void SetDatos()
-        {
-            this.textEtiqueta.Text = versionSeleccionada.etiqueta;
-            this.dateTimeFechaCreacion.Value = versionSeleccionada.fechaCreacion;
-            this.comboBoxTipoVersion.Text = versionSeleccionada.estado;
-        }
+        
 
         private void botonIngresar_Click(object sender, EventArgs e)
         {

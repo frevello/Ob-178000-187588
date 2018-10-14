@@ -12,7 +12,7 @@ using Dominio;
 using Logica;
 
 namespace Interfaz_de_usuario
-{  
+{
     public partial class EditarUsuario : UserControl
     {
         private IUsuarioService IUService;
@@ -36,11 +36,12 @@ namespace Interfaz_de_usuario
 
         private void CargarListaUsuarios()
         {
-            for (int i = 0; i < IUService.GetListaUsuarios().Count; i++)
+            List<Usuario> usuarios = IUService.GetListaUsuarios();
+            for (int i = 0; i < usuarios.Count; i++)
             {
-                if (!IUService.GetListaUsuarios()[i].nombreUsuario.Equals("Admin"))
+                if (!usuarios[i].nombreUsuario.Equals("Admin"))
                 {
-                    listaUsuarios.Add(IUService.GetListaUsuarios()[i].nombreUsuario);
+                    listaUsuarios.Add(usuarios[i].nombreUsuario);
                 }
             }
         }
@@ -73,18 +74,19 @@ namespace Interfaz_de_usuario
         {
             try
             {
-                TryUsuarioSeleccionado("Error: No se selecciono un usuario");
-                TryActualizarUsuario();
-                MessageBox.Show("Usuario actualizado correctamente");
+                TryActualizarUsuarioMetodoGeneral();
             }
-            catch (UsuarioServiceException m)
+            catch (Exception m)
             {
                 MessageBox.Show(m.Message);
             }
-            catch (LargoDatoNoValidoException m)
-            {
-                MessageBox.Show(m.Message);
-            }
+        }
+
+        private void TryActualizarUsuarioMetodoGeneral()
+        {
+            TryUsuarioSeleccionado("Error: No se selecciono un usuario");
+            TryActualizarUsuario();
+            MessageBox.Show("Usuario actualizado correctamente");
         }
 
         private void TryActualizarUsuario()
@@ -100,47 +102,49 @@ namespace Interfaz_de_usuario
             this.textNombre.Text = "";
             this.textApellido.Text = "";
             this.textContraseña.Text = "";
-            string ultimoIngresoString = "";
-            this.textFechaUltimoIngreso.Text = ultimoIngresoString;
-            string registroString = "";
-            this.textFechaRegistro.Text = registroString;
+            this.textFechaUltimoIngreso.Text = "";
+            this.textFechaRegistro.Text = "";
         }
 
         private void botonEliminar_Click(object sender, EventArgs e)
         {
             try
             {
-                TryUsuarioSeleccionado("Error: No se selecciono un usuario");
-                TryEliminarUsuario();
-                SetDatosFinales();    
+                TryEliminarUsuarioMetodoGeneral();
             }
-            catch (UsuarioServiceException m)
+            catch (Exception m)
             {
                 MessageBox.Show(m.Message);
             }
         }
 
-        private void SetDatosFinales()
+        private void TryEliminarUsuarioMetodoGeneral()
         {
-
-            MessageBox.Show("Usuario eliminado exitosamente");
-            CargarDatos();
-            usuario = null;
+            TryUsuarioSeleccionado("Error: No se selecciono un usuario");
+            TryDarBajaUsuario();
+            SetDatosFinales();
         }
 
         private void TryUsuarioSeleccionado(String mensaje)
         {
             if (usuario == null)
             {
-                throw new UsuarioServiceException(mensaje);
+                throw new Exception(mensaje);
             }
         }
 
-        private void TryEliminarUsuario()
+        private void TryDarBajaUsuario()
         {
             Usuario u = new Usuario(this.textNombreUsuario.Text, this.textNombre.Text, this.textContraseña.Text, this.textApellido.Text, "Desarollador");
             IUService.BajaUsuario(u);
             VaciarCampos();
         }
+
+        private void SetDatosFinales()
+        {
+            MessageBox.Show("Usuario eliminado exitosamente");
+            CargarDatos();
+            usuario = null;
+        } 
     }
 }
