@@ -17,22 +17,12 @@ namespace Interfaz_de_usuario
     {
         private Usuario usuario;
         private IProductoService productoService;
-        public MenuDesarollador(Usuario u)
+        public MenuDesarollador(Usuario u, IProductoService productoService)
         {
             InitializeComponent();
             this.usuario = u;
             CargarDatosUsuario();
-            productoService = new ProductoService();
-
-            ////////
-            productoService.AltaProducto("producto1");
-            productoService.AltaProducto("producto2");
-            productoService.AltaProducto("producto3");
-
-            productoService.AltaVersion("producto1", "1.00.001", "interno");
-            productoService.AltaVersion("producto1", "2.00.002", "interno");
-            productoService.AltaVersion("producto2", "0.00.001", "interno");
-            productoService.AltaVersion("producto3", "3.00.001", "interno");
+            this.productoService = productoService;
         }
 
         private void botonDatosUsuario_Click(object sender, EventArgs e)

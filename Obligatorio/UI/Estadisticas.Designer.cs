@@ -116,6 +116,7 @@
             this.listBoxEstadisticas.Name = "listBoxEstadisticas";
             this.listBoxEstadisticas.Size = new System.Drawing.Size(535, 100);
             this.listBoxEstadisticas.TabIndex = 81;
+            this.listBoxEstadisticas.SelectedIndexChanged += new System.EventHandler(this.listBoxEstadisticas_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -165,7 +166,7 @@
             this.Controls.Add(this.listBoxVersiones);
             this.Controls.Add(this.listBoxProducto);
             this.Controls.Add(this.textTitulo);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Estadisticas";
             this.Size = new System.Drawing.Size(593, 369);
             this.ResumeLayout(false);

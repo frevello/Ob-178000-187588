@@ -28,22 +28,36 @@ namespace Interfaz_de_usuario
             productoService = iProductoService;
             productos = new List<string>();
             nombreProducto = null;
-            versiones = new BindingList<string>();
+            versiones = new BindingList<String>();
             etiquetaVersion = null;
-            dataSets = new BindingList<string>();
+            dataSets = new BindingList<String>();
             nombreDataSet = null;
-            estadistias = new BindingList<string>();
+            estadistias = new BindingList<String>();
             InitializeComponent();
             CargarListBoxProductos();
         }
 
         private void CargarListBoxProductos()
         {
+            etiquetaVersion = null;
+            nombreProducto = null;
+            ClearListBoxDataSet();
+            ClearListBoxEstadisticas();
             productos.Clear();
             CargarListaProductos();
             SetListaProductos();
         }
-
+        private void ClearListBoxDataSet()
+        {
+            nombreDataSet = null;
+            dataSets.Clear();
+            SetListaDataSets();
+        }
+        private void ClearListBoxEstadisticas()
+        {
+            estadistias.Clear();
+            SetListaEstadisticas();
+        }
         private void CargarListaProductos()
         {
             for (int i = 0; i < productoService.GetListaProducto().Count; i++)
@@ -59,14 +73,13 @@ namespace Interfaz_de_usuario
 
         private void btnSelectVersion_Click(object sender, EventArgs e)
         {
-            CargarEstadisticaSiDatosSeleccionados();
-            SetListaEstadisticas();
+            CargarListBoxEstadisticas();
         }
 
         private void CargarEstadisticaSiDatosSeleccionados()
         {
             nombreDataSet = listBoxDataSet.GetItemText(listBoxDataSet.SelectedItem);
-            if (nombreProducto != null && etiquetaVersion != null && nombreDataSet != null)
+            if (nombreProducto != null && etiquetaVersion != null && nombreDataSet != null && !etiquetaVersion.Equals("") && !nombreDataSet.Equals("") && !nombreProducto.Equals(""))
             {
                 CargarEstadisticas();
             }
@@ -78,6 +91,14 @@ namespace Interfaz_de_usuario
         private void CargarEstadisticas()
         {
             Dominio.DataSet dataSet = productoService.GetDataSet(nombreProducto, etiquetaVersion, nombreDataSet);
+            if(dataSet != null && dataSet.GetRegistros() != null)
+            {
+                CargarListBoxEstadistica(dataSet);
+            }
+        }
+
+        private void CargarListBoxEstadistica(Dominio.DataSet dataSet)
+        {
             estadistias.Add("Cantidad de Registros del DataSet: " + dataSet.GetRegistros().Count());
             for (int i = 0; i < dataSet.GetRegistros().Count(); i++)
             {
@@ -102,6 +123,8 @@ namespace Interfaz_de_usuario
         }
         private void CargarListBoxVersiones()
         {
+            etiquetaVersion = null;
+            nombreDataSet = null;
             versiones.Clear();
             CargarListaVersiones();
             SetListaVersiones();
@@ -123,14 +146,22 @@ namespace Interfaz_de_usuario
             nombreProducto = listBoxProducto.GetItemText(listBoxProducto.SelectedItem);
             CargarListBoxVersiones();
         }
-
+  
         private void listBoxVersiones_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ClearListBoxDataSet();
+            ClearListBoxEstadisticas();
             etiquetaVersion = listBoxVersiones.GetItemText(listBoxVersiones.SelectedItem);
-            CargarListBoxDataSets();
+            if(etiquetaVersion!= null && !etiquetaVersion.Equals(""))
+            {
+                CargarListBoxDataSets();
+            }
+
         }
         private void CargarListBoxDataSets()
         {
+            nombreDataSet = null;
+            dataSets.Clear();
             CargarListaDataSets();
             SetListaDataSets();
         }
@@ -149,10 +180,21 @@ namespace Interfaz_de_usuario
         {
             this.listBoxEstadisticas.DataSource = estadistias;
         }
+
         private void listBoxDataSet_SelectedIndexChanged(object sender, EventArgs e)
         {
+        }
+
+        private void CargarListBoxEstadisticas()
+        {
+            estadistias.Clear();
             CargarEstadisticaSiDatosSeleccionados();
             SetListaEstadisticas();
+        }
+
+        private void listBoxEstadisticas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
