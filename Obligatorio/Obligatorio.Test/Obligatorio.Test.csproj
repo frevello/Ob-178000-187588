@@ -55,6 +55,7 @@
     <Compile Include="FileReaderTest.cs" />
     <Compile Include="LoadDataSetTest.cs" />
     <Compile Include="ProductoServiceTest.cs" />
+    <Compile Include="DataSetServiceTest.cs" />
     <Compile Include="UsuarioServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
