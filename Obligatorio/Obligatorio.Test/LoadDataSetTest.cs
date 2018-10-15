@@ -94,5 +94,19 @@ namespace Obligatorio.Test
             ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileTimeMenorQueCero.txt");
             loadDataSet.CargarDataSet();
         }
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void CargarDataSetCantidadRegistrosMenorA2Test()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileCantidadRegistrosMenor.txt");
+            loadDataSet.CargarDataSet();
+        }
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void CargarDataSetSinRegistrosTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileSinRegistros.txt");
+            loadDataSet.CargarDataSet();
+        }
     }
 }

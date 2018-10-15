@@ -109,5 +109,10 @@ namespace AccesoDatos
             dataSet.AddGrupoRegistro(grupoRegistro);
         }
 
+        public void EndDataSet()
+        {
+            dataSet.ValidarMinimoDeRegistros();
+        }
+
     }
 }

@@ -10,8 +10,8 @@ namespace Dominio
         private List<String> nombreRegistros;
         private List<VariablesDataSet> registros;
         private const String REGISTRO_TIME = "TIME";
+        private const int MINIMO_NOMBRES_REGISTROS = 2;
         private const int MINIMO_REGISTROS = 2;
-        
 
         public DataSet(String path)
         {
@@ -36,9 +36,9 @@ namespace Dominio
 
         private void ValidarExistenMinimoDeVariables(String[] registrosVARDEF)
         {
-            if (registrosVARDEF.Length < MINIMO_REGISTROS)
+            if (registrosVARDEF.Length < MINIMO_NOMBRES_REGISTROS)
             {
-                throw new DataSetException("ERROR: No tiene el minimo (" + MINIMO_REGISTROS + ") de registros");
+                throw new DataSetException("ERROR: No tiene el minimo (" + MINIMO_NOMBRES_REGISTROS + ") de registros");
             }
         }
 
@@ -55,7 +55,7 @@ namespace Dominio
             ValidarTodosLosRegistrosExisten(grupoRegistro);
             AddTodosLosRegistros(grupoRegistro);
         }
-
+       
         private void ValidarTodosLosRegistrosExisten(IEnumerable<KeyValuePair<String, float>> grupoRegistro)
         {
             for(int i = 0; i < grupoRegistro.Count(); i++)
@@ -171,6 +171,28 @@ namespace Dominio
         } public IEnumerable<VariablesDataSet> GetRegistros()
         {
             return this.registros;
+        }
+
+        public void ValidarMinimoDeRegistros()
+        {
+            TryGetDatosRegistro();
+            List<float> datosRegistros = registros.ElementAt(0).datosRegistro;
+            if (datosRegistros.Count() < MINIMO_REGISTROS)
+            {
+                throw new DataSetException("ERROR: Debe tener al menos " + MINIMO_REGISTROS + "registros");
+            }
+        }
+
+        private void  TryGetDatosRegistro()
+        {
+            try
+            {
+               List<float> datos =  registros.ElementAt(0).datosRegistro;
+            }
+            catch(Exception e)
+            {
+                throw new DataSetException("ERROR: No existen Datos Registros");
+            }
         }
     }
 

@@ -77,6 +77,7 @@ namespace AccesoDatos
 
         private void EndDataSet()
         {
+            creator.EndDataSet();
             reader.EndReading();
         }
 
