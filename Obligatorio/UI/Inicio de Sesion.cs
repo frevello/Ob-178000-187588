@@ -114,6 +114,7 @@ namespace Interfaz_de_usuario
             IProductoService.AltaProducto("Adobe Illustrator", DateTime.Now);
             IProductoService.AltaVersion("Adobe Illustrator", "1.00.000", "Interna", DateTime.Now);
             IProductoService.AltaProducto("Adobe Reader", DateTime.Now);
+            IProductoService.AltaVersion("Adobe Reader", "1.00.000", "Interna", DateTime.Now);
         }
 
         private void Form1_Load(object sender, EventArgs e)
