@@ -26,38 +26,25 @@ namespace Interfaz_de_usuario
         {
             try
             {
-                TryIngresarProducto();
-                MessageBox.Show("Producto ingresado correctamente");
-                VaciarCampos();
+                TryIngresarProductoMetodoGeneral();
             }
             catch (Exception m)
             {
                 TryIngresarVersionPorDefecto(m.Message);
             }
         }
-        private void TryIngresarVersionPorDefecto(String m)
+
+        private void TryIngresarProductoMetodoGeneral()
         {
-            try {
-                IPService.AltaVersion(this.textNombreProducto.Text, "1.00.000", "interno", DateTime.Now);
-                MessageBox.Show("Producto ingresado correctamente con version por defecto 1.00.000");
-                VaciarCampos();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(m);
-            }
-        }
-        private void VaciarCampos()
-        {
-            this.textBoxEtiquetaVersion.Text = "";
-            this.textNombreProducto.Text = "";
-            this.textNombreProducto.Text = "";
+            TryIngresarProducto();
+            MessageBox.Show("Producto ingresado correctamente");
+            VaciarCampos();
         }
 
         private void TryIngresarProducto()
         {
             TryProducto();
-            TryVersion();       
+            TryVersion();
         }
 
         private void TryProducto()
@@ -68,6 +55,31 @@ namespace Interfaz_de_usuario
         private void TryVersion()
         {
             IPService.AltaVersion(this.textNombreProducto.Text, this.textBoxEtiquetaVersion.Text, this.comboBoxTipoVersion.Text, this.dateTimeFechaCreacion.Value);
+        }
+
+        private void TryIngresarVersionPorDefecto(String m)
+        {
+            try {
+                TryIngresarVersionPorDefectoGeneral();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(m);
+            }
+        }
+
+        private void TryIngresarVersionPorDefectoGeneral()
+        {
+            IPService.AltaVersion(this.textNombreProducto.Text, "1.00.000", "interno", DateTime.Now);
+            MessageBox.Show("Producto ingresado correctamente con version por defecto 1.00.000");
+            VaciarCampos();
+        }
+
+        private void VaciarCampos()
+        {
+            this.textBoxEtiquetaVersion.Text = "";
+            this.textNombreProducto.Text = "";
+            this.textNombreProducto.Text = "";
         }
     }
 }

@@ -34,9 +34,10 @@ namespace Interfaz_de_usuario
 
         private void CargarListaProductos()
         {
-            for (int i = 0; i < IPService.GetListaProducto().Count; i++)
+            List<Producto> productos = IPService.GetListaProducto();
+            for (int i = 0; i < productos.Count; i++)
             {
-                listaProductos.Add(IPService.GetListaProducto()[i].nombre);
+                listaProductos.Add(productos[i].nombre);
             }
         }
 
@@ -49,25 +50,27 @@ namespace Interfaz_de_usuario
         {
             String producto = this.listBoxProductos.GetItemText(this.listBoxProductos.SelectedItem);
             productoSeleccionado = IPService.GetProducto(producto);
-            String mensaje = "Producto seleccionado ";
-            mensaje += productoSeleccionado.nombre;
-            MessageBox.Show(mensaje);
         }
 
         private void botonIngresarVersion_Click(object sender, EventArgs e)
         {
             try
             {
-                TryProductoSeleccionado("Error: No se selecciono un producto");
-                TryAltaVersion();
-                MessageBox.Show("Usuario actualizado correctamente");
-                VaciarCampos();
+                TryIngresarVersionMetodoGeneral();     
             }
             catch (Exception m)
             {
                 MessageBox.Show(m.Message);
             }
         }  
+
+        private void TryIngresarVersionMetodoGeneral()
+        {
+            TryProductoSeleccionado("Error: No se selecciono un producto");
+            TryAltaVersion();
+            MessageBox.Show("Usuario actualizado correctamente");
+            VaciarCampos();
+        }
 
         private void TryProductoSeleccionado(String mensaje)
         {

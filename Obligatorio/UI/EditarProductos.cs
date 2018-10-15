@@ -35,9 +35,10 @@ namespace Interfaz_de_usuario
 
         private void CargarListaUsuarios()
         {
-            for (int i = 0; i < IPService.GetListaProducto().Count; i++)
+            List<Producto> productos = IPService.GetListaProducto();
+            for (int i = 0; i < productos.Count; i++)
             {
-                listaProductos.Add(IPService.GetListaProducto()[i].nombre);
+                listaProductos.Add(productos[i].nombre);
             }
         }
 
@@ -63,14 +64,20 @@ namespace Interfaz_de_usuario
         {
             try
             {
-                TryProductoSeleccionado("Error: No se selecciono un producto");
-                TryModificarProducto();
-                SetDatosFinales();
+                TryActualizarProductoMetodoGeneral();
+
             }
             catch (Exception m)
             {
                 MessageBox.Show(m.Message);
             }
+        }
+
+        private void TryActualizarProductoMetodoGeneral()
+        {
+            TryProductoSeleccionado("Error: No se selecciono un producto");
+            TryModificarProducto();
+            SetDatosFinales();
         }
 
         private void TryProductoSeleccionado(String mensaje)
@@ -84,20 +91,19 @@ namespace Interfaz_de_usuario
         private void TryModificarProducto()
         {
             IPService.ModificarProducto(productoSeleccionado.nombre, this.textNombreUsuario.Text, this.dateTimeFechaCreacion.Value);
-            //modificar fecha version igual a la del producto
         }
 
         private void SetDatosFinales()
         {
             MessageBox.Show("Producto actualizado correctamente");
             productoSeleccionado = null;
-            CargarDatos();
-            VaciarCampos();
+            CargarDatos();       
         }
 
         private void VaciarCampos()
         {
             this.textNombreUsuario.Text = "";
+            this.dateTimeFechaCreacion.Value = DateTime.Now;
         }
     }
 }

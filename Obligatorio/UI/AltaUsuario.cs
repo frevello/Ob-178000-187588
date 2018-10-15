@@ -26,18 +26,19 @@ namespace Interfaz_de_usuario
         {
             try
             {
-                IngresarUsuario();
-                MessageBox.Show("Usuario ingresado correctamente");
-                VaciarCampos();
+                TryIngresarUsuarioMetodoGeneral();
             }
-            catch (UsuarioServiceException m)
+            catch (Exception m)
             {
                 MessageBox.Show(m.Message);
             }
-            catch (LargoDatoNoValidoException m)
-            {
-                MessageBox.Show(m.Message);
-            }
+        }
+
+        private void TryIngresarUsuarioMetodoGeneral()
+        {
+            IngresarUsuario();
+            MessageBox.Show("Usuario ingresado correctamente");
+            VaciarCampos();
         }
 
         private void IngresarUsuario()
@@ -51,7 +52,6 @@ namespace Interfaz_de_usuario
             this.textBoxNombre.Text = "";
             this.textBoxApellido.Text = "";
             this.textBoxContraseña.Text = "";
-            string ultimoIngresoString = "";
         }
     }
 }
