@@ -15,6 +15,7 @@ namespace Interfaz_de_usuario
     public partial class VisualizarDataSet : UserControl
     {
         private IProductoService productoService;
+        private IDataSetService dataSetService;
         private List<String> nombresRegistros;
         private List<String> dataSets;
         private String nombreProducto;
@@ -22,9 +23,12 @@ namespace Interfaz_de_usuario
         private String nombreDataSet;
         private Panel panelPrincipal;
 
-        public VisualizarDataSet(IProductoService iProductoService, String nombreProducto, String etiquetaVersion, Panel panelPrincipal)
+        private const String REGISTRO_TIME = "TIME"; 
+
+        public VisualizarDataSet(IProductoService iProductoService, String nombreProducto, String etiquetaVersion, Panel panelPrincipal, IDataSetService iDataSetService)
         {
             productoService = iProductoService;
+            dataSetService = iDataSetService;
             this.panelPrincipal = panelPrincipal;
             this.nombreProducto = nombreProducto;
             this.etiquetaVersion = etiquetaVersion;
@@ -51,7 +55,6 @@ namespace Interfaz_de_usuario
             this.listBoxDataSet.DataSource = dataSets;
         }
 
-
         private void btnSelect_Click(object sender, EventArgs e)
         {
             nombreDataSet = listBoxDataSet.GetItemText(listBoxDataSet.SelectedItem);
@@ -66,11 +69,12 @@ namespace Interfaz_de_usuario
 
         private void CargarListaNombresRegistros()
         {
-            for (int i = 0; i < productoService.GetDataSet(nombreProducto, etiquetaVersion, nombreDataSet).GetNomresRegistros().Count(); i++)
+            Dominio.DataSet dataSet = productoService.GetDataSet(nombreProducto, etiquetaVersion, nombreDataSet);
+            for (int i = 0; i < dataSetService.GetCantidadRegistros(dataSet); i++)
             {
-                if (!productoService.GetDataSet(nombreProducto, etiquetaVersion, nombreDataSet).GetNomresRegistros().ElementAt(i).Equals("TIME"))
+                if (!dataSetService.GetNombreRegistroAtIndex(dataSet, i).Equals("TIME"))
                 {
-                    nombresRegistros.Add(productoService.GetDataSet(nombreProducto, etiquetaVersion, nombreDataSet).GetNomresRegistros().ElementAt(i));
+                    nombresRegistros.Add(dataSetService.GetNombreRegistroAtIndex(dataSet, i));
                 }
            }
         }
@@ -87,13 +91,11 @@ namespace Interfaz_de_usuario
         private void btnVizualizarDataSet_Click(object sender, EventArgs e)
         {
             String nombreRegistro = listBoxNombresRegistros.GetItemText(listBoxNombresRegistros.SelectedItem);
-            VariablesDataSet registroVar = productoService.GetRegistro(nombreProducto, etiquetaVersion, nombreDataSet, nombreRegistro);
-            VariablesDataSet registroTiempo = productoService.GetRegistro(nombreProducto, etiquetaVersion, nombreDataSet, "TIME");
+            Dominio.DataSet dataSet = productoService.GetDataSet(nombreProducto, etiquetaVersion, nombreDataSet);
+            VariablesDataSet registroVar = dataSetService.GetRegistro(dataSet, nombreRegistro);
+            VariablesDataSet registroTiempo = dataSetService.GetRegistro(dataSet, REGISTRO_TIME);
             
             Grafica grafica = new Grafica(registroTiempo.datosRegistro, registroVar.datosRegistro, registroTiempo.nombreVariable, registroVar.nombreVariable);
-          //  Application.EnableVisualStyles();
-           // Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(grafica);
             grafica.Show();
         }
 
@@ -105,7 +107,7 @@ namespace Interfaz_de_usuario
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            ListaDataSet lista = new ListaDataSet(productoService, panelPrincipal);
+            ListaDataSet lista = new ListaDataSet(productoService, panelPrincipal, dataSetService);
             this.panelPrincipal.Controls.Clear();
             panelPrincipal.Controls.Add(lista);
         }

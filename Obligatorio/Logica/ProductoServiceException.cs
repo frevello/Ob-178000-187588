@@ -8,16 +8,7 @@ namespace Logica
 {
     public class ProductoServiceException : Exception
     {
-        private const string MESSAGE = "ERROR AL CREAR PRODUCTO";
-        public ProductoServiceException() : base(MESSAGE)
-        {
-        }
-
         public ProductoServiceException(String mensaje) : base(mensaje)
-        {
-        }
-
-        public ProductoServiceException(Exception innerException) : base(MESSAGE, innerException)
         {
         }
     }

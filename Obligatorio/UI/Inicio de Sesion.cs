@@ -17,12 +17,14 @@ namespace Interfaz_de_usuario
     {
         private IUsuarioService IUsuarioService;
         private IProductoService IProductoService;
+        private IDataSetService IDataSetService;
         public Form1()
         {
             this.CenterToScreen();
             InitializeComponent();
             IUsuarioService = new UsuarioService();
             IProductoService = new ProductoService();
+            IDataSetService = new DataSetService();
         }
 
         private void textTitulo_Click(object sender, EventArgs e)
@@ -79,7 +81,7 @@ namespace Interfaz_de_usuario
         {
             IUsuarioService.SetUltimoIngreso(DateTime.Now, this.textBoxNombreUsuario.Text);
             this.Hide();
-            var MenuDesarollador = new MenuDesarollador(IUsuarioService.GetUsuario(this.textBoxNombreUsuario.Text), IProductoService);
+            var MenuDesarollador = new MenuDesarollador(IUsuarioService.GetUsuario(this.textBoxNombreUsuario.Text), IProductoService, IDataSetService);
             MenuDesarollador.Closed += (s, args) => this.Close();
             MenuDesarollador.Show();
         }

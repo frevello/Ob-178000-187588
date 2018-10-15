@@ -212,5 +212,49 @@ namespace Obligatorio.Test
             productoService.AltaVersion("Abode PhotoShoot", "1.00.003", "Interna", DateTime.Now);
             productoService.ModificarVersion("Abode PhotoShoot", "1.00.003", "1.00.001","Interna", DateTime.Now);
         }
+
+        [TestMethod]
+        public void AddDataSetTest()
+        {
+            productoService.AltaProducto("Abode PhotoShoot", DateTime.Now);
+            productoService.AltaVersion("Abode PhotoShoot", "1.00.001", "Interna", DateTime.Now);
+            Dominio.DataSet dataSet = new Dominio.DataSet("DataSet1");
+            productoService.AddDataSet("Abode PhotoShoot", "1.00.001", dataSet);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ProductoServiceException))]
+        public void AddDataSetNoExisteDataSetTest()
+        {
+            productoService.AltaProducto("Abode PhotoShoot", DateTime.Now);
+            productoService.AltaVersion("Abode PhotoShoot", "1.00.001", "Interna", DateTime.Now);
+            Dominio.DataSet dataSet = null;
+            productoService.AddDataSet("Abode PhotoShoot", "1.00.001", dataSet);
+        }
+        [TestMethod]
+        public void GetDataSetTest()
+        {
+            productoService.AltaProducto("Abode PhotoShoot", DateTime.Now);
+            productoService.AltaVersion("Abode PhotoShoot", "1.00.001", "Interna", DateTime.Now);
+            Dominio.DataSet dataSet = new Dominio.DataSet("DataSet1");
+            productoService.AddDataSet("Abode PhotoShoot", "1.00.001", dataSet);
+            productoService.GetDataSet("Abode PhotoShoot", "1.00.001", "DataSet1");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ProductoServiceException))]
+        public void GetDataSetNombreDataSetVacioTest()
+        {
+            productoService.AltaProducto("Abode PhotoShoot", DateTime.Now);
+            productoService.AltaVersion("Abode PhotoShoot", "1.00.001", "Interna", DateTime.Now);
+            productoService.AddDataSet("Abode PhotoShoot", "1.00.001", null);
+        }
+        [TestMethod]
+        public void GetDataSetsTest()
+        {
+            productoService.AltaProducto("Abode PhotoShoot", DateTime.Now);
+            productoService.AltaVersion("Abode PhotoShoot", "1.00.001", "Interna", DateTime.Now);
+            Dominio.DataSet dataSet = new Dominio.DataSet("DataSet1");
+            productoService.AddDataSet("Abode PhotoShoot", "1.00.001", dataSet);
+            productoService.GetDataSets("Abode PhotoShoot", "1.00.001");
+        }
     }
 }

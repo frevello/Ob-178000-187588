@@ -8,17 +8,7 @@ namespace Dominio
 {
     public class VersionEtiquetaException : Exception
     {
-        private const string MESSAGE = "ERROR EN LA ETIQUETA";
-
-        public VersionEtiquetaException() : base(MESSAGE)
-        {
-        }
-
         public VersionEtiquetaException(String mensaje) : base(mensaje)
-        {
-        }
-
-        public VersionEtiquetaException(Exception innerException) : base(MESSAGE, innerException)
         {
         }
     }

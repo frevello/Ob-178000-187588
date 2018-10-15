@@ -25,9 +25,9 @@ namespace Interfaz_de_usuario
         private String nombreProducto;
         private String etiquetaVersion;
 
-        public CargarArchivo(IProductoService iProductoService)
+        public CargarArchivo(IProductoService iProductoService, IDataSetService iDataSetService)
         {
-            dataSetService = new DataSetService();
+            dataSetService = iDataSetService;
             productoService = iProductoService;
             productos = new List<string>();
             nombreProducto = null;
@@ -43,7 +43,6 @@ namespace Interfaz_de_usuario
             productos.Clear();
             CargarListaProductos();
             SetListaProductos();
-
         }
 
         private void CargarListaProductos()
@@ -53,7 +52,6 @@ namespace Interfaz_de_usuario
                 productos.Add(productoService.GetListaProducto()[i].nombre);
             }
         }
-     
 
         private void SetListaProductos()
         {
@@ -98,7 +96,7 @@ namespace Interfaz_de_usuario
         {
             
             etiquetaVersion = listBoxVersiones.GetItemText(listBoxVersiones.SelectedItem);
-            if(nombreProducto != null && etiquetaVersion != null)
+            if(nombreProducto != null && etiquetaVersion != null && !nombreProducto.Equals("") && !etiquetaVersion.Equals(""))
             {
                 String path = GetPathDataSet();
                 TryCargarYAddDataSet(path);

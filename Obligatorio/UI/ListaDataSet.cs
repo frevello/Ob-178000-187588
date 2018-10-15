@@ -8,21 +8,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InterfazServiceUI;
+using Logica;
 
 namespace Interfaz_de_usuario
 {
     public partial class ListaDataSet : UserControl
     {
         private IProductoService productoService;
+        private IDataSetService dataSetService;
         private List<String> productos;
         private BindingList<String> versiones;
         private String nombreProducto;
         private String etiquetaVersion;
         private Panel panelPrincipal;
 
-        public ListaDataSet(IProductoService iProductoService, Panel panelpricipal)
+        public ListaDataSet(IProductoService iProductoService, Panel panelpricipal, IDataSetService iDataSetService)
         {
             productoService = iProductoService;
+            dataSetService = iDataSetService;
             this.panelPrincipal = panelpricipal;
             productos = new List<string>();
             nombreProducto = null;
@@ -87,18 +90,60 @@ namespace Interfaz_de_usuario
             etiquetaVersion = listBoxVersiones.GetItemText(listBoxVersiones.SelectedItem);
             if (nombreProducto != null && etiquetaVersion != null)
             {
-                IrAVisualizarDataSet();
+                SiExistenDataSetsIrAVisualizarDataSets();
             }
             else
             {
                 MessageBox.Show("Debe Seleccionar un producto, una version y un dataSet");
             }
         }
-        
 
+        private void SiExistenDataSetsIrAVisualizarDataSets()
+        {
+            if (ExistenDataSets())
+            {
+                IrAVisualizarDataSet();
+            }
+        }
+
+        private Boolean ExistenDataSets()
+        {
+            IEnumerable<Dominio.DataSet> dataSets = GetDataSets();
+            if (dataSets == null || dataSets.Count() == 0 )
+            {
+                MessageBox.Show("No tiene dataSets cargados");
+                return false;
+            }
+            return true;
+        }
+
+        private IEnumerable<Dominio.DataSet> GetDataSets()
+        {
+            if (TryGetDataSets())
+            {
+                return productoService.GetDataSets(nombreProducto, etiquetaVersion);
+            }
+            else
+            {
+                return null;
+            }
+            
+        }
+        private Boolean TryGetDataSets()
+        {
+            try
+            {
+                IEnumerable<Dominio.DataSet> dataSets = productoService.GetDataSets(nombreProducto, etiquetaVersion);
+                return true;
+            }catch(VersionException e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
+        }
         private void IrAVisualizarDataSet()
         {
-            VisualizarDataSet visualiar = new VisualizarDataSet(productoService,nombreProducto, etiquetaVersion, panelPrincipal);
+            VisualizarDataSet visualiar = new VisualizarDataSet(productoService,nombreProducto, etiquetaVersion, panelPrincipal, dataSetService);
             this.panelPrincipal.Controls.Clear();
             panelPrincipal.Controls.Add(visualiar);
         }

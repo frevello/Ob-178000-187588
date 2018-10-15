@@ -17,12 +17,15 @@ namespace Interfaz_de_usuario
     {
         private Usuario usuario;
         private IProductoService productoService;
-        public MenuDesarollador(Usuario u, IProductoService productoService)
+        private IDataSetService dataSetService;
+
+        public MenuDesarollador(Usuario u, IProductoService productoService, IDataSetService dataSetService)
         {
             InitializeComponent();
             this.usuario = u;
             CargarDatosUsuario();
             this.productoService = productoService;
+            this.dataSetService = dataSetService;
         }
 
         private void botonDatosUsuario_Click(object sender, EventArgs e)
@@ -45,7 +48,7 @@ namespace Interfaz_de_usuario
         private void CargarArchivo()
         {
             panelPrincipal.Controls.Clear();
-            CargarArchivo cargarArchivo = new CargarArchivo(productoService);
+            CargarArchivo cargarArchivo = new CargarArchivo(productoService, dataSetService);
             panelPrincipal.Controls.Add(cargarArchivo);
         }
 
@@ -57,7 +60,7 @@ namespace Interfaz_de_usuario
         private void CargarListaDataSet()
         {
             panelPrincipal.Controls.Clear();
-            ListaDataSet listaDataSet = new ListaDataSet(productoService, panelPrincipal);
+            ListaDataSet listaDataSet = new ListaDataSet(productoService, panelPrincipal, dataSetService);
             panelPrincipal.Controls.Add(listaDataSet);
         }
 
@@ -69,7 +72,7 @@ namespace Interfaz_de_usuario
         private void CargarEstadisticas()
         {
             panelPrincipal.Controls.Clear();
-            Estadisticas estadisticas = new Estadisticas(productoService);
+            Estadisticas estadisticas = new Estadisticas(productoService, dataSetService);
             panelPrincipal.Controls.Add(estadisticas);
         }
 

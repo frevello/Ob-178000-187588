@@ -20,10 +20,6 @@ namespace InterfazServiceUI
         void ModificarVersion(String nombreProducto, String etiquetaVieja, String etiquetaNueva, String estado, DateTime fecha);
         void AddDataSet(String nombreProducto, String etiquetaVersion, DataSet dataSet);
         Dominio.DataSet GetDataSet(String nombreProducto, String etiquetaVersion, String nombreDataSet);
-        VariablesDataSet GetRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro);
-        float GetPromedioRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro);
-        float GetMinimoRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro);
-        float GetMaximoRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro);
-
+        IEnumerable<DataSet> GetDataSets(String nombreProducto, String etiquetaVersion);
     }
 }

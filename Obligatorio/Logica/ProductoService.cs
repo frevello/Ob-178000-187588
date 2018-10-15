@@ -205,32 +205,30 @@ namespace Logica
 
         public void AddDataSet(String nombreProducto, String etiquetaVersion, DataSet dataSet)
         {
-            TryProductoInexistente(nombreProducto, "Error: No existe el producto");
-            Producto producto = this.listaProductos.FirstOrDefault(p => p.nombre == nombreProducto);
-            TryExisteVersion(producto, etiquetaVersion, "Error: No existe la version");
-            Dominio.Version version = GetVersion(producto, etiquetaVersion);
+            Dominio.Version version = GetVersionProducto(nombreProducto, etiquetaVersion);
+            ValidarExisteDataSet(dataSet);
             version.dataset.Add(dataSet);
+        }
+
+        private void ValidarExisteDataSet(DataSet dataSet)
+        {
+            if(dataSet == null)
+            {
+                throw new ProductoServiceException("ERROR: No existe DataSet");
+            }
         }
 
         public DataSet GetDataSet(String nombreProducto, String etiquetaVersion, String nombreDataSet)
         {
-            Producto producto = GetProducto(nombreProducto);
-            Dominio.Version version = GetVersion(producto, etiquetaVersion);
+            Dominio.Version version = GetVersionProducto(nombreProducto, etiquetaVersion);
+            ValidarNombreDataSetNoVacio(nombreDataSet);
             return version.dataset.FirstOrDefault(d => d.GetNombre() == nombreDataSet);
         }
-
-        public VariablesDataSet GetRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro)
+        private void ValidarNombreDataSetNoVacio(String nombre)
         {
-            DataSet dataSet = this.GetDataSet(nombreProducto, etiquetaVersion, nombreDataSet);
-            TryExiteDataSet(dataSet);
-            return dataSet.GetRegistros().FirstOrDefault(r => r.nombreVariable == nombreRegistro);
-        }
-
-        private void TryExiteDataSet(DataSet dataSet) ///////// ya esta pasado
-        {
-           if(dataSet == null)
+            if(nombre == null || nombre.Equals(""))
             {
-                throw new ProductoServiceException("ERROR: DataSet no existe");
+                throw new ProductoServiceException("ERROR: Nombre DataSet vacio");
             }
         }
 
@@ -240,11 +238,7 @@ namespace Logica
             TryFechaCreacion(prod, fecha, "Error: La fecha debe ser posterior o igual a la del producto");
             Dominio.Version v = new Dominio.Version(etiquetaNueva, estado, prod, fecha);
         }
-        public float GetPromedioRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro)
-        {
-            VariablesDataSet variableDataSet = GetRegistro(nombreProducto, etiquetaVersion, nombreDataSet, nombreRegistro);
-            return variableDataSet.datosRegistro.Average();
-        }
+     
 
         private void TryEtiquetaNuevaVersion(String etiquetaVieja, String etiquetaNueva, String nombreProducto)
         {
@@ -269,16 +263,20 @@ namespace Logica
             v.etiqueta = etiquetaNueva;
             v.fechaCreacion = fecha;
         }
-        public float GetMinimoRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro)
+   
+        public IEnumerable<DataSet> GetDataSets(String nombreProducto, String etiquetaVersion)
         {
-            VariablesDataSet variableDataSet = GetRegistro(nombreProducto, etiquetaVersion, nombreDataSet, nombreRegistro);
-            return variableDataSet.datosRegistro.Min();
-        }
-        public float GetMaximoRegistro(String nombreProducto, String etiquetaVersion, String nombreDataSet, String nombreRegistro)
-        {
-            VariablesDataSet variableDataSet = GetRegistro(nombreProducto, etiquetaVersion, nombreDataSet, nombreRegistro);
-            return variableDataSet.datosRegistro.Max();
+            Dominio.Version version = GetVersionProducto(nombreProducto, etiquetaVersion);
+            TryExistenDataSets(version);
+            return version.dataset;
         }
 
+        private void TryExistenDataSets(Dominio.Version version)
+        {
+            if(version.dataset == null)
+            {
+                throw new ProductoServiceException("ERROR: No existen DataSets");
+            }
+        }
     }
 }
