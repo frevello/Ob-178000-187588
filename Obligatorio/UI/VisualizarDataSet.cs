@@ -16,7 +16,7 @@ namespace Interfaz_de_usuario
     {
         private IProductoService productoService;
         private IDataSetService dataSetService;
-        private List<String> nombresRegistros;
+        private BindingList<String> nombresRegistros;
         private List<String> dataSets;
         private String nombreProducto;
         private String etiquetaVersion;
@@ -33,7 +33,7 @@ namespace Interfaz_de_usuario
             this.nombreProducto = nombreProducto;
             this.etiquetaVersion = etiquetaVersion;
             this.dataSets = new List<string>();
-            nombresRegistros = new List<string>();
+            nombresRegistros = new BindingList<String>();
             InitializeComponent();
             CargarListBoxDataSets();
         }

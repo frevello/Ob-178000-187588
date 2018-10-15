@@ -20,13 +20,14 @@ namespace Interfaz_de_usuario
         private List<PointF> points;
         private String nombreEjeX;
         private String nombreEjeY;
+        private int gridCellCountX = 21;
+        private int gridCellCountY = 21;
+        private int gridCellCountSinMinY = 21;
 
-        private const int gridCellCountX = 21;
-        private const int gridCellCountY = 21;
         private const int cellSizeInPixels = 40;
-        private const int windowXBoundryInPixels = 20;
-        private const int windowYBoundryInPixels = 40;
-        private const int drawSurfaceMaringToWindowInPixels = 10;
+        private const int windowXBoundryInPixels = 60;
+        private const int windowYBoundryInPixels = 100;
+        private const int drawSurfaceMaringToWindowInPixels = 40;
         private const int gridLinesMarginToLayerInPixels = 1;
 
 
@@ -36,6 +37,7 @@ namespace Interfaz_de_usuario
             InitializeComponent();
             this.nombreEjeX = nombreEjeX;
             this.nombreEjeY = nombreEjeY;
+            CalcularGridCellCount(pointsX, pointsY);
             int drawSurfaceSizeX = cellSizeInPixels * gridCellCountX;
             int drawSurfaceSizeY = cellSizeInPixels * gridCellCountY;
             CreateDrawSurface(drawSurfaceSizeX, drawSurfaceSizeY);
@@ -48,8 +50,17 @@ namespace Interfaz_de_usuario
 
             PaintLines();
         }
-
-       
+        private void CalcularGridCellCount(List<float> pointsX, List<float> pointsY)
+        {
+            gridCellCountX = (int)Math.Round(pointsX.Max())+ 5;
+            gridCellCountSinMinY = (int)Math.Round(pointsY.Max()) + 5;
+            int min = 0;
+            if(pointsY.Min() < 0)
+            {
+                min = (int)Math.Floor(pointsY.Min()) - 5;
+            }
+            gridCellCountY = gridCellCountSinMinY + min *(-1);
+        }
 
 
         private void CreateDrawSurface(int drawSurfaceSizeX, int drawSurfaceSizeY)
@@ -121,17 +132,19 @@ namespace Interfaz_de_usuario
             Pen p = new Pen(Color.Black);
             p.CustomEndCap = new System.Drawing.Drawing2D.AdjustableArrowCap(10, 10);
 
-            DrawHorizontalLine(graphics, gridCellCountY - 1, -gridLinesMarginToLayerInPixels, p);
+            DrawHorizontalLine(graphics, gridCellCountSinMinY - 1, -gridLinesMarginToLayerInPixels, p);
             DrawVerticalLine(graphics, 1, -gridLinesMarginToLayerInPixels, p);
-            graphics.DrawString(nombreEjeX, new Font(FontFamily.GenericSansSerif, 9, FontStyle.Regular), Brushes.Black, gridLayer.Width / 2, gridLayer.Height - 20);
-            graphics.DrawString(nombreEjeY, new Font(FontFamily.GenericSansSerif, 9, FontStyle.Regular), Brushes.Black, 0, gridLayer.Width / 2);
+            int gridHeight = cellSizeInPixels * gridCellCountSinMinY;
+            graphics.DrawString(nombreEjeX, new Font(FontFamily.GenericSansSerif, 9, FontStyle.Regular), Brushes.Black, gridLayer.Width / 2, gridHeight - 20);
+            graphics.DrawString(nombreEjeY, new Font(FontFamily.GenericSansSerif, 9, FontStyle.Regular), Brushes.Black, 0, gridHeight / 2);
         }
 
 
         private void DrawHorizontalLine(Graphics graphics, int axis, int offset, Pen color)
         {
             int gridCellHeight = axis * gridLayer.Height / gridCellCountY + offset;
-            int valorEjeY = gridCellCountY - axis - 1;
+            int gridHeight = cellSizeInPixels * gridCellCountSinMinY;
+            int valorEjeY = gridCellCountSinMinY - axis - 1;
             graphics.DrawLine(color, 40, gridCellHeight, gridLayer.Width, gridCellHeight);
             graphics.DrawString("" + valorEjeY, new Font(FontFamily.GenericSansSerif, 9, FontStyle.Regular), Brushes.Black, 20, gridCellHeight);
 
@@ -141,8 +154,9 @@ namespace Interfaz_de_usuario
         {
             int gridCellWidth = axis * gridLayer.Width / gridCellCountX + offset;
             int valorEjeX = axis - 1;
+            int gridHeight = cellSizeInPixels * gridCellCountSinMinY;
             graphics.DrawLine(color, gridCellWidth, gridLayer.Height - 40, gridCellWidth, 0);
-            graphics.DrawString("" + valorEjeX, new Font(FontFamily.GenericSansSerif, 9, FontStyle.Regular), Brushes.Black, gridCellWidth, gridLayer.Height - 40);
+            graphics.DrawString("" + valorEjeX, new Font(FontFamily.GenericSansSerif, 9, FontStyle.Regular), Brushes.Black, gridCellWidth, gridHeight - 40);
 
         }
 
@@ -159,19 +173,21 @@ namespace Interfaz_de_usuario
             CreateOrRecreateLayer(ref linesLayer);
             using (Graphics graphics = Graphics.FromImage(linesLayer))
             {
+                int gridHeight = cellSizeInPixels * gridCellCountSinMinY;
                 for (int i = 1; i < points.Count; i++)
                 {
+                   
                     float pointX1 = points[i - 1].X * 40 + 40;
-                    float pointY1 = gridLayer.Height - 40 * points[i - 1].Y - 40;
+                    float pointY1 = gridHeight - 40 * points[i - 1].Y - 40;
                     float pointX2 = points[i].X * 40 + 40;
-                    float pointY2 = gridLayer.Height - 40 * points[i].Y - 40;
+                    float pointY2 = gridHeight - 40 * points[i].Y - 40;
                     float x = points[i - 1].X;
                     graphics.FillRectangle(Brushes.Black, pointX1, pointY1, 5, 5);
                     graphics.DrawLine(Pens.Red, pointX1, pointY1, pointX2, pointY2);
                     graphics.DrawString("(" + x + "," + points[i - 1].Y + ")", new Font(FontFamily.GenericSansSerif, 9, FontStyle.Regular), Brushes.Black, pointX1, pointY1);
                 }
                 float pointX = points[points.Count - 1].X * 40 + 40;
-                float pointY = gridLayer.Height - 40 * points[points.Count - 1].Y - 40;
+                float pointY = gridHeight - 40 * points[points.Count - 1].Y - 40;
                 graphics.FillRectangle(Brushes.Black, pointX, pointY, 5, 5);
                 graphics.DrawString("(" + points[points.Count - 1].X + "," + points[points.Count - 1].Y + ")", new Font(FontFamily.GenericSansSerif, 9, FontStyle.Regular), Brushes.Black, pointX, pointY);
             }

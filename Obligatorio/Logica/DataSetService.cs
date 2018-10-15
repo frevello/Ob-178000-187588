@@ -119,7 +119,7 @@ namespace Logica
         {
             VariablesDataSet variableDataSet = GetRegistro(dataSet, nombreRegistro);
             ValidarExistenDatosRegistro(variableDataSet);
-            return variableDataSet.datosRegistro.Min();
+            return variableDataSet.datosRegistro.Max();
         }
 
         public int GetCantidadRegistros(DataSet dataSet)

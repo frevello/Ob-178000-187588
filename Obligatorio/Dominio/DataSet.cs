@@ -22,18 +22,29 @@ namespace Dominio
 
         public void CargarRegistrosVARDEF(String[] registrosVARDEF)
         {
-            ValidarExisteRegistroTIME(registrosVARDEF);
-            ValidarExistenMinimoDeVariables(registrosVARDEF);
+            ValidarLineaVARDEF(registrosVARDEF);
             AddNombresRegistros(registrosVARDEF);
         }
-
+        private void ValidarLineaVARDEF(String[] registrosVARDEF)
+        {
+            ValidarExisteRegistroTIME(registrosVARDEF);
+            ValidarNoExistenRegistrosVacios(registrosVARDEF);
+            ValidarExistenMinimoDeVariables(registrosVARDEF);
+            ValidarNoExistanRegistrosRepetidosVARDEF(registrosVARDEF);
+        }
         private void ValidarExisteRegistroTIME(String[] registrosVARDEF)
         {
             if (!registrosVARDEF.Contains(REGISTRO_TIME)){
                 throw new DataSetException("ERROR: No esta definido el registro TIME");
             }
         }
-
+        private void ValidarNoExistenRegistrosVacios(String[] registrosVARDEF)
+        {
+            if(registrosVARDEF.Any(r => r == null || r.Equals("")))
+            {
+                throw new DataSetException("ERROR: Se esperaba una variables en VARDEF");
+            }
+        }
         private void ValidarExistenMinimoDeVariables(String[] registrosVARDEF)
         {
             if (registrosVARDEF.Length < MINIMO_NOMBRES_REGISTROS)
@@ -41,7 +52,19 @@ namespace Dominio
                 throw new DataSetException("ERROR: No tiene el minimo (" + MINIMO_NOMBRES_REGISTROS + ") de registros");
             }
         }
+       
+        private void ValidarNoExistanRegistrosRepetidosVARDEF(String[] registrosVARDEF)
+        {
+            if(registrosVARDEF.Count() != DevolverRegistrosDistintos(registrosVARDEF).Count())
+            {
+                throw new DataSetException("ERROR: Variables Repetida en VARDEF");
+            }
+        }
 
+        private IEnumerable<String> DevolverRegistrosDistintos(String[] registrosVARDEF)
+        {
+            return registrosVARDEF.Distinct();
+        }
         private void AddNombresRegistros(String[] registrosVARDEF)
         {
             for (int i = 0; i < registrosVARDEF.Length; i++)
@@ -52,10 +75,19 @@ namespace Dominio
 
         public void AddGrupoRegistro(IDictionary<String, float> grupoRegistro)
         {
+            ValidarCantidadDeRegistros(grupoRegistro);
             ValidarTodosLosRegistrosExisten(grupoRegistro);
             AddTodosLosRegistros(grupoRegistro);
         }
        
+        private void ValidarCantidadDeRegistros(IDictionary<String, float> grupoRegistro)
+        {
+            if(grupoRegistro.Count() != nombreRegistros.Count())
+            {
+                throw new DataSetException("ERROR: falta en el Registro una variables");
+            }
+        }
+
         private void ValidarTodosLosRegistrosExisten(IEnumerable<KeyValuePair<String, float>> grupoRegistro)
         {
             for(int i = 0; i < grupoRegistro.Count(); i++)

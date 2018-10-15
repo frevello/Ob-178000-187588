@@ -15,16 +15,17 @@ namespace AccesoDatos
         
         public void ValidarPrimeraLinea(String line)
         {
-            ValidarLineaContieneVARDEF(line);
             ValidarLineaContieneUnicoSeparadorDeDato(line);
+            ValidarLineaContieneVARDEF(line);
         }
 
 
         private void ValidarLineaContieneVARDEF(String line)
         {
-            if (!line.StartsWith(VARDEF))
+            String[] vardef = line.Split(SEPARADOR_REGISTRO_DE_DATO);
+            if (!vardef[0].Equals(VARDEF))
             {
-                throw new ValidatorFormatException("ERROR: Falta VARDEF");
+                throw new ValidatorFormatException("ERROR: En 1ra linea no se encontro VARDEF");
             }
         }
 
