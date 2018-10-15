@@ -158,5 +158,10 @@ namespace Interfaz_de_usuario
             nombreProducto = listBoxProducto.GetItemText(listBoxProducto.SelectedItem);
             CargarListBoxVersiones();
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

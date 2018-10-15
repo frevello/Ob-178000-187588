@@ -70,7 +70,7 @@
             this.btnSelectVersion.Name = "btnSelectVersion";
             this.btnSelectVersion.Size = new System.Drawing.Size(147, 31);
             this.btnSelectVersion.TabIndex = 79;
-            this.btnSelectVersion.Text = "Estadisticas";
+            this.btnSelectVersion.Text = "Estadistica";
             this.btnSelectVersion.UseVisualStyleBackColor = true;
             this.btnSelectVersion.Click += new System.EventHandler(this.btnSelectVersion_Click);
             // 
@@ -88,6 +88,7 @@
             // listBoxVersiones
             // 
             this.listBoxVersiones.FormattingEnabled = true;
+            this.listBoxVersiones.HorizontalScrollbar = true;
             this.listBoxVersiones.ItemHeight = 16;
             this.listBoxVersiones.Location = new System.Drawing.Point(211, 76);
             this.listBoxVersiones.Margin = new System.Windows.Forms.Padding(4);
@@ -99,6 +100,7 @@
             // listBoxProducto
             // 
             this.listBoxProducto.FormattingEnabled = true;
+            this.listBoxProducto.HorizontalScrollbar = true;
             this.listBoxProducto.ItemHeight = 16;
             this.listBoxProducto.Location = new System.Drawing.Point(27, 76);
             this.listBoxProducto.Margin = new System.Windows.Forms.Padding(4);
@@ -110,6 +112,7 @@
             // listBoxEstadisticas
             // 
             this.listBoxEstadisticas.FormattingEnabled = true;
+            this.listBoxEstadisticas.HorizontalScrollbar = true;
             this.listBoxEstadisticas.ItemHeight = 16;
             this.listBoxEstadisticas.Location = new System.Drawing.Point(27, 251);
             this.listBoxEstadisticas.Margin = new System.Windows.Forms.Padding(4);
@@ -133,6 +136,7 @@
             // listBoxDataSet
             // 
             this.listBoxDataSet.FormattingEnabled = true;
+            this.listBoxDataSet.HorizontalScrollbar = true;
             this.listBoxDataSet.ItemHeight = 16;
             this.listBoxDataSet.Location = new System.Drawing.Point(396, 76);
             this.listBoxDataSet.Margin = new System.Windows.Forms.Padding(4);

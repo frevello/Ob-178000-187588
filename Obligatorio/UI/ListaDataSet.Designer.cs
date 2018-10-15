@@ -39,7 +39,7 @@
             // textTitulo
             // 
             this.textTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textTitulo.Location = new System.Drawing.Point(4, 22);
+            this.textTitulo.Location = new System.Drawing.Point(4, 16);
             this.textTitulo.Margin = new System.Windows.Forms.Padding(4, 12, 4, 0);
             this.textTitulo.Name = "textTitulo";
             this.textTitulo.Size = new System.Drawing.Size(593, 34);
@@ -52,21 +52,22 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(314, 66);
+            this.label2.Location = new System.Drawing.Point(4, 187);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(159, 20);
             this.label2.TabIndex = 67;
             this.label2.Text = "Seleccionar Version";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // listBoxProducto
             // 
             this.listBoxProducto.FormattingEnabled = true;
             this.listBoxProducto.ItemHeight = 16;
-            this.listBoxProducto.Location = new System.Drawing.Point(105, 90);
+            this.listBoxProducto.Location = new System.Drawing.Point(4, 78);
             this.listBoxProducto.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxProducto.Name = "listBoxProducto";
-            this.listBoxProducto.Size = new System.Drawing.Size(147, 196);
+            this.listBoxProducto.Size = new System.Drawing.Size(581, 84);
             this.listBoxProducto.TabIndex = 64;
             this.listBoxProducto.SelectedIndexChanged += new System.EventHandler(this.listBoxProducto_SelectedIndexChanged);
             // 
@@ -74,19 +75,19 @@
             // 
             this.listBoxVersiones.FormattingEnabled = true;
             this.listBoxVersiones.ItemHeight = 16;
-            this.listBoxVersiones.Location = new System.Drawing.Point(318, 90);
+            this.listBoxVersiones.Location = new System.Drawing.Point(4, 211);
             this.listBoxVersiones.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxVersiones.Name = "listBoxVersiones";
-            this.listBoxVersiones.Size = new System.Drawing.Size(147, 196);
+            this.listBoxVersiones.Size = new System.Drawing.Size(581, 84);
             this.listBoxVersiones.TabIndex = 66;
             // 
             // btnSelectVersion
             // 
             this.btnSelectVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectVersion.Location = new System.Drawing.Point(318, 314);
+            this.btnSelectVersion.Location = new System.Drawing.Point(381, 316);
             this.btnSelectVersion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
             this.btnSelectVersion.Name = "btnSelectVersion";
-            this.btnSelectVersion.Size = new System.Drawing.Size(147, 31);
+            this.btnSelectVersion.Size = new System.Drawing.Size(204, 31);
             this.btnSelectVersion.TabIndex = 71;
             this.btnSelectVersion.Text = "Continuar";
             this.btnSelectVersion.UseVisualStyleBackColor = true;
@@ -96,7 +97,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(101, 66);
+            this.label4.Location = new System.Drawing.Point(4, 54);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(169, 20);
