@@ -81,5 +81,10 @@ namespace AccesoDatos
             reader.EndReading();
         }
 
+        public void ValidarFormatoDataSet()
+        {
+
+        }
+
     }
 }
