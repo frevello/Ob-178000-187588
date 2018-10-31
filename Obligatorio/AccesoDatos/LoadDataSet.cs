@@ -83,8 +83,36 @@ namespace AccesoDatos
 
         public void ValidarFormatoDataSet()
         {
-
+            OpenFile(path);
+            ValidarPrimeraLinea();
+            ValidarGruposRegistros();
+        }
+       private void ValidarPrimeraLinea()
+        {
+            String line = ObtenerNextLine();
+            validatorFormat.ValidarPrimeraLinea(line);
+        }
+        private void ValidarGruposRegistros()
+        {
+            String line = ObtenerNextLine();
+            while (validatorFormat.ExisteLinea(line))
+            {
+                ValidarGrupoRegistro(line);
+                line = ObtenerNextLine();
+            }
+            reader.EndReading();
         }
 
+        private void ValidarGrupoRegistro(String line)
+        {
+            validatorFormat.IniciaGrupoRegistro();
+            while (validatorFormat.ExisteLinea(line) && !validatorFormat.EsFinGrupoRegistro(line))
+            {
+                validatorFormat.ValidarRegistro(line);
+                line = ObtenerNextLine();
+            }
+            validatorFormat.ValidarFinRegistroCorrecto(line);
+        }
+    
     }
 }
