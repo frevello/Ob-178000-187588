@@ -353,5 +353,6 @@ namespace Obligatorio.Test
             dataSet.AddGrupoRegistro(grupoRegistro2);
             dataSetService.GetRegistroAtIndex(dataSet, 3);
         }
+      
     }
 }

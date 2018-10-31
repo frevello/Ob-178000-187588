@@ -143,5 +143,122 @@ namespace Obligatorio.Test
             ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileVARDEFregistroReptido.txt");
             loadDataSet.CargarDataSet();
         }
+        [TestMethod]
+        public void ValidarFormatoTxtTest()
+        {
+            ILoadDataSet dataSetService = new LoadDataSet(@"../../../DataSetFiles/file.txt");
+            dataSetService.ValidarFormatoDataSet();
+        }
+     /*     [TestMethod]
+        [ExpectedException(typeof(ValidatorFormatException))]
+        public void ValidarFormatoTxtSinVARDEFTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileSinVARDEF.txt");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void ValidarFormatoTxtSinTIMEenVARDEFTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileSinTIMEenVARDEF.txt");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ValidatorFormatException))]
+        public void ValidarFormatoTxtSinIgualTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileSinIgual.txt");
+        }
+        
+
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void ValidarFormatoTxtNoExisteVarEnVARDEFTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileVarNoExisteEnVARDEF.txt");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ValidatorFormatException))]
+        public void ValidarFormatoTxtConVarRepetidaTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileVarRepetida.txt");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ValidatorFormatException))]
+        public void ValidarFormatoTxtFormatoDatoIncorrectoTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileDatoIncorrecto.txt");
+        }
+       
+        [TestMethod]
+        [ExpectedException(typeof(ValidatorFormatException))]
+        public void ValidarFormatoTxtRegistroNoTerminaTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileNoTerminaRegistro.txt");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void ValidarFormatoTxtRegistroTimeNoOrdenadoTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileTimeNoOrdenado.txt");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void ValidarFormatoTxtSinElMinimoDeRegistrosTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileSinMinimoRegistros.txt");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void ValidarFormatoTxtTimeMenorQueCeroTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileTimeMenorQueCero.txt");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void ValidarFormatoTxtCantidadRegistrosMenorA2Test()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileCantidadRegistrosMenor.txt");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void ValidarFormatoTxtSinRegistrosTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileSinRegistros.txt");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void ValidarFormatoTxtFaltaVariableEnRegistroTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileFaltaVariableEnRegistro.txt");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ValidatorFormatException))]
+        public void ValidarFormatoTxtVARDEFmalDefnidoTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileVARDEFmalDefinido.txt");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void ValidarFormatoTxtVARDEFFaltaVariablesTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileVARDEFfaltaVar.txt");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void ValidarFormatoTxtVARDEFFaltaVariablesFinalTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileVARDEFfaltaVarFinal.txt");
+        }
+        [TestMethod]
+        [ExpectedException(typeof(DataSetException))]
+        public void ValidarFormatoTxtVARDEFRegistroRepetidoTest()
+        {
+            ILoadDataSet loadDataSet = new LoadDataSet(@"../../../DataSetFiles/fileVARDEFregistroReptido.txt");
+        }*/
     }
 }
