@@ -1,125 +1,19 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Dominio;
+using System.Text;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logica;
 using InterfazServiceUI;
+using Dominio;
 
 namespace Obligatorio.Test
 {
     [TestClass]
-    public class DataSetServiceTest
-
+    public class EstadisticosServiceTest
     {
-        [TestMethod]
-        public void CargarDataSetTest()
-        {
-            IDataSetService dataSet = new DataSetService();
-            dataSet.CargarDataSet(@"../../../DataSetFiles/file.txt");
-        }
 
-        [TestMethod]
-        public void  GetRegistrosTest()
-        {
-            IDataSetService dataSetService = new DataSetService();
-            Dominio.DataSet dataSet = new DataSet("DataSet1");
-            String[] nombresRegistros = { "CPU", "TIME" };
-            dataSet.CargarRegistrosVARDEF(nombresRegistros);
-            IDictionary<String, float> grupoRegistro = new Dictionary<String, float>();
-            grupoRegistro.Add("CPU", 1);
-            grupoRegistro.Add("TIME", 2);
-            dataSet.AddGrupoRegistro(grupoRegistro);
-            IEnumerable<VariablesDataSet> registros = dataSetService.GetRegistros(dataSet);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(DataSetServiceException))]
-        public void GetRegistrosNoExisteDataSetTest()
-        {
-            IDataSetService dataSetService = new DataSetService();
-            Dominio.DataSet dataSet = null;
-            IEnumerable<VariablesDataSet> registros = dataSetService.GetRegistros(dataSet);
-        }
-        [TestMethod]
-        [ExpectedException(typeof(DataSetServiceException))]
-        public void GetRegistrosNoExisteRegistrosTest()
-        {
-            IDataSetService dataSetService = new DataSetService();
-            Dominio.DataSet dataSet = null;
-            IEnumerable<VariablesDataSet> registros = dataSetService.GetRegistros(dataSet);
-        }
-        [TestMethod]
-        public void GetRegistroTest()
-        {
-            IDataSetService dataSetService = new DataSetService();
-            Dominio.DataSet dataSet = new DataSet("DataSet1");
-            String[] nombresRegistros = { "CPU", "TIME" };
-            dataSet.CargarRegistrosVARDEF(nombresRegistros);
-            IDictionary<String, float> grupoRegistro = new Dictionary<String, float>();
-            grupoRegistro.Add("CPU", 1);
-            grupoRegistro.Add("TIME", 2);
-            dataSet.AddGrupoRegistro(grupoRegistro);
-            dataSetService.GetRegistro(dataSet, "CPU");
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(DataSetServiceException))]
-        public void GetRegistroNoExisteRegistroTest()
-        {
-            IDataSetService dataSetService = new DataSetService();
-            Dominio.DataSet dataSet = new DataSet("DataSet1");
-            String[] nombresRegistros = { "CPU", "TIME" };
-            dataSet.CargarRegistrosVARDEF(nombresRegistros);
-            IDictionary<String, float> grupoRegistro = new Dictionary<String, float>();
-            grupoRegistro.Add("CPU", 1);
-            grupoRegistro.Add("TIME", 2);
-            dataSet.AddGrupoRegistro(grupoRegistro);
-            dataSetService.GetRegistro(dataSet, "Registro1");
-        }
-
-        [TestMethod]
-        public void GetNombreDataSetTest()
-        {
-            IDataSetService dataSetService = new DataSetService();
-            Dominio.DataSet dataSet = new DataSet("DataSet1");
-            String nombre = dataSetService.GetNombreDataSet(dataSet);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(DataSetServiceException))]
-        public void GetNombreDataSetNoExisteDataSetTest()
-        {
-            IDataSetService dataSetService = new DataSetService();
-            Dominio.DataSet dataSet = null;
-            dataSetService.GetNombreDataSet(dataSet);
-        }
-      
-        [TestMethod]
-        public void GetNombreRegistrosDataSetTest()
-        {
-            IDataSetService dataSetService = new DataSetService();
-            Dominio.DataSet dataSet = new DataSet("DataSet1");
-            String[] nombresRegistros = { "CPU", "TIME" };
-            dataSet.CargarRegistrosVARDEF(nombresRegistros);
-            IDictionary<String, float> grupoRegistro = new Dictionary<String, float>();
-            grupoRegistro.Add("CPU", 1);
-            grupoRegistro.Add("TIME", 2);
-            dataSet.AddGrupoRegistro(grupoRegistro);
-            dataSetService.GetNombreRegistrosDataSet(dataSet);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(DataSetServiceException))]
-        public void GetNombresRegistrosDataSetNoExisteDataSetTest()
-        {
-            IDataSetService dataSetService = new DataSetService();
-            Dominio.DataSet dataSet = null;
-            dataSetService.GetNombreRegistrosDataSet(dataSet);
-        }
-
-
-        [TestMethod]
-        public void GetRegistroAtIndexTest()
+       [TestMethod]
+        public void GetPromedioRegistroTest()
         {
             IDataSetService dataSetService = new DataSetService();
             Dominio.DataSet dataSet = new DataSet("DataSet1");
@@ -133,20 +27,12 @@ namespace Obligatorio.Test
             grupoRegistro2.Add("CPU", 1);
             grupoRegistro2.Add("TIME", 2);
             dataSet.AddGrupoRegistro(grupoRegistro2);
-            dataSetService.GetRegistroAtIndex(dataSet,1);
+            dataSetService.GetPromedioRegistro(dataSet, "CPU");
         }
 
         [TestMethod]
         [ExpectedException(typeof(DataSetServiceException))]
-        public void GetRegistroAtIndexNoExisteDataSetTest()
-        {
-            IDataSetService dataSetService = new DataSetService();
-            Dominio.DataSet dataSet = new DataSet("DataSet1");
-            dataSetService.GetRegistroAtIndex(dataSet, 1);
-        }
-        [TestMethod]
-        [ExpectedException(typeof(DataSetServiceException))]
-        public void GetRegistroAtIndexNoExisteRegistroTest()
+        public void GetPromedioRegistroNoExiteRegistroTest()
         {
             IDataSetService dataSetService = new DataSetService();
             Dominio.DataSet dataSet = new DataSet("DataSet1");
@@ -160,10 +46,11 @@ namespace Obligatorio.Test
             grupoRegistro2.Add("CPU", 1);
             grupoRegistro2.Add("TIME", 2);
             dataSet.AddGrupoRegistro(grupoRegistro2);
-            dataSetService.GetRegistroAtIndex(dataSet, 3);
+            dataSetService.GetPromedioRegistro(dataSet, "GPU");
         }
+
         [TestMethod]
-        public void GetNombreRegistroAtIndexTest()
+        public void GetMinimoRegistroTest()
         {
             IDataSetService dataSetService = new DataSetService();
             Dominio.DataSet dataSet = new DataSet("DataSet1");
@@ -177,20 +64,12 @@ namespace Obligatorio.Test
             grupoRegistro2.Add("CPU", 1);
             grupoRegistro2.Add("TIME", 2);
             dataSet.AddGrupoRegistro(grupoRegistro2);
-            dataSetService.GetNombreRegistroAtIndex(dataSet, 1);
+            dataSetService.GetMinimoRegistro(dataSet, "CPU");
         }
 
         [TestMethod]
         [ExpectedException(typeof(DataSetServiceException))]
-        public void GetNombreAtIndexNoExisteDataSetTest()
-        {
-            IDataSetService dataSetService = new DataSetService();
-            Dominio.DataSet dataSet = new DataSet("DataSet1");
-            dataSetService.GetNombreRegistroAtIndex(dataSet, 1);
-        }
-        [TestMethod]
-        [ExpectedException(typeof(DataSetServiceException))]
-        public void GetNombreAtIndexNoExisteRegistroTest()
+        public void GetMinimoRegistroNoExiteRegistroTest()
         {
             IDataSetService dataSetService = new DataSetService();
             Dominio.DataSet dataSet = new DataSet("DataSet1");
@@ -204,8 +83,81 @@ namespace Obligatorio.Test
             grupoRegistro2.Add("CPU", 1);
             grupoRegistro2.Add("TIME", 2);
             dataSet.AddGrupoRegistro(grupoRegistro2);
-            dataSetService.GetRegistroAtIndex(dataSet, 3);
+            dataSetService.GetMinimoRegistro(dataSet, "PU");
         }
-      
+        [TestMethod]
+        public void GetMaximoRegistroTest()
+        {
+            IDataSetService dataSetService = new DataSetService();
+            Dominio.DataSet dataSet = new DataSet("DataSet1");
+            String[] nombresRegistros = { "CPU", "TIME" };
+            dataSet.CargarRegistrosVARDEF(nombresRegistros);
+            IDictionary<String, float> grupoRegistro = new Dictionary<String, float>();
+            grupoRegistro.Add("CPU", 1);
+            grupoRegistro.Add("TIME", 2);
+            dataSet.AddGrupoRegistro(grupoRegistro);
+            IDictionary<String, float> grupoRegistro2 = new Dictionary<String, float>();
+            grupoRegistro2.Add("CPU", 1);
+            grupoRegistro2.Add("TIME", 2);
+            dataSet.AddGrupoRegistro(grupoRegistro2);
+            dataSetService.GetMaximoRegistro(dataSet, "CPU");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DataSetServiceException))]
+        public void GetMaximoRegistroNoExisteRegistroTest()
+        {
+            IDataSetService dataSetService = new DataSetService();
+            Dominio.DataSet dataSet = new DataSet("DataSet1");
+            String[] nombresRegistros = { "CPU", "TIME" };
+            dataSet.CargarRegistrosVARDEF(nombresRegistros);
+            IDictionary<String, float> grupoRegistro = new Dictionary<String, float>();
+            grupoRegistro.Add("CPU", 1);
+            grupoRegistro.Add("TIME", 2);
+            dataSet.AddGrupoRegistro(grupoRegistro);
+            IDictionary<String, float> grupoRegistro2 = new Dictionary<String, float>();
+            grupoRegistro2.Add("CPU", 1);
+            grupoRegistro2.Add("TIME", 2);
+            dataSet.AddGrupoRegistro(grupoRegistro2);
+            dataSetService.GetMaximoRegistro(dataSet, "PU");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DataSetServiceException))]
+        public void GetMaximoRegistroNoExistenDatosRegistroTest()
+        {
+            IDataSetService dataSetService = new DataSetService();
+            Dominio.DataSet dataSet = new DataSet("DataSet1");
+            String[] nombresRegistros = { "CPU", "TIME" };
+            dataSet.CargarRegistrosVARDEF(nombresRegistros);
+            dataSetService.GetMaximoRegistro(dataSet, "CPU");
+        }
+
+        [TestMethod]
+        public void GetCantidadRegistrosTest()
+        {
+            IDataSetService dataSetService = new DataSetService();
+            Dominio.DataSet dataSet = new DataSet("DataSet1");
+            String[] nombresRegistros = { "CPU", "TIME" };
+            dataSet.CargarRegistrosVARDEF(nombresRegistros);
+            IDictionary<String, float> grupoRegistro = new Dictionary<String, float>();
+            grupoRegistro.Add("CPU", 1);
+            grupoRegistro.Add("TIME", 2);
+            dataSet.AddGrupoRegistro(grupoRegistro);
+            IDictionary<String, float> grupoRegistro2 = new Dictionary<String, float>();
+            grupoRegistro2.Add("CPU", 1);
+            grupoRegistro2.Add("TIME", 2);
+            dataSet.AddGrupoRegistro(grupoRegistro2);
+            dataSetService.GetCantidadRegistros(dataSet);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(DataSetServiceException))]
+        public void GetCantidadRegistrosNoExisteDataSetTest()
+        {
+            IDataSetService dataSetService = new DataSetService();
+            Dominio.DataSet dataSet = null;
+            dataSetService.GetCantidadRegistros(dataSet);
+        }
     }
 }
