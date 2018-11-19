@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InterfazServiceUI;
 using Dominio;
+using InterfazUI;
+using Logica;
 
 namespace Interfaz_de_usuario
 {
@@ -16,6 +18,7 @@ namespace Interfaz_de_usuario
     {
         private IProductoService productoService;
         private IDataSetService dataSetService;
+        private IEstadisticosService estadisticosService;
         private BindingList<String> nombresRegistros;
         private List<String> dataSets;
         private String nombreProducto;
@@ -27,6 +30,7 @@ namespace Interfaz_de_usuario
 
         public VisualizarDataSet(IProductoService iProductoService, String nombreProducto, String etiquetaVersion, Panel panelPrincipal, IDataSetService iDataSetService)
         {
+            estadisticosService = new EstadisticosService();
             productoService = iProductoService;
             dataSetService = iDataSetService;
             this.panelPrincipal = panelPrincipal;
@@ -70,7 +74,7 @@ namespace Interfaz_de_usuario
         private void CargarListaNombresRegistros()
         {
             Dominio.DataSet dataSet = productoService.GetDataSet(nombreProducto, etiquetaVersion, nombreDataSet);
-            for (int i = 0; i < dataSetService.GetCantidadRegistros(dataSet); i++)
+            for (int i = 0; i < estadisticosService.GetCantidadRegistros(dataSet); i++)
             {
                 if (!dataSetService.GetNombreRegistroAtIndex(dataSet, i).Equals("TIME"))
                 {
