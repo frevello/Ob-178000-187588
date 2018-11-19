@@ -40,7 +40,7 @@ namespace Logica
             IDataSetService dataSetService = new DataSetService();
             VariablesDataSet variableDataSet = dataSetService.GetRegistro(dataSet, nombreRegistro);
             ValidarExistenDatosRegistro(variableDataSet);
-            return variableDataSet.datosRegistro.Max();
+            return variableDataSet.GetDatosRegistro().Max();
         }
 
         public float GetMinimoRegistro(DataSet dataSet, string nombreRegistro)
@@ -48,7 +48,7 @@ namespace Logica
             IDataSetService dataSetService = new DataSetService();
             VariablesDataSet variableDataSet = dataSetService.GetRegistro(dataSet, nombreRegistro);
             ValidarExistenDatosRegistro(variableDataSet);
-            return variableDataSet.datosRegistro.Min();
+            return variableDataSet.GetDatosRegistro().Min();
         }
 
         public float GetPromedioRegistro(DataSet dataSet, String nombreRegistro)
@@ -56,15 +56,15 @@ namespace Logica
             IDataSetService dataSetService = new DataSetService();
             VariablesDataSet variableDataSet = dataSetService.GetRegistro(dataSet, nombreRegistro);
             ValidarExistenDatosRegistro(variableDataSet);
-            return variableDataSet.datosRegistro.Average();
+            return variableDataSet.GetDatosRegistro().Average();
         }
         private void ValidarExistenDatosRegistro(VariablesDataSet variableDataSet)
         {
             TryGetDatosRegistro(variableDataSet);
-            TryValidarExisteDatosRegistro(variableDataSet.datosRegistro);
+            TryValidarExisteDatosRegistro(variableDataSet.GetDatosRegistro());
         }
 
-        private void TryValidarExisteDatosRegistro(List<float> datosRegistro)
+        private void TryValidarExisteDatosRegistro(IEnumerable<float> datosRegistro)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace Logica
         {
             try
             {
-                List<float> datosRegistro = variableDataSet.datosRegistro;
+                IEnumerable<float> datosRegistro = variableDataSet.GetDatosRegistro();
             }
             catch (Exception)
             {

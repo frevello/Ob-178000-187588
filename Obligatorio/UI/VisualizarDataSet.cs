@@ -99,7 +99,7 @@ namespace Interfaz_de_usuario
             VariablesDataSet registroVar = dataSetService.GetRegistro(dataSet, nombreRegistro);
             VariablesDataSet registroTiempo = dataSetService.GetRegistro(dataSet, REGISTRO_TIME);
             
-            Grafica grafica = new Grafica(registroTiempo.datosRegistro, registroVar.datosRegistro, registroTiempo.nombreVariable, registroVar.nombreVariable);
+            Grafica grafica = new Grafica(registroTiempo.GetDatosRegistro(), registroVar.GetDatosRegistro(), registroTiempo.GetNombreVariable(), registroVar.GetNombreVariable());
             grafica.Show();
         }
 

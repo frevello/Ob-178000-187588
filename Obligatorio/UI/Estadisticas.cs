@@ -109,10 +109,10 @@ namespace Interfaz_de_usuario
             for (int i = 0; i < estadisticosService.GetCantidadRegistros(dataSet); i++)
             {
                 VariablesDataSet variables = dataSetService.GetRegistroAtIndex(dataSet, i);
-                float promedio = estadisticosService.GetPromedioRegistro(dataSet, variables.nombreVariable);
-                float minimo = estadisticosService.GetMinimoRegistro(dataSet, variables.nombreVariable);
-                float maximo = estadisticosService.GetMaximoRegistro(dataSet, variables.nombreVariable);
-                estadistias.Add(variables.nombreVariable + " Promedio: " + promedio + " Minimo: " + minimo + " Maximo: " + maximo);
+                float promedio = estadisticosService.GetPromedioRegistro(dataSet, variables.GetNombreVariable());
+                float minimo = estadisticosService.GetMinimoRegistro(dataSet, variables.GetNombreVariable());
+                float maximo = estadisticosService.GetMaximoRegistro(dataSet, variables.GetNombreVariable());
+                estadistias.Add(variables.GetNombreVariable() + " Promedio: " + promedio + " Minimo: " + minimo + " Maximo: " + maximo);
             }
         }
 

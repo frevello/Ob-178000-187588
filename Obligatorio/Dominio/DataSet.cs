@@ -150,7 +150,7 @@ namespace Dominio
 
         private Boolean ExisteRegistroDataSet(String nombreRegistro)
         {
-            return registros.Exists(r => r.nombreVariable == nombreRegistro);
+            return registros.Exists(r => r.GetNombreVariable() == nombreRegistro);
         }
 
         private void AddRegistroDataSet(String nombreRegistro)
@@ -158,21 +158,21 @@ namespace Dominio
             VariablesDataSet registro = new VariablesDataSet(nombreRegistro);
             if (nombreRegistro.Equals(REGISTRO_TIME))
             {
-                registro.ordenado = true;
+                registro.SetOrdenado(true);
             }
             registros.Add(registro);
         }
 
         private void AddDatoARegistoDataSet(String nombreRegistro, float datoRegistro)
         {
-            VariablesDataSet registro = registros.Find(r => r.nombreVariable == nombreRegistro);
+            VariablesDataSet registro = registros.Find(r => r.GetNombreVariable() == nombreRegistro);
             SiRegistroEsOredenadoValidar(registro, datoRegistro);
-            registro.datosRegistro.Add(datoRegistro);
+            registro.AddDdatosRegistro(datoRegistro);
         }
 
         private void SiRegistroEsOredenadoValidar(VariablesDataSet registro, float datoRegistro)
         {
-            if (registro.ordenado && registro.datosRegistro != null)
+            if (registro.GetOrdenado() && registro.GetDatosRegistro() != null)
             {
                 ValidarDatoRegistroOrdenado(registro, datoRegistro);
             }
@@ -183,13 +183,13 @@ namespace Dominio
             float lastDato = ObtenerLastDatoDeRegistroDataSet(registro, datoRegistro);
             if(lastDato > datoRegistro)
             {
-                throw new DataSetException("ERROR: DataSet ordenado por" + registro.nombreVariable);
+                throw new DataSetException("ERROR: DataSet ordenado por" + registro.GetNombreVariable());
             }
         }
 
         private float ObtenerLastDatoDeRegistroDataSet(VariablesDataSet registro, float datoRegistro)
         {
-            return registro.datosRegistro.LastOrDefault();
+            return registro.GetDatosRegistro().LastOrDefault();
         }
 
         public String GetNombre()
@@ -208,7 +208,7 @@ namespace Dominio
         public void ValidarMinimoDeRegistros()
         {
             TryGetDatosRegistro();
-            List<float> datosRegistros = registros.ElementAt(0).datosRegistro;
+            IEnumerable<float> datosRegistros = registros.ElementAt(0).GetDatosRegistro();
             if (datosRegistros.Count() < MINIMO_REGISTROS)
             {
                 throw new DataSetException("ERROR: Debe tener al menos " + MINIMO_REGISTROS + "registros");
@@ -219,7 +219,7 @@ namespace Dominio
         {
             try
             {
-               List<float> datos =  registros.ElementAt(0).datosRegistro;
+               IEnumerable<float> datos =  registros.ElementAt(0).GetDatosRegistro();
             }
             catch(Exception e)
             {

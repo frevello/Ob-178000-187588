@@ -55,7 +55,7 @@ namespace Logica
         {
             IEnumerable<VariablesDataSet> registros = GetRegistros(dataSet);
             ValidarExisteRegistro(registros, nombreRegistro);
-            return registros.FirstOrDefault(r => r.nombreVariable == nombreRegistro);
+            return registros.FirstOrDefault(r => r.GetNombreVariable() == nombreRegistro);
         }
 
         private VariablesDataSet GetRegistroAtIndexDeDataSet(DataSet dataSet, int index)
@@ -72,7 +72,7 @@ namespace Logica
         }
         private void ValidarExisteRegistro(IEnumerable<VariablesDataSet> registros, String nombreRegistro)
         {
-            if (registros.FirstOrDefault(r => r.nombreVariable == nombreRegistro) == null)
+            if (registros.FirstOrDefault(r => r.GetNombreVariable() == nombreRegistro) == null)
             {
                 throw new DataSetServiceException("ERROR: no existe registro");
             }
