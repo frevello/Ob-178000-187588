@@ -83,9 +83,9 @@ namespace Interfaz_de_usuario
 
         private void SetDatos()
         {
-            this.textEtiqueta.Text = versionSeleccionada.etiqueta;
-            this.dateTimeFechaCreacion.Value = versionSeleccionada.fechaCreacion;
-            this.comboBoxTipoVersion.Text = versionSeleccionada.estado;
+            this.textEtiqueta.Text = versionSeleccionada.GetEtiqueta();
+            this.dateTimeFechaCreacion.Value = versionSeleccionada.GetFechaCreacion();
+            this.comboBoxTipoVersion.Text = versionSeleccionada.GetEtiqueta();
         }
 
         private void botonSeleccionarProducto_Click(object sender, EventArgs e)
@@ -107,7 +107,7 @@ namespace Interfaz_de_usuario
             Producto p = IPService.GetProducto(productoSeleccionado.GetNombre());
             for (int i = 0; i < p.GetVersiones().Count(); i++)
             {
-                listaVersiones.Add(p.GetVersiones().ElementAt(i).etiqueta);
+                listaVersiones.Add(p.GetVersiones().ElementAt(i).GetEtiqueta());
             }
         }
 
@@ -143,7 +143,7 @@ namespace Interfaz_de_usuario
 
         private void TryModificarVersion()
         {
-            IPService.ModificarVersion(productoSeleccionado.GetNombre(), versionSeleccionada.etiqueta, this.textEtiqueta.Text, this.comboBoxTipoVersion.Text, this.dateTimeFechaCreacion.Value);
+            IPService.ModificarVersion(productoSeleccionado.GetNombre(), versionSeleccionada.GetEtiqueta(), this.textEtiqueta.Text, this.comboBoxTipoVersion.Text, this.dateTimeFechaCreacion.Value);
         }
     }
 }

@@ -49,9 +49,9 @@ namespace Interfaz_de_usuario
         }
         private void CargarListaDataSets()
         {
-            for (int i = 0; i < productoService.GetVersionProducto(nombreProducto, etiquetaVersion).dataset.Count; i++)
+            for (int i = 0; i < productoService.GetVersionProducto(nombreProducto, etiquetaVersion).GetDataSets().Count(); i++)
             {
-                dataSets.Add(productoService.GetVersionProducto(nombreProducto, etiquetaVersion).dataset[i].GetNombre());
+                dataSets.Add(productoService.GetVersionProducto(nombreProducto, etiquetaVersion).GetDataSets().ElementAt(i).GetNombre());
             }
         }
         private void SetListaDataSets()

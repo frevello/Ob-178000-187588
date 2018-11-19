@@ -80,7 +80,7 @@ namespace Logica
 
         private void TryVersionUnica(Producto producto, String etiqueta, String mensaje)
         {
-            if (producto.GetVersiones().FirstOrDefault(v => v.etiqueta == etiqueta) != null)
+            if (producto.GetVersiones().FirstOrDefault(v => v.GetEtiqueta() == etiqueta) != null)
             {
                 throw new VersionException(mensaje);
             }
@@ -110,7 +110,7 @@ namespace Logica
 
         private void TryExisteVersion(Producto producto, String etiqueta, String mensaje)
         {
-            if (producto.GetVersiones().FirstOrDefault(v => v.etiqueta == etiqueta) == null)
+            if (producto.GetVersiones().FirstOrDefault(v => v.GetEtiqueta() == etiqueta) == null)
             {
                 throw new VersionException(mensaje);
             }
@@ -118,7 +118,7 @@ namespace Logica
 
         private Dominio.Version GetVersion(Producto producto, String etiqueta)
         {
-            return producto.GetVersiones().FirstOrDefault(v => v.etiqueta == etiqueta);
+            return producto.GetVersiones().FirstOrDefault(v => v.GetEtiqueta() == etiqueta);
         }
 
         public IEnumerable<Dominio.Version> GetListaVersionesVersionProducto(String nombre)
@@ -162,9 +162,9 @@ namespace Logica
             IEnumerable<Dominio.Version> listaV = GetListaVersionesVersionProducto(nombreProductoViejo);
             for (int i = 0; i < listaV.Count(); i++)
             {
-                if (listaV.ElementAt(i).fechaCreacion < fechaMenor)
+                if (listaV.ElementAt(i).GetFechaCreacion() < fechaMenor)
                 {
-                    fechaMenor = listaV.ElementAt(i).fechaCreacion;
+                    fechaMenor = listaV.ElementAt(i).GetFechaCreacion();
                 }
             }
             return fechaMenor;
@@ -206,7 +206,7 @@ namespace Logica
         {
             Dominio.Version version = GetVersionProducto(nombreProducto, etiquetaVersion);
             ValidarExisteDataSet(dataSet);
-            version.dataset.Add(dataSet);
+            version.AddDataSet(dataSet);
         }
 
         private void ValidarExisteDataSet(DataSet dataSet)
@@ -221,7 +221,7 @@ namespace Logica
         {
             Dominio.Version version = GetVersionProducto(nombreProducto, etiquetaVersion);
             ValidarNombreDataSetNoVacio(nombreDataSet);
-            return version.dataset.FirstOrDefault(d => d.GetNombre() == nombreDataSet);
+            return version.GetDataSets().FirstOrDefault(d => d.GetNombre() == nombreDataSet);
         }
         private void ValidarNombreDataSetNoVacio(String nombre)
         {
@@ -258,21 +258,21 @@ namespace Logica
         private void ModificarDatosVersion(String nombreProducto, String etiquetaVieja, String etiquetaNueva, String estado, DateTime fecha)
         {
             Dominio.Version v = GetVersion(this.listaProductos.FirstOrDefault(p => p.GetNombre() == nombreProducto), etiquetaVieja);
-            v.estado = estado;
-            v.etiqueta = etiquetaNueva;
-            v.fechaCreacion = fecha;
+            v.SetEstado(estado );
+            v.SetEtiqueta(etiquetaNueva);
+            v.SetFechaCreacion(fecha);
         }
    
         public IEnumerable<DataSet> GetDataSets(String nombreProducto, String etiquetaVersion)
         {
             Dominio.Version version = GetVersionProducto(nombreProducto, etiquetaVersion);
             TryExistenDataSets(version);
-            return version.dataset;
+            return version.GetDataSets();
         }
 
         private void TryExistenDataSets(Dominio.Version version)
         {
-            if(version.dataset == null)
+            if(version.GetDataSets() == null)
             {
                 throw new ProductoServiceException("ERROR: No existen DataSets");
             }

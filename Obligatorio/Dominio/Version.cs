@@ -6,11 +6,11 @@ namespace Dominio
 {
     public class Version
     {
-        public String etiqueta;
-        public DateTime fechaCreacion;
-        public String estado;
-        public Producto producto;
-        public List<DataSet> dataset;
+        private String etiqueta;
+        private DateTime fechaCreacion;
+        private String estado;
+        private Producto producto;
+        private List<DataSet> datasets;
 
         private const String formatoEtiqueta = "^\\d{1}.\\d{2}.\\d{3}$";
 
@@ -22,7 +22,7 @@ namespace Dominio
             this.fechaCreacion = fecha;
             this.estado = estado;
             this.producto = producto;
-            this.dataset = new List<DataSet>();
+            this.datasets = new List<DataSet>();
         }
 
         private void ValidarFormatoEtiqueta(String campo, String mensaje)
@@ -48,5 +48,37 @@ namespace Dominio
             }
         }
 
+        public String GetEtiqueta()
+        {
+            return this.etiqueta;
+        }
+        public String GetEstado()
+        {
+            return this.estado;
+        }
+        public IEnumerable<DataSet> GetDataSets()
+        {
+            return this.datasets;
+        }
+        public DateTime GetFechaCreacion()
+        {
+            return this.fechaCreacion;
+        }
+        public void SetEtiqueta(String etiqueta)
+        {
+            this.etiqueta = etiqueta;
+        }
+        public void SetEstado(String estado)
+        {
+            this.estado = estado;
+        }
+        public void SetFechaCreacion(DateTime fecha)
+        {
+            this.fechaCreacion = fecha;
+        }
+        public void AddDataSet(DataSet dataSet)
+        {
+            this.datasets.Add(dataSet);
+        }
     }
 }
