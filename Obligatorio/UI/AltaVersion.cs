@@ -37,7 +37,7 @@ namespace Interfaz_de_usuario
             List<Producto> productos = IPService.GetListaProducto();
             for (int i = 0; i < productos.Count; i++)
             {
-                listaProductos.Add(productos[i].nombre);
+                listaProductos.Add(productos[i].GetNombre());
             }
         }
 
@@ -82,7 +82,7 @@ namespace Interfaz_de_usuario
 
         private void TryAltaVersion()
         {
-            IPService.AltaVersion(productoSeleccionado.nombre, this.textEtiqueta.Text, this.comboBoxTipoVersion.Text, this.dateTimeFechaCreacion.Value);
+            IPService.AltaVersion(productoSeleccionado.GetNombre(), this.textEtiqueta.Text, this.comboBoxTipoVersion.Text, this.dateTimeFechaCreacion.Value);
         }
 
         private void VaciarCampos()

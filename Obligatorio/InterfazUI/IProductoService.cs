@@ -15,7 +15,7 @@ namespace InterfazServiceUI
         Boolean ExisteProducto(String nombre);
         void AltaVersion(String nombreProducto, String etiqueta, String estado, DateTime fecha);
         Dominio.Version GetVersionProducto(String nombre, String etiqueta);
-        List<Dominio.Version> GetListaVersionesVersionProducto(String nombre);
+        IEnumerable<Dominio.Version> GetListaVersionesVersionProducto(String nombre);
         void ModificarProducto(String nombreProductoViejo, String nombreProductoNuevo, DateTime nuevaFecha);
         void ModificarVersion(String nombreProducto, String etiquetaVieja, String etiquetaNueva, String estado, DateTime fecha);
         void AddDataSet(String nombreProducto, String etiquetaVersion, DataSet dataSet);
