@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="EstadisticosServiceTest.cs" />
     <Compile Include="FileReaderTest.cs" />
+    <Compile Include="LoadCsvDataSetTest.cs" />
     <Compile Include="LoadDataSetTest.cs" />
     <Compile Include="ProductoServiceTest.cs" />
     <Compile Include="DataSetServiceTest.cs" />

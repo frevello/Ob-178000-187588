@@ -80,5 +80,12 @@ namespace Interfaz_de_usuario
         {
             this.Close();
         }
+
+        private void btnValidarArchivo_Click(object sender, EventArgs e)
+        {
+            panelPrincipal.Controls.Clear();
+            ValidarArchivo estadisticas = new ValidarArchivo();
+            panelPrincipal.Controls.Add(estadisticas);
+        }
     }   
 }

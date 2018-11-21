@@ -84,7 +84,7 @@ namespace Dominio
         {
             if(grupoRegistro.Count() != nombreRegistros.Count())
             {
-                throw new DataSetException("ERROR: falta en el Registro una variables");
+                throw new DataSetException("ERROR: cantidad de variables en el registro incorrecta");
             }
         }
 
@@ -113,7 +113,7 @@ namespace Dominio
 
         private void ValidarVariableTimeSeaMayorCero(KeyValuePair<String, float> registro)
         {
-            if (registro.Key.Equals("TIME"))
+            if (registro.Key.Equals(REGISTRO_TIME))
             {
                 ValidarMayorCero(registro.Value);
             }

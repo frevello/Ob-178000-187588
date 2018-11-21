@@ -21,6 +21,8 @@ namespace AccesoDatos
 
         public DataSet CargarDataSet()
         {
+            
+            ValidarFormatoDataSet();
             OpenFile(path);
             CargarVARDEF();
             CargarGruposRegistros();
@@ -36,7 +38,6 @@ namespace AccesoDatos
         private void CargarVARDEF()
         {
             String line = ObtenerNextLine();
-            validatorFormat.ValidarPrimeraLinea(line);
             creator.CargarRegistrosVARDEF(line);
         }
        
@@ -56,17 +57,15 @@ namespace AccesoDatos
             creator.IniciaGrupoRegistro();
             while (validatorFormat.ExisteLinea(line) && !validatorFormat.EsFinGrupoRegistro(line))
             {
-                ValidarYCargarRegistro(line);
+                CargarRegistro(line);
                 line = ObtenerNextLine();
             }
-            validatorFormat.ValidarFinRegistroCorrecto(line);
             creator.FinGrupoRegistro();
         }
 
 
-        private void ValidarYCargarRegistro(String line)
+        private void CargarRegistro(String line)
         {
-            validatorFormat.ValidarRegistro(line);
             creator.CargarRegistro(line);
         }
 
@@ -94,13 +93,16 @@ namespace AccesoDatos
         }
         private void ValidarGruposRegistros()
         {
+            int countGruposRegistros = 0;
             String line = ObtenerNextLine();
             while (validatorFormat.ExisteLinea(line))
             {
                 ValidarGrupoRegistro(line);
                 line = ObtenerNextLine();
+                countGruposRegistros++;
             }
             reader.EndReading();
+            validatorFormat.ValidarFinArchivo(countGruposRegistros);
         }
 
         private void ValidarGrupoRegistro(String line)
@@ -111,7 +113,8 @@ namespace AccesoDatos
                 validatorFormat.ValidarRegistro(line);
                 line = ObtenerNextLine();
             }
-            validatorFormat.ValidarFinRegistroCorrecto(line);
+          
+            validatorFormat.FinGrupoRegistro(line);
         }
     
     }
