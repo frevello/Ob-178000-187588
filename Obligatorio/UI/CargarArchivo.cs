@@ -49,7 +49,7 @@ namespace Interfaz_de_usuario
         {
             for (int i = 0; i < productoService.GetListaProducto().Count; i++)
             {
-                productos.Add(productoService.GetListaProducto()[i].nombre);
+                productos.Add(productoService.GetListaProducto()[i].GetNombre());
             }
         }
 
@@ -65,9 +65,9 @@ namespace Interfaz_de_usuario
         }
         private void CargarListaVersiones(String nombreProducto)
         {
-            for (int i = 0; i < productoService.GetListaVersionesVersionProducto(nombreProducto).Count; i++)
+            for (int i = 0; i < productoService.GetListaVersionesVersionProducto(nombreProducto).Count(); i++)
             {
-                versiones.Add(productoService.GetListaVersionesVersionProducto(nombreProducto)[i].etiqueta);
+                versiones.Add(productoService.GetListaVersionesVersionProducto(nombreProducto).ElementAt(i).GetEtiqueta());
             }
         }
         private void SetListaVersiones()

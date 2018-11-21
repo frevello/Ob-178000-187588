@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InterfazServiceUI;
 using Dominio;
+using InterfazUI;
+using Logica;
 
 namespace Interfaz_de_usuario
 {
@@ -16,6 +18,7 @@ namespace Interfaz_de_usuario
     {
         private IProductoService productoService;
         private IDataSetService dataSetService;
+        private IEstadisticosService estadisticosService;
         private List<String> productos;
         private BindingList<String> versiones;
         private BindingList<String> dataSets;
@@ -26,6 +29,7 @@ namespace Interfaz_de_usuario
 
         public Estadisticas(IProductoService iProductoService, IDataSetService iDataSetService)
         {
+            estadisticosService = new EstadisticosService();
             productoService = iProductoService;
             dataSetService = iDataSetService;
             productos = new List<string>();
@@ -64,7 +68,7 @@ namespace Interfaz_de_usuario
         {
             for (int i = 0; i < productoService.GetListaProducto().Count; i++)
             {
-                productos.Add(productoService.GetListaProducto()[i].nombre);
+                productos.Add(productoService.GetListaProducto()[i].GetNombre());
             }
         }
 
@@ -101,14 +105,14 @@ namespace Interfaz_de_usuario
 
         private void CargarListBoxEstadistica(Dominio.DataSet dataSet)
         {
-            estadistias.Add("Cantidad de Registros del DataSet: " + dataSetService.GetCantidadRegistros(dataSet));
-            for (int i = 0; i < dataSetService.GetCantidadRegistros(dataSet); i++)
+            estadistias.Add("Cantidad de Registros del DataSet: " + estadisticosService.GetCantidadRegistros(dataSet));
+            for (int i = 0; i < estadisticosService.GetCantidadRegistros(dataSet); i++)
             {
                 VariablesDataSet variables = dataSetService.GetRegistroAtIndex(dataSet, i);
-                float promedio = dataSetService.GetPromedioRegistro(dataSet, variables.nombreVariable);
-                float minimo = dataSetService.GetMinimoRegistro(dataSet, variables.nombreVariable);
-                float maximo = dataSetService.GetMaximoRegistro(dataSet, variables.nombreVariable);
-                estadistias.Add(variables.nombreVariable + " Promedio: " + promedio + " Minimo: " + minimo + " Maximo: " + maximo);
+                float promedio = estadisticosService.GetPromedioRegistro(dataSet, variables.GetNombreVariable());
+                float minimo = estadisticosService.GetMinimoRegistro(dataSet, variables.GetNombreVariable());
+                float maximo = estadisticosService.GetMaximoRegistro(dataSet, variables.GetNombreVariable());
+                estadistias.Add(variables.GetNombreVariable() + " Promedio: " + promedio + " Minimo: " + minimo + " Maximo: " + maximo);
             }
         }
 
@@ -132,9 +136,9 @@ namespace Interfaz_de_usuario
         }
         private void CargarListaVersiones()
         {
-            for (int i = 0; i < productoService.GetListaVersionesVersionProducto(nombreProducto).Count; i++)
+            for (int i = 0; i < productoService.GetListaVersionesVersionProducto(nombreProducto).Count(); i++)
             {
-                versiones.Add(productoService.GetListaVersionesVersionProducto(nombreProducto)[i].etiqueta);
+                versiones.Add(productoService.GetListaVersionesVersionProducto(nombreProducto).ElementAt(i).GetEtiqueta());
             }
         }
         private void SetListaVersiones()

@@ -5,30 +5,52 @@ namespace Dominio
 { 
     public class Producto
     {
-        public String nombre;
-       // public String Nombre { get { return nombre } private set; }
-        public DateTime fechaInicial;
-        private List<Version> listaVersion;
+        private String nombre;
+        private DateTime fechaInicial;
+        private List<Version> versiones;
 
         public Producto(String nombre, DateTime fecha)
         {
-            ValidarNoVacio(nombre, "ERROR: nombre vacio");
+            ValidarNoVacio(nombre);
             this.nombre = nombre;
             this.fechaInicial = fecha;
-            this.listaVersion = new List<Version>();
+            this.versiones = new List<Version>();
         }
 
-        private void ValidarNoVacio(String campo, String mensaje)
+        private void ValidarNoVacio(String campo)
         {
             if (campo.Length == 0)
             {
-                throw new LargoDatoNoValidoException(mensaje);
+                throw new LargoDatoNoValidoException("ERROR: nombre vacio");
             }
         }
 
-        public List<Version> GetVersiones()
+        public IEnumerable<Version> GetVersiones()
         {
-            return this.listaVersion;
+            return this.versiones;
+        }
+        public String GetNombre()
+        {
+            return this.nombre;
+        }
+
+        public DateTime GetFechaInicial()
+        {
+            return this.fechaInicial;
+        }
+
+        public void SetNombre(String nombre)
+        {
+           this.nombre = nombre;
+        }
+        public void SetFechaInicial(DateTime fechaInicial)
+        {
+            this.fechaInicial = fechaInicial;
+        }
+
+        public void AddVersion(Version version)
+        {
+            this.versiones.Add(version);
         }
     }
 }

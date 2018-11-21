@@ -55,7 +55,7 @@ namespace Logica
         {
             IEnumerable<VariablesDataSet> registros = GetRegistros(dataSet);
             ValidarExisteRegistro(registros, nombreRegistro);
-            return registros.FirstOrDefault(r => r.nombreVariable == nombreRegistro);
+            return registros.FirstOrDefault(r => r.GetNombreVariable() == nombreRegistro);
         }
 
         private VariablesDataSet GetRegistroAtIndexDeDataSet(DataSet dataSet, int index)
@@ -72,7 +72,7 @@ namespace Logica
         }
         private void ValidarExisteRegistro(IEnumerable<VariablesDataSet> registros, String nombreRegistro)
         {
-            if (registros.FirstOrDefault(r => r.nombreVariable == nombreRegistro) == null)
+            if (registros.FirstOrDefault(r => r.GetNombreVariable() == nombreRegistro) == null)
             {
                 throw new DataSetServiceException("ERROR: no existe registro");
             }
@@ -103,30 +103,6 @@ namespace Logica
             return dataSet.GetNomresRegistros();
         }
 
-        public float GetPromedioRegistro(DataSet dataSet, String nombreRegistro)
-        {
-            VariablesDataSet variableDataSet = GetRegistro(dataSet, nombreRegistro);
-            ValidarExistenDatosRegistro(variableDataSet);
-            return variableDataSet.datosRegistro.Average();
-        }
-        public float GetMinimoRegistro(DataSet dataSet, String nombreRegistro)
-        {
-            VariablesDataSet variableDataSet = GetRegistro(dataSet, nombreRegistro);
-            ValidarExistenDatosRegistro(variableDataSet);
-            return variableDataSet.datosRegistro.Min();
-        }
-        public float GetMaximoRegistro(DataSet dataSet, String nombreRegistro)
-        {
-            VariablesDataSet variableDataSet = GetRegistro(dataSet, nombreRegistro);
-            ValidarExistenDatosRegistro(variableDataSet);
-            return variableDataSet.datosRegistro.Max();
-        }
-
-        public int GetCantidadRegistros(DataSet dataSet)
-        {
-            TryValidarExisteDataSetYRegistro(dataSet);
-            return dataSet.GetRegistros().Count();
-        }
         private void TryExiteDataSet(DataSet dataSet)
         {
             if (dataSet == null)
@@ -134,35 +110,5 @@ namespace Logica
                 throw new DataSetServiceException("ERROR: DataSet no existe");
             }
         }
-       
-        private void ValidarExistenDatosRegistro(VariablesDataSet variableDataSet)
-        {
-            TryGetDatosRegistro(variableDataSet);
-            TryValidarExisteDatosRegistro(variableDataSet.datosRegistro);
-        }
-
-        private void TryValidarExisteDatosRegistro(List<float> datosRegistro)
-        {
-            try
-            {
-                float avarage = datosRegistro.Average();
-            }
-            catch (Exception)
-            {
-                throw new DataSetServiceException("ERROR: No Existen Datos en el Registro");
-            }
-        }
-        private void TryGetDatosRegistro(VariablesDataSet variableDataSet)
-        {
-            try
-            {
-                List<float> datosRegistro = variableDataSet.datosRegistro;
-            }
-            catch(Exception)
-            {
-                throw new DataSetServiceException("ERROR: No Existe variablesDataSet");
-            }
-        }
-
     }
 }

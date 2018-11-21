@@ -39,7 +39,7 @@ namespace Interfaz_de_usuario
         {
             for (int i = 0; i < IPService.GetListaProducto().Count; i++)
             {
-                listaProductos.Add(IPService.GetListaProducto()[i].nombre);
+                listaProductos.Add(IPService.GetListaProducto()[i].GetNombre());
             }
         }
 
@@ -77,15 +77,15 @@ namespace Interfaz_de_usuario
         private void SetDatosVersiones()
         {
             String version = this.listBoxVersiones.GetItemText(this.listBoxVersiones.SelectedItem);
-            versionSeleccionada = IPService.GetVersionProducto(productoSeleccionado.nombre, version);
+            versionSeleccionada = IPService.GetVersionProducto(productoSeleccionado.GetNombre(), version);
             SetDatos();
         }
 
         private void SetDatos()
         {
-            this.textEtiqueta.Text = versionSeleccionada.etiqueta;
-            this.dateTimeFechaCreacion.Value = versionSeleccionada.fechaCreacion;
-            this.comboBoxTipoVersion.Text = versionSeleccionada.estado;
+            this.textEtiqueta.Text = versionSeleccionada.GetEtiqueta();
+            this.dateTimeFechaCreacion.Value = versionSeleccionada.GetFechaCreacion();
+            this.comboBoxTipoVersion.Text = versionSeleccionada.GetEtiqueta();
         }
 
         private void botonSeleccionarProducto_Click(object sender, EventArgs e)
@@ -104,10 +104,10 @@ namespace Interfaz_de_usuario
 
         private void CargarListaVersiones()
         {
-            Producto p = IPService.GetProducto(productoSeleccionado.nombre);
-            for (int i = 0; i < p.GetVersiones().Count; i++)
+            Producto p = IPService.GetProducto(productoSeleccionado.GetNombre());
+            for (int i = 0; i < p.GetVersiones().Count(); i++)
             {
-                listaVersiones.Add(p.GetVersiones()[i].etiqueta);
+                listaVersiones.Add(p.GetVersiones().ElementAt(i).GetEtiqueta());
             }
         }
 
@@ -143,7 +143,7 @@ namespace Interfaz_de_usuario
 
         private void TryModificarVersion()
         {
-            IPService.ModificarVersion(productoSeleccionado.nombre, versionSeleccionada.etiqueta, this.textEtiqueta.Text, this.comboBoxTipoVersion.Text, this.dateTimeFechaCreacion.Value);
+            IPService.ModificarVersion(productoSeleccionado.GetNombre(), versionSeleccionada.GetEtiqueta(), this.textEtiqueta.Text, this.comboBoxTipoVersion.Text, this.dateTimeFechaCreacion.Value);
         }
     }
 }

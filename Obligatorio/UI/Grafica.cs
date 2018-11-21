@@ -31,7 +31,7 @@ namespace Interfaz_de_usuario
         private const int gridLinesMarginToLayerInPixels = 1;
 
 
-        public Grafica(List<float> pointsX, List<float> pointsY, String nombreEjeX, String nombreEjeY)
+        public Grafica(IEnumerable<float> pointsX, IEnumerable<float> pointsY, String nombreEjeX, String nombreEjeY)
         {
             
             InitializeComponent();
@@ -50,7 +50,7 @@ namespace Interfaz_de_usuario
 
             PaintLines();
         }
-        private void CalcularGridCellCount(List<float> pointsX, List<float> pointsY)
+        private void CalcularGridCellCount(IEnumerable<float> pointsX, IEnumerable<float> pointsY)
         {
             gridCellCountX = (int)Math.Round(pointsX.Max())+ 5;
             gridCellCountSinMinY = (int)Math.Round(pointsY.Max()) + 5;
@@ -85,12 +85,12 @@ namespace Interfaz_de_usuario
             AutoScrollMargin = new Size(drawSurfaceMaringToWindowInPixels, drawSurfaceMaringToWindowInPixels);
            
         }
-        private void CrearPoints(List<float> pointsX, List<float> pointsY)
+        private void CrearPoints(IEnumerable<float> pointsX, IEnumerable<float> pointsY)
         {
             points = new List<PointF>();
             for (int i = 0; i < pointsX.Count(); i++)
             {
-                points.Add(new PointF(pointsX[i], pointsY[i]));
+                points.Add(new PointF(pointsX.ElementAt(i), pointsY.ElementAt(i)));
             }
         }
 

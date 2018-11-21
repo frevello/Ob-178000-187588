@@ -38,7 +38,7 @@ namespace Interfaz_de_usuario
             List<Producto> productos = IPService.GetListaProducto();
             for (int i = 0; i < productos.Count; i++)
             {
-                listaProductos.Add(productos[i].nombre);
+                listaProductos.Add(productos[i].GetNombre());
             }
         }
 
@@ -56,8 +56,8 @@ namespace Interfaz_de_usuario
 
         private void CargarDatosProductos()
         {
-            this.textNombreUsuario.Text = productoSeleccionado.nombre;
-            this.dateTimeFechaCreacion.Value = productoSeleccionado.fechaInicial;
+            this.textNombreUsuario.Text = productoSeleccionado.GetNombre();
+            this.dateTimeFechaCreacion.Value = productoSeleccionado.GetFechaInicial();
         }
 
         private void butonActualizarProducto_Click(object sender, EventArgs e)
@@ -90,7 +90,7 @@ namespace Interfaz_de_usuario
 
         private void TryModificarProducto()
         {
-            IPService.ModificarProducto(productoSeleccionado.nombre, this.textNombreUsuario.Text, this.dateTimeFechaCreacion.Value);
+            IPService.ModificarProducto(productoSeleccionado.GetNombre(), this.textNombreUsuario.Text, this.dateTimeFechaCreacion.Value);
         }
 
         private void SetDatosFinales()
