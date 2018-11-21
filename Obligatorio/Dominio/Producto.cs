@@ -6,6 +6,7 @@ namespace Dominio
     public class Producto
     {
         public String nombre;
+       // public String Nombre { get { return nombre } private set; }
         public DateTime fechaInicial;
         private List<Version> listaVersion;
 
