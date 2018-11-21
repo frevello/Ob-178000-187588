@@ -10,6 +10,12 @@ namespace AccesoDatosCsv
 {
     public class LoadCsvDataSet : ILoadDataSet
     {
+        public LoadCsvDataSet(String pathDataSet)
+        {
+           /* validatorFormat = new ValidatorFormat();
+            path = pathDataSet;
+            creator = new Creator(path);*/
+        }
         public DataSet CargarDataSet()
         {
             throw new NotImplementedException();

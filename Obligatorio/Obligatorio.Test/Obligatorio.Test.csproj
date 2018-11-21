@@ -62,6 +62,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AccesoDatosCsv\AccesoDatosCsv.csproj">
+      <Project>{477B0B34-4746-4912-8EE8-7F81D862CDC2}</Project>
+      <Name>AccesoDatosCsv</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj">
       <Project>{2A9C0F29-63A5-460F-88B6-C740629785D4}</Project>
       <Name>AccesoDatos</Name>
