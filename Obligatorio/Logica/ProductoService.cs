@@ -10,6 +10,7 @@ namespace Logica
 {
     public class ProductoService : IProductoService
     {
+        private const int FECHA = 2000;
         private List<Producto> listaProductos;
 
         public ProductoService()
@@ -32,7 +33,7 @@ namespace Logica
 
         private void TryFechaCorrecta(DateTime fecha, String mensaje)
         {
-            if (fecha.Year < 2000)
+            if (fecha.Year < FECHA)
             {
                 throw new ProductoServiceException(mensaje);
             }

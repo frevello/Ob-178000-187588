@@ -5,12 +5,14 @@ namespace Dominio
 {
     public class VariablesDataSet
     {
-        private String nombreVariable;
-        private List<float> datosRegistro;
-        private Boolean ordenado;
+        public Guid Id { get; set; }
+        public String nombreVariable { get; set; }
+        public List<float> datosRegistro { get; set; }
+        public Boolean ordenado { get; set; }
 
         public VariablesDataSet(String nombre, Boolean esOrdenado = false)
         {
+            Id = Guid.NewGuid();
             nombreVariable = nombre;
             datosRegistro = new List<float>();
             ordenado = esOrdenado;

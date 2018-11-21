@@ -5,12 +5,14 @@ namespace Dominio
 { 
     public class Producto
     {
-        private String nombre;
-        private DateTime fechaInicial;
-        private List<Version> versiones;
+        public Guid Id { get; set; }
+        public String nombre { get; set; }
+        public DateTime fechaInicial { get; set; }
+        public List<Version> versiones { get; set; }
 
         public Producto(String nombre, DateTime fecha)
         {
+            Id = Guid.NewGuid();
             ValidarNoVacio(nombre);
             this.nombre = nombre;
             this.fechaInicial = fecha;
@@ -29,6 +31,7 @@ namespace Dominio
         {
             return this.versiones;
         }
+
         public String GetNombre()
         {
             return this.nombre;

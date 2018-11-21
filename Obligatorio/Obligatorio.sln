@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoDatos", "AccesoDatos\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfazAccesoDatos", "InterfazAccesoDatos\InterfazAccesoDatos.csproj", "{4090D37B-F9D9-4351-B883-EB69EBB9BA98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseAccess", "BaseAccess\BaseAccess.csproj", "{D622FF5C-DE38-45B9-A0FE-6EA0DA864A66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{4090D37B-F9D9-4351-B883-EB69EBB9BA98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4090D37B-F9D9-4351-B883-EB69EBB9BA98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4090D37B-F9D9-4351-B883-EB69EBB9BA98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D622FF5C-DE38-45B9-A0FE-6EA0DA864A66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D622FF5C-DE38-45B9-A0FE-6EA0DA864A66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D622FF5C-DE38-45B9-A0FE-6EA0DA864A66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D622FF5C-DE38-45B9-A0FE-6EA0DA864A66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
