@@ -13,5 +13,8 @@ namespace InterfazUI
         float GetMinimoRegistro(DataSet dataSet, String nombreRegistro);
         float GetMaximoRegistro(DataSet dataSet, String nombreRegistro);
         int GetCantidadRegistros(DataSet dataSet);
+        float GetPromedioRegistroDesdeHasta(DataSet dataSet, String nombreRegistro, float timeDesde, float timeHasta);
+        float GetMinimoRegistroDesdeHasta(DataSet dataSet, String nombreRegistro, float timeDesde, float timeHasta);
+        float GetMaximoRegistroDesdeHasta(DataSet dataSet, String nombreRegistro, float timeDesde, float timeHasta);
     }
 }

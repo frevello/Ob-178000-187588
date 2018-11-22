@@ -81,7 +81,12 @@ namespace Interfaz_de_usuario
         {
             CargarListBoxEstadisticas();
         }
-
+        private void CargarListBoxEstadisticas()
+        {
+            estadistias.Clear();
+            CargarEstadisticaSiDatosSeleccionados();
+            SetListaEstadisticas();
+        }
         private void CargarEstadisticaSiDatosSeleccionados()
         {
             nombreDataSet = listBoxDataSet.GetItemText(listBoxDataSet.SelectedItem);
@@ -99,22 +104,91 @@ namespace Interfaz_de_usuario
             Dominio.DataSet dataSet = productoService.GetDataSet(nombreProducto, etiquetaVersion, nombreDataSet);
             if(dataSet != null && dataSet.GetRegistros() != null)
             {
-                CargarListBoxEstadistica(dataSet);
+                float timeDesde = GetFiltroTimeDesde(dataSet);
+                float timeHasta = GetFiltroTimeHasta(dataSet);
+                if(ValidarFiltrosDesdeMenorHasta(timeDesde, timeHasta))
+                {
+                    CargarListBoxEstadistica(dataSet, timeDesde, timeHasta);
+                }
             }
         }
-
-        private void CargarListBoxEstadistica(Dominio.DataSet dataSet)
+        private bool ValidarFiltrosDesdeMenorHasta(float timeDesde, float timeHasta)
+        {
+            if (timeDesde > timeHasta)
+            {
+                MessageBox.Show("El filtro desde debe ser menor al filtro hasta");
+                return false;
+            }
+            return true;
+         }
+        private float GetFiltroTimeDesde(Dominio.DataSet dataSet)
+        {
+            try
+            {
+                return float.Parse(txtTimeDesde.Text);
+            }
+            catch
+            {
+                float minTime = estadisticosService.GetMinimoRegistro(dataSet, "TIME");
+                txtTimeDesde.Text = minTime.ToString();
+                return minTime;
+            }
+        }
+        private float GetFiltroTimeHasta(Dominio.DataSet dataSet)
+        {
+            try
+            {
+                return float.Parse(txtTimeHasta.Text);
+            }
+            catch
+            {
+                float maxTime = estadisticosService.GetMaximoRegistro(dataSet, "TIME");
+                txtTimeHasta.Text = maxTime.ToString();
+                return maxTime;
+            }
+        }
+        private void CargarListBoxEstadistica(Dominio.DataSet dataSet, float timeDesde, float timeHasta)
         {
             estadistias.Add("Cantidad de Registros del DataSet: " + estadisticosService.GetCantidadRegistros(dataSet));
             for (int i = 0; i < estadisticosService.GetCantidadRegistros(dataSet); i++)
             {
                 VariablesDataSet variables = dataSetService.GetRegistroAtIndex(dataSet, i);
-                float promedio = estadisticosService.GetPromedioRegistro(dataSet, variables.GetNombreVariable());
-                float minimo = estadisticosService.GetMinimoRegistro(dataSet, variables.GetNombreVariable());
-                float maximo = estadisticosService.GetMaximoRegistro(dataSet, variables.GetNombreVariable());
-                estadistias.Add(variables.GetNombreVariable() + " Promedio: " + promedio + " Minimo: " + minimo + " Maximo: " + maximo);
+                CargarListBoxEstadisticaDeVar(dataSet, variables, timeDesde, timeHasta);
             }
         }
+        private void CargarListBoxEstadisticaDeVar(Dominio.DataSet dataSet, VariablesDataSet variables, float timeDesde, float timeHasta)
+        {
+            if (variables.GetNombreVariable().Equals("TIME"))
+            {
+                CargarListBoxEstadisticaVarSinFiltro(dataSet, variables);
+            }
+            else
+            {
+                CargarListBoxEstadisticaVarConFiltro(dataSet, variables,  timeDesde,  timeHasta);
+            }
+        }
+        private void CargarListBoxEstadisticaVarSinFiltro(Dominio.DataSet dataSet, VariablesDataSet variables)
+        {
+            float promedio = estadisticosService.GetPromedioRegistro(dataSet, variables.GetNombreVariable());
+            float minimo = estadisticosService.GetMinimoRegistro(dataSet, variables.GetNombreVariable());
+            float maximo = estadisticosService.GetMaximoRegistro(dataSet, variables.GetNombreVariable());
+            estadistias.Add(variables.GetNombreVariable() + " Promedio: " + promedio + " Minimo: " + minimo + " Maximo: " + maximo);
+        }
+
+        private void CargarListBoxEstadisticaVarConFiltro(Dominio.DataSet dataSet, VariablesDataSet variables, float timeDesde, float timeHasta)
+        {
+            try
+            {
+                float promedio = estadisticosService.GetPromedioRegistroDesdeHasta(dataSet, variables.GetNombreVariable(), timeDesde, timeHasta);
+                float minimo = estadisticosService.GetMinimoRegistroDesdeHasta(dataSet, variables.GetNombreVariable(), timeDesde, timeHasta);
+                float maximo = estadisticosService.GetMaximoRegistroDesdeHasta(dataSet, variables.GetNombreVariable(), timeDesde, timeHasta);
+                estadistias.Add(variables.GetNombreVariable() + " Promedio: " + promedio + " Minimo: " + minimo + " Maximo: " + maximo);
+            }
+            catch (EstadisticosServiceException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+       }
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -190,13 +264,18 @@ namespace Interfaz_de_usuario
 
         private void listBoxDataSet_SelectedIndexChanged(object sender, EventArgs e)
         {
-        }
-
-        private void CargarListBoxEstadisticas()
-        {
-            estadistias.Clear();
-            CargarEstadisticaSiDatosSeleccionados();
-            SetListaEstadisticas();
+            nombreDataSet = listBoxDataSet.GetItemText(listBoxDataSet.SelectedItem);
+            if(listBoxDataSet.SelectedItem != null)
+            {
+                Dominio.DataSet dataSet = productoService.GetDataSet(nombreProducto, etiquetaVersion, nombreDataSet);
+                txtTimeDesde.Text = estadisticosService.GetMinimoRegistro(dataSet, "TIME").ToString();
+                txtTimeHasta.Text = estadisticosService.GetMaximoRegistro(dataSet, "TIME").ToString();
+            }
+            else
+            {
+                txtTimeDesde.Text = "";
+                txtTimeHasta.Text = "";
+            }
         }
 
         private void listBoxEstadisticas_SelectedIndexChanged(object sender, EventArgs e)

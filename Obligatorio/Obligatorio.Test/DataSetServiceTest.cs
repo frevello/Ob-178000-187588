@@ -12,13 +12,6 @@ namespace Obligatorio.Test
 
     {
         [TestMethod]
-        public void CargarDataSetTest()
-        {
-            IDataSetService dataSet = new DataSetService();
-            dataSet.CargarDataSet(@"../../../DataSetFiles/file.txt");
-        }
-
-        [TestMethod]
         public void  GetRegistrosTest()
         {
             IDataSetService dataSetService = new DataSetService();

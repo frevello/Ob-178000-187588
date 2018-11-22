@@ -91,6 +91,70 @@ namespace Obligatorio.Test
             estadisticosService.GetCantidadRegistros(dataSet);
         }
 
+        [TestMethod]
+        public void GetPromedioRegistroDesdeHastaTest()
+        {
+            IEstadisticosService estadisticosService = new EstadisticosService();
+            Dominio.DataSet dataSet = crearDataSet();
+            estadisticosService.GetPromedioRegistroDesdeHasta(dataSet, "CPU", 2,4);
+        }
+        [TestMethod]
+        public void GetMinimoRegistroDesdeHastaTest()
+        {
+            IEstadisticosService estadisticosService = new EstadisticosService();
+            Dominio.DataSet dataSet = crearDataSet();
+            estadisticosService.GetMinimoRegistroDesdeHasta(dataSet, "CPU", 2, 4);
+        }
+        [TestMethod]
+        public void GetMaximoRegistroDesdeHastaTest()
+        {
+            IEstadisticosService estadisticosService = new EstadisticosService();
+            Dominio.DataSet dataSet = crearDataSet();
+            estadisticosService.GetMaximoRegistroDesdeHasta(dataSet, "CPU", 2, 4);
+        }
+        [TestMethod]
+        public void GetPromedioRegistroDesdeHastaFueraRangoTest()
+        {
+            IEstadisticosService estadisticosService = new EstadisticosService();
+            Dominio.DataSet dataSet = crearDataSet();
+            estadisticosService.GetPromedioRegistroDesdeHasta(dataSet, "CPU", 8, 9);
+        }
+        [TestMethod]
+        public void GetMinimoRegistroDesdeHastaFueraRangoTest()
+        {
+            IEstadisticosService estadisticosService = new EstadisticosService();
+            Dominio.DataSet dataSet = crearDataSet();
+            estadisticosService.GetMinimoRegistroDesdeHasta(dataSet, "CPU", 8, 9);
+        }
+        [TestMethod]
+        public void GetMaximoRegistroDesdeHastaFueraRangoTest()
+        {
+            IEstadisticosService estadisticosService = new EstadisticosService();
+            Dominio.DataSet dataSet = crearDataSet();
+            estadisticosService.GetMaximoRegistroDesdeHasta(dataSet, "CPU", 8, 9);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(EstadisticosServiceException))]
+        public void GetMaximoRegistroDesdeMenorHastaTest()
+        {
+            IEstadisticosService estadisticosService = new EstadisticosService();
+            Dominio.DataSet dataSet = crearDataSet();
+            estadisticosService.GetMaximoRegistroDesdeHasta(dataSet, "CPU", 10, 9);
+        }
+        [TestMethod]
+        public void GetMaximoRegistroDesdeMayorMaximoTest()
+        {
+            IEstadisticosService estadisticosService = new EstadisticosService();
+            Dominio.DataSet dataSet = crearDataSet();
+            estadisticosService.GetMaximoRegistroDesdeHasta(dataSet, "CPU", 10, 14);
+        }
+        [TestMethod]
+        public void GetMaximoRegistroHastaMenorMinimoTest()
+        {
+            IEstadisticosService estadisticosService = new EstadisticosService();
+            Dominio.DataSet dataSet = crearDataSet();
+            estadisticosService.GetMaximoRegistroDesdeHasta(dataSet, "CPU", 0, 1);
+        }
         private Dominio.DataSet crearDataSet()
         {
             IDataSetService dataSetService = new DataSetService();
@@ -103,8 +167,16 @@ namespace Obligatorio.Test
             dataSet.AddGrupoRegistro(grupoRegistro);
             IDictionary<String, float> grupoRegistro2 = new Dictionary<String, float>();
             grupoRegistro2.Add("CPU", 1);
-            grupoRegistro2.Add("TIME", 2);
+            grupoRegistro2.Add("TIME", 3);
             dataSet.AddGrupoRegistro(grupoRegistro2);
+            IDictionary<String, float> grupoRegistro4 = new Dictionary<String, float>();
+            grupoRegistro4.Add("CPU", 1);
+            grupoRegistro4.Add("TIME", 4);
+            dataSet.AddGrupoRegistro(grupoRegistro4);
+            IDictionary<String, float> grupoRegistro5 = new Dictionary<String, float>();
+            grupoRegistro5.Add("CPU", 1);
+            grupoRegistro5.Add("TIME", 5);
+            dataSet.AddGrupoRegistro(grupoRegistro5);
             return dataSet;
         }
     }
