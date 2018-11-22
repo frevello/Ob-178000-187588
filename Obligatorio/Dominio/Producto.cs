@@ -10,6 +10,13 @@ namespace Dominio
         public DateTime fechaInicial { get; set; }
         public List<Version> versiones { get; set; }
 
+
+        public Producto()
+        {
+            Id = Guid.NewGuid();
+            this.versiones = new List<Version>();
+        }
+
         public Producto(String nombre, DateTime fecha)
         {
             Id = Guid.NewGuid();

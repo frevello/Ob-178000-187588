@@ -10,6 +10,12 @@ namespace Dominio
         public List<float> datosRegistro { get; set; }
         public Boolean ordenado { get; set; }
 
+        public VariablesDataSet()
+        {
+            Id = Guid.NewGuid();
+            datosRegistro = new List<float>();
+        }
+
         public VariablesDataSet(String nombre, Boolean esOrdenado = false)
         {
             Id = Guid.NewGuid();

@@ -85,7 +85,7 @@ namespace Interfaz_de_usuario
         {
             this.textEtiqueta.Text = versionSeleccionada.GetEtiqueta();
             this.dateTimeFechaCreacion.Value = versionSeleccionada.GetFechaCreacion();
-            this.comboBoxTipoVersion.Text = versionSeleccionada.GetEtiqueta();
+            this.comboBoxTipoVersion.Text = versionSeleccionada.GetEstado();
         }
 
         private void botonSeleccionarProducto_Click(object sender, EventArgs e)

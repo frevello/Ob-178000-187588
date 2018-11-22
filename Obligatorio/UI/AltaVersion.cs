@@ -68,7 +68,7 @@ namespace Interfaz_de_usuario
         {
             TryProductoSeleccionado("Error: No se selecciono un producto");
             TryAltaVersion();
-            MessageBox.Show("Usuario actualizado correctamente");
+            MessageBox.Show("Version creada");
             VaciarCampos();
         }
 

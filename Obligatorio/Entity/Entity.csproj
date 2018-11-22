@@ -54,7 +54,6 @@
     <Compile Include="UsuarioDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VariablesDataSetDB.cs" />
-    <Compile Include="VersionDB.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseAccess\BaseAccess.csproj">

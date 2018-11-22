@@ -70,7 +70,7 @@ namespace Entity
             {
                 using (ContextDB context = new ContextDB())
                 {
-                    return context.VariablesDataSets.FirstOrDefault(variableDataSets => variableDataSet.nombreVariable.Equals(nombreVariablesDataSet));
+                    return context.VariablesDataSets.FirstOrDefault(variableDataSet => variableDataSet.nombreVariable.Equals(nombreVariablesDataSet));
                 }
 
             }

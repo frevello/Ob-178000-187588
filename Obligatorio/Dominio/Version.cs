@@ -14,6 +14,12 @@ namespace Dominio
 
         private const String formatoEtiqueta = "^\\d{1}.\\d{2}.\\d{3}$";
 
+        public Version()
+        {
+            Id = Guid.NewGuid();
+            this.datasets = new List<DataSet>();
+        }
+
         public Version(String etiqueta, String estado, Producto producto, DateTime fecha)
         {
             ValidarFormatoEtiqueta(etiqueta, "ERROR: Formato de etiqueta invalido");

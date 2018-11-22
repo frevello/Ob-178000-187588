@@ -15,5 +15,7 @@ namespace InterfazBaseAccess
         Producto GetProducto(string nombreProducto);
         List<Producto> GetListaProductos();
         List<Dominio.Version> GetListaVersionesProducto(string nombreProducto);
+        void AgregarVersionProducto(Producto producto, Dominio.Version version);
+        void EliminarVersionProducto(Producto producto, Dominio.Version version);
     }
 }

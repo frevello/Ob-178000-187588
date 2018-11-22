@@ -14,6 +14,13 @@ namespace Dominio
         public const int MINIMO_NOMBRES_REGISTROS = 2;
         public const int MINIMO_REGISTROS = 2;
 
+        public DataSet()
+        {
+            Id = Guid.NewGuid();
+            nombreRegistros = new List<String>();
+            registros = new List<VariablesDataSet>();
+        }
+
         public DataSet(String path)
         {
             Id = Guid.NewGuid();
