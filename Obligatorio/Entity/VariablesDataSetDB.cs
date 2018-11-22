@@ -9,16 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Entity
-{ 
-    public class VersionDB : IVersionDB
+{
+    public class VariablesDataSetDB : IVariablesDataSetDB
     {
-        public void AgregarVersion(Dominio.Version version)
+        public void AgregarVariablesDataSet(VariablesDataSet variableDataSet)
         {
             try
             {
                 using (ContextDB aContext = new ContextDB())
                 {
-                    aContext.Versiones.Add(version);
+                    aContext.VariablesDataSets.Add(variableDataSet);
                     aContext.SaveChanges();
                 }
             }
@@ -27,13 +27,13 @@ namespace Entity
                 throw new Exception(m.Message);
             }
         }
-        public void ModificarVersion(Dominio.Version version)
+        public void modificarVariablesDataSet(VariablesDataSet variableDataSet)
         {
             try
             {
                 using (ContextDB context = new ContextDB())
                 {
-                    context.Entry(version).State = System.Data.Entity.EntityState.Modified;
+                    context.Entry(variableDataSet).State = System.Data.Entity.EntityState.Modified;
                     context.SaveChanges();
                 }
             }
@@ -42,16 +42,16 @@ namespace Entity
                 throw new Exception(m.Message);
             }
         }
-        public bool ExisteVersion(string etiqueta)
+        public bool ExisteVariablesDataSet(string nombreVariablesDataSet)
         {
             try
             {
                 bool exists = false;
                 using (ContextDB context = new ContextDB())
                 {
-                    foreach (Dominio.Version versionFromColecction in context.Versiones)
+                    foreach (VariablesDataSet variableDataSetFromColecction in context.VariablesDataSets)
                     {
-                        if (etiqueta.Equals(versionFromColecction.etiqueta))
+                        if (nombreVariablesDataSet.Equals(variableDataSetFromColecction.nombreVariable))
                         {
                             exists = true;
                         }
@@ -64,13 +64,13 @@ namespace Entity
                 throw new Exception(m.Message);
             }
         }
-        public Dominio.Version GetVersion(string etiqueta)
+        public VariablesDataSet GetVariablesDataSet(string nombreVariablesDataSet)
         {
             try
             {
                 using (ContextDB context = new ContextDB())
                 {
-                    return context.Versiones.FirstOrDefault(version => version.etiqueta.Equals(etiqueta));
+                    return context.VariablesDataSets.FirstOrDefault(variableDataSets => variableDataSet.nombreVariable.Equals(nombreVariablesDataSet));
                 }
 
             }
@@ -79,25 +79,21 @@ namespace Entity
                 throw new Exception(m.Message);
             }
         }
-        public List<Dominio.Version> GetListaVersion()
+        public List<VariablesDataSet> GetListaVariablesDataSet()
         {
             try
             {
                 using (ContextDB context = new ContextDB())
                 {
-                    var query = context.Versiones;
+                    var query = context.VariablesDataSets;
                     context.SaveChanges();
-                    return query.ToList<Dominio.Version>();
+                    return query.ToList<VariablesDataSet>();
                 }
             }
             catch (DbEntityValidationException m)
             {
                 throw new Exception(m.Message);
             }
-        }
-        public List<DataSet> GetListaDataSet(string etiqueta)
-        {
-            return GetVersion(etiqueta).datasets;
         }
     }
 }
