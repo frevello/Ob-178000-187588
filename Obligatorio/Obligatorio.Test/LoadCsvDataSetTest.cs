@@ -115,5 +115,11 @@ namespace Obligatorio.Test
             ILoadDataSet loadDataSet = new LoadCsvDataSet(@"../../../DataSetCsv/Incorrecto_19.csv");
             loadDataSet.ValidarFormatoDataSet();
         }
+        [TestMethod]
+        public void CargarDataSetTest()
+        {
+            ILoadDataSet loadDataSet = new LoadCsvDataSet(@"../../../DataSetCsv/Correcto_2.csv");
+            loadDataSet.CargarDataSet();
+        }
     }
 }
