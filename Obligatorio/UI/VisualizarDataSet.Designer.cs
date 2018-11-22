@@ -55,6 +55,7 @@
             this.listBoxNombresRegistros.Location = new System.Drawing.Point(6, 203);
             this.listBoxNombresRegistros.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxNombresRegistros.Name = "listBoxNombresRegistros";
+            this.listBoxNombresRegistros.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.listBoxNombresRegistros.Size = new System.Drawing.Size(578, 84);
             this.listBoxNombresRegistros.TabIndex = 76;
             this.listBoxNombresRegistros.SelectedIndexChanged += new System.EventHandler(this.listBoxNombresRegistros_SelectedIndexChanged);

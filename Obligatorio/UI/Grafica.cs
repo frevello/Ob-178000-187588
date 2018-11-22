@@ -17,9 +17,8 @@ namespace Interfaz_de_usuario
         private NoFlickerPanel drawSurface;
         private Bitmap gridLayer;
         private Bitmap linesLayer;
-        private List<PointF> points;
         private String nombreEjeX;
-        private String nombreEjeY;
+        private IDictionary<String, Pen> nombresEjeY;
         private int gridCellCountX = 21;
         private int gridCellCountY = 21;
         private int gridCellCountSinMinY = 21;
@@ -30,13 +29,14 @@ namespace Interfaz_de_usuario
         private const int drawSurfaceMaringToWindowInPixels = 40;
         private const int gridLinesMarginToLayerInPixels = 1;
 
+        private  Pen[] colores = { Pens.Red, Pens.Blue, Pens.DarkMagenta, Pens.Green, Pens.Coral, Pens.Violet, Pens.Purple, Pens.LightBlue, Pens.Salmon, Pens.DarkGreen };
 
-        public Grafica(IEnumerable<float> pointsX, IEnumerable<float> pointsY, String nombreEjeX, String nombreEjeY)
+        public Grafica(IEnumerable<float> pointsX, IEnumerable<IEnumerable<float>> pointsY, String nombreEjeX, IEnumerable<String> nombresEjeY)
         {
             
             InitializeComponent();
             this.nombreEjeX = nombreEjeX;
-            this.nombreEjeY = nombreEjeY;
+            SetColoresEjeY(nombresEjeY);
             CalcularGridCellCount(pointsX, pointsY);
             int drawSurfaceSizeX = cellSizeInPixels * gridCellCountX;
             int drawSurfaceSizeY = cellSizeInPixels * gridCellCountY;
@@ -45,20 +45,43 @@ namespace Interfaz_de_usuario
 
             CreateOrRecreateLayer(ref gridLayer);
             PaintGrid();
-            CreateOrRecreateLayer(ref linesLayer);
-            CrearPoints(pointsX, pointsY);
 
-            PaintLines();
+            CreateOrRecreateLayer(ref linesLayer);
+            for (int i = 0; i < pointsY.Count(); i++)
+             {
+                 List<PointF> points = CrearPoints(pointsX, pointsY.ElementAt(i));
+                 PaintLines(ref linesLayer, points, this.nombresEjeY.ElementAt(i).Value);
+             }
         }
-        private void CalcularGridCellCount(IEnumerable<float> pointsX, IEnumerable<float> pointsY)
+        private void SetColoresEjeY(IEnumerable<String> nombreEjeY)
+        {
+            this.nombresEjeY = new Dictionary<String, Pen>();
+            Random rnd = new Random();
+            for (int i = 0; i < nombreEjeY.Count(); i++)
+            {
+                int indexColor = rnd.Next(10);
+                this.nombresEjeY.Add(nombreEjeY.ElementAt(i), colores[indexColor]);
+            }
+        }
+
+        private void CalcularGridCellCount(IEnumerable<float> pointsX, IEnumerable<IEnumerable<float>> pointsY)
         {
             gridCellCountX = (int)Math.Round(pointsX.Max())+ 5;
-            gridCellCountSinMinY = (int)Math.Round(pointsY.Max()) + 5;
+            
             int min = 0;
-            if(pointsY.Min() < 0)
+            int max = 0;
+            for(int i = 0; i < pointsY.Count(); i++)
             {
-                min = (int)Math.Floor(pointsY.Min()) - 5;
+                if (pointsY.ElementAt(i).Min() < 0)
+                {
+                    min = (int)Math.Floor(pointsY.ElementAt(i).Min()) - 5;
+                }
+                if(pointsY.ElementAt(i).Max() > max)
+                {
+                    max = (int)Math.Round(pointsY.ElementAt(i).Max());
+                }
             }
+            gridCellCountSinMinY = max + 5;
             gridCellCountY = gridCellCountSinMinY + min *(-1);
         }
 
@@ -85,13 +108,14 @@ namespace Interfaz_de_usuario
             AutoScrollMargin = new Size(drawSurfaceMaringToWindowInPixels, drawSurfaceMaringToWindowInPixels);
            
         }
-        private void CrearPoints(IEnumerable<float> pointsX, IEnumerable<float> pointsY)
+        private List<PointF> CrearPoints(IEnumerable<float> pointsX, IEnumerable<float> pointsY)
         {
-            points = new List<PointF>();
+            List<PointF> points = new List<PointF>();
             for (int i = 0; i < pointsX.Count(); i++)
             {
                 points.Add(new PointF(pointsX.ElementAt(i), pointsY.ElementAt(i)));
             }
+            return points;
         }
 
         private void PaintGrid()
@@ -136,7 +160,11 @@ namespace Interfaz_de_usuario
             DrawVerticalLine(graphics, 1, -gridLinesMarginToLayerInPixels, p);
             int gridHeight = cellSizeInPixels * gridCellCountSinMinY;
             graphics.DrawString(nombreEjeX, new Font(FontFamily.GenericSansSerif, 9, FontStyle.Regular), Brushes.Black, gridLayer.Width / 2, gridHeight - 20);
-            graphics.DrawString(nombreEjeY, new Font(FontFamily.GenericSansSerif, 9, FontStyle.Regular), Brushes.Black, 0, gridHeight / 2);
+
+            for(int i = 0; i < this.nombresEjeY.Count; i++)
+            {
+                graphics.DrawString(this.nombresEjeY.ElementAt(i).Key, new Font(FontFamily.GenericSansSerif, 9, FontStyle.Regular), this.nombresEjeY.ElementAt(i).Value.Brush, 0, (gridHeight + i*40) / 2);
+            }
         }
 
 
@@ -168,10 +196,9 @@ namespace Interfaz_de_usuario
             e.Graphics.DrawImage(linesLayer, zeroing);
         }
 
-        private void PaintLines()
+        private void PaintLines(ref Bitmap layer, List<PointF> points, Pen color)
         {
-            CreateOrRecreateLayer(ref linesLayer);
-            using (Graphics graphics = Graphics.FromImage(linesLayer))
+            using (Graphics graphics = Graphics.FromImage(layer))
             {
                 int gridHeight = cellSizeInPixels * gridCellCountSinMinY;
                 for (int i = 1; i < points.Count; i++)
@@ -183,7 +210,7 @@ namespace Interfaz_de_usuario
                     float pointY2 = gridHeight - 40 * points[i].Y - 40;
                     float x = points[i - 1].X;
                     graphics.FillRectangle(Brushes.Black, pointX1, pointY1, 5, 5);
-                    graphics.DrawLine(Pens.Red, pointX1, pointY1, pointX2, pointY2);
+                    graphics.DrawLine(color, pointX1, pointY1, pointX2, pointY2);
                     graphics.DrawString("(" + x + "," + points[i - 1].Y + ")", new Font(FontFamily.GenericSansSerif, 9, FontStyle.Regular), Brushes.Black, pointX1, pointY1);
                 }
                 float pointX = points[points.Count - 1].X * 40 + 40;
