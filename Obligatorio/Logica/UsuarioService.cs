@@ -1,4 +1,6 @@
 ﻿using Dominio;
+using Entity;
+using InterfazBaseAccess;
 using InterfazServiceUI;
 using System;
 using System.Collections.Generic;
@@ -8,18 +10,26 @@ namespace Logica
 {
     public class UsuarioService: IUsuarioService
     {
-        private List<Usuario> listaUsuarios;
+        private IUsuarioDB IUsuarioDB;
 
         public UsuarioService()
         {
-            this.listaUsuarios = new List<Usuario>();
+            this.IUsuarioDB = new UsuarioDB();
             SetUsuarioAdministrador();
         }
 
         private void SetUsuarioAdministrador()
         {
-            Usuario admin = new Usuario("Admin", "Admin", "Admin", "Admin", "Administrador");
-            listaUsuarios.Add(admin);
+            try
+            {
+                this.AltaUsuario("Admin", "Admin", "Admin", "Admin", "Administrador");
+            }
+            catch
+            {
+
+            }
+
+            
         }
 
         public void AltaUsuario(String nombreUsuario, String nombre, String contraseña, String apellido, String rol)
@@ -37,19 +47,19 @@ namespace Logica
         private void AgregarUsuario(String nombreUsuario, String nombre, String contraseña, String apellido, String rol)
         {
             Usuario usuario = new Usuario(nombreUsuario, nombre, contraseña, apellido, rol);
-            this.listaUsuarios.Add(usuario);
+            this.IUsuarioDB.AgregarUsuario(usuario);
         }
 
         private Boolean ExisteUsuario(String nombreUsuario)
         {
-            return this.listaUsuarios.FirstOrDefault(u => u.nombreUsuario == nombreUsuario) != null;
+            return this.IUsuarioDB.ExisteUsuario(nombreUsuario);         
         }
 
         public void BajaUsuario(Usuario usuario)
         {
             TryBajaUsuarioAdmin(usuario, "Error: No se puede dar de baja a Admin");
             TryUsuarioInexistente(usuario.nombreUsuario, "Error: No existe el usuario");
-            this.listaUsuarios.RemoveAll(u => u.nombreUsuario == usuario.nombreUsuario);
+            this.IUsuarioDB.EliminarUsuario(usuario);
         }
 
         private void TryBajaUsuarioAdmin(Usuario usuario, String mensaje)
@@ -110,7 +120,7 @@ namespace Logica
 
         private void TryDatosCorrectos(String nombre, String contraseña)
         {
-            Usuario usuario = this.listaUsuarios.FirstOrDefault(u => u.nombreUsuario == nombre);
+            Usuario usuario = this.IUsuarioDB.GetUsuario(nombre);
             if (!usuario.contraseña.Equals(contraseña))
             {
                 throw new UsuarioServiceException("Error: Contraseña Invalida");
@@ -119,19 +129,19 @@ namespace Logica
 
         public List<Usuario> GetListaUsuarios()
         {
-            return this.listaUsuarios;
+            return this.IUsuarioDB.GetListaUsuarios();
         }
 
         public Usuario GetUsuario(String nombreUsuario)
         {
             TryUsuarioInexistente(nombreUsuario, "Error: No existe el usuario");
-            return this.listaUsuarios.FirstOrDefault(u => u.nombreUsuario == nombreUsuario);
+            return this.IUsuarioDB.GetUsuario(nombreUsuario);
         }
 
         public void SetUltimoIngreso(DateTime fecha, String nombreUsuario)
         {
             TryUsuarioInexistente(nombreUsuario, "Error: No existe el usuario");
-            Usuario usuario = this.listaUsuarios.FirstOrDefault(u => u.nombreUsuario == nombreUsuario);
+            Usuario usuario = this.IUsuarioDB.GetUsuario(nombreUsuario);
             usuario.ultimoIngreso = fecha;
         }
     }

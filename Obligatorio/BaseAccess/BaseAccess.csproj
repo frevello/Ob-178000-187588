@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{189B631B-03C7-4C88-AEB4-E5C4B68CD53B}</ProjectGuid>
+    <ProjectGuid>{D622FF5C-DE38-45B9-A0FE-6EA0DA864A66}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Logica</RootNamespace>
-    <AssemblyName>Logica</AssemblyName>
+    <RootNamespace>BaseAccess</RootNamespace>
+    <AssemblyName>BaseAccess</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,9 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,42 +49,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSetServiceException.cs" />
-    <Compile Include="DataSetService.cs" />
-    <Compile Include="EstadisticosService.cs" />
-    <Compile Include="EstadisticosServiceException.cs" />
-    <Compile Include="ProductoService.cs" />
-    <Compile Include="ProductoServiceException.cs" />
-    <Compile Include="UsuarioService.cs" />
+    <Compile Include="ContextDB.cs" />
+    <Compile Include="Migrations\201811212124591_createDB.cs" />
+    <Compile Include="Migrations\201811212124591_createDB.Designer.cs">
+      <DependentUpon>201811212124591_createDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UsuarioServiceException.cs" />
-    <Compile Include="VersionException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj">
-      <Project>{2A9C0F29-63A5-460F-88B6-C740629785D4}</Project>
-      <Name>AccesoDatos</Name>
-    </ProjectReference>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Dominio\Dominio.csproj">
       <Project>{990824FF-3CE5-474A-AEC2-E8562F29484D}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Entity\Entity.csproj">
-      <Project>{8BB72C17-AD81-4D7F-B387-9762542C3747}</Project>
-      <Name>Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InterfazAccesoDatos\InterfazAccesoDatos.csproj">
-      <Project>{4090D37B-F9D9-4351-B883-EB69EBB9BA98}</Project>
-      <Name>InterfazAccesoDatos</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InterfazBaseAccess\InterfazBaseAccess.csproj">
-      <Project>{B2C90C6C-5584-4508-9B9E-1C782C2FF3F9}</Project>
-      <Name>InterfazBaseAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InterfazUI\InterfazServiceUI.csproj">
-      <Project>{695D2445-80BD-4408-8E9F-B97184E4C61F}</Project>
-      <Name>InterfazServiceUI</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201811212124591_createDB.resx">
+      <DependentUpon>201811212124591_createDB.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

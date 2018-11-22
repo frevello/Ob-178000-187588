@@ -6,22 +6,28 @@ namespace Dominio
 {
     public class Version
     {
-        private String etiqueta;
-        private DateTime fechaCreacion;
-        private String estado;
-        private Producto producto;
-        private List<DataSet> datasets;
+        public Guid Id { get; set; }
+        public String etiqueta { get; set; }
+        public DateTime fechaCreacion { get; set; }
+        public String estado { get; set; }
+        public List<DataSet> datasets { get; set; }
 
         private const String formatoEtiqueta = "^\\d{1}.\\d{2}.\\d{3}$";
+
+        public Version()
+        {
+            Id = Guid.NewGuid();
+            this.datasets = new List<DataSet>();
+        }
 
         public Version(String etiqueta, String estado, Producto producto, DateTime fecha)
         {
             ValidarFormatoEtiqueta(etiqueta, "ERROR: Formato de etiqueta invalido");
             ValidarCampoNoVacios(estado, "ERROR: Estado vacio");
+            Id = Guid.NewGuid();
             this.etiqueta = etiqueta;
             this.fechaCreacion = fecha;
             this.estado = estado;
-            this.producto = producto;
             this.datasets = new List<DataSet>();
         }
 

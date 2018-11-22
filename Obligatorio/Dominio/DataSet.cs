@@ -6,15 +6,24 @@ namespace Dominio
 {
     public class DataSet
     {
-        private String nombre;
-        private List<String> nombreRegistros;
-        private List<VariablesDataSet> registros;
-        private const String REGISTRO_TIME = "TIME";
-        private const int MINIMO_NOMBRES_REGISTROS = 2;
-        private const int MINIMO_REGISTROS = 2;
+        public Guid Id { get; set; }
+        public String nombre { get; set; }
+        public List<String> nombreRegistros { get; set; }
+        public List<VariablesDataSet> registros { get; set; }
+        public const String REGISTRO_TIME = "TIME";
+        public const int MINIMO_NOMBRES_REGISTROS = 2;
+        public const int MINIMO_REGISTROS = 2;
+
+        public DataSet()
+        {
+            Id = Guid.NewGuid();
+            nombreRegistros = new List<String>();
+            registros = new List<VariablesDataSet>();
+        }
 
         public DataSet(String path)
         {
+            Id = Guid.NewGuid();
             nombre = path;
             nombreRegistros = new List<String>();
             registros = new List<VariablesDataSet>();
