@@ -118,7 +118,7 @@ namespace Obligatorio.Test
         [TestMethod]
         public void CargarDataSetTest()
         {
-            ILoadDataSet loadDataSet = new LoadCsvDataSet(@"../../../DataSetCsv/Correcto_2.csv");
+            ILoadDataSet loadDataSet = new LoadCsvDataSet(@"../../../DataSetCsv/Correcto_3.csv");
             loadDataSet.CargarDataSet();
         }
     }

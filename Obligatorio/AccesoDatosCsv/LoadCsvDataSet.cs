@@ -49,16 +49,46 @@ namespace AccesoDatosCsv
         
         public DataSet CargarDataSet()
         {
-            throw new NotImplementedException();
+            ValidarFormatoDataSet();
+            OpenFile(path);
+            CargarVARDEF();
+            CargarGruposRegistros();
+            return creator.DevolverDataSet();
         }
         private void OpenFile(String path)
         {
             reader = new CsvReader();
             reader.OpenFile(path);
         }
+        private void CargarVARDEF()
+        {
+            String line = ObtenerNextLine();
+            creator.CargarRegistrosVARDEF(line);
+        }
+        private void CargarGruposRegistros()
+        {
+            String line = ObtenerNextLine();
+            while (validatorFormat.ExisteLinea(line))
+            {
+                CargarGrupoRegistro(line);
+                line = ObtenerNextLine();
+            }
+            EndDataSet();
+        }
+        private void CargarGrupoRegistro(String line)
+        {
+            creator.IniciaGrupoRegistro();
+            creator.AddGrupoRegistro(line);
+            creator.FinGrupoRegistro();
+        }
         private String ObtenerNextLine()
         {
             return reader.GetNextLine();
+        }
+        private void EndDataSet()
+        {
+            creator.EndDataSet();
+            reader.EndReading();
         }
     }
 }

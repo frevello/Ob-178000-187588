@@ -11,6 +11,9 @@ using InterfazServiceUI;
 using Logica;
 using Dominio;
 using System.Diagnostics;
+using InterfazAccesoDatos;
+using AccesoDatos;
+using AccesoDatosCsv;
 
 namespace Interfaz_de_usuario
 {
@@ -24,6 +27,9 @@ namespace Interfaz_de_usuario
         private BindingList<String> versiones;
         private String nombreProducto;
         private String etiquetaVersion;
+
+        private const String EXT_TXT = "txt";
+        private const String EXT_CSV = "csv";
 
         public CargarArchivo(IProductoService iProductoService, IDataSetService iDataSetService)
         {
@@ -113,7 +119,7 @@ namespace Interfaz_de_usuario
             using (OpenFileDialog openFileDialog1 = new OpenFileDialog())
             {
                 openFileDialog1.InitialDirectory = "./";
-                openFileDialog1.Filter = "txt files (*.txt)|*.txt";
+                openFileDialog1.Filter = "txt files (*.txt)|*.txt|csv files (*.csv)|*.csv";
                 openFileDialog1.FilterIndex = 2;
                 openFileDialog1.RestoreDirectory = true;
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -127,7 +133,8 @@ namespace Interfaz_de_usuario
         {
             try
             {
-                Dominio.DataSet dataset = dataSetService.CargarDataSet(path);
+                ILoadDataSet l = ExtensionArchivo(path);
+                Dominio.DataSet dataset = l.CargarDataSet();
                 productoService.AddDataSet(nombreProducto, etiquetaVersion, dataset);
                 MessageBox.Show("Se cargo correctamente");
             }
@@ -136,6 +143,21 @@ namespace Interfaz_de_usuario
                 MessageBox.Show(e.Message);
             }
         
+        }
+        private ILoadDataSet ExtensionArchivo(String path)
+        {
+            ILoadDataSet l;
+            String[] split = path.Split('.');
+            String ext = split[split.Length - 1];
+            if (ext.Equals(EXT_TXT))
+            {
+                l = new LoadDataSet(path);
+            }
+            else
+            {
+                l = new LoadCsvDataSet(path);
+            }
+            return l;
         }
     }
 }

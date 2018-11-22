@@ -9,7 +9,6 @@ namespace InterfazServiceUI
 {
     public interface IDataSetService
     {
-        DataSet CargarDataSet(String path);
         IEnumerable<VariablesDataSet> GetRegistros(DataSet dataSet);
         VariablesDataSet GetRegistro(DataSet dataSet, String nombreRegistro);
         String GetNombreDataSet(DataSet dataSet);

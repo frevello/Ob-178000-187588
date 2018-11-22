@@ -99,7 +99,7 @@ namespace AccesoDatosCsv
         }
         private void ValidarDatosRegistro(String[] registros)
         {
-            for(int i = 0; i <= registros.Length; i++)
+            for(int i = 0; i < registros.Length; i++)
             {
                 ValidarFormatoDato(registros[i]);
             }

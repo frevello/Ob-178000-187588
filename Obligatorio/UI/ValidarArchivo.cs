@@ -10,11 +10,15 @@ using System.Windows.Forms;
 using InterfazServiceUI;
 using InterfazAccesoDatos;
 using AccesoDatos;
+using AccesoDatosCsv;
 
 namespace Interfaz_de_usuario
 {
     public partial class ValidarArchivo : UserControl
     {
+        private const String EXT_TXT = "txt";
+        private const String EXT_CSV = "csv";
+
         public ValidarArchivo()
         {
             InitializeComponent();
@@ -23,7 +27,7 @@ namespace Interfaz_de_usuario
         private void btnBuscarArchivo_Click(object sender, EventArgs e)
         {
             String path = GetPathDataSet();
-            ILoadDataSet l = new LoadDataSet(path);
+            ILoadDataSet l = ExtensionArchivo(path);
             try
             {
                 l.ValidarFormatoDataSet();
@@ -42,7 +46,7 @@ namespace Interfaz_de_usuario
             using (OpenFileDialog openFileDialog1 = new OpenFileDialog())
             {
                 openFileDialog1.InitialDirectory = "./";
-                openFileDialog1.Filter = "txt files (*.txt)|*.txt";
+                openFileDialog1.Filter = "txt files (*.txt)|*.txt|csv files (*.csv)|*.csv";
                 openFileDialog1.FilterIndex = 2;
                 openFileDialog1.RestoreDirectory = true;
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -51,6 +55,21 @@ namespace Interfaz_de_usuario
                 }
             }
             return path;
+        }
+        private ILoadDataSet ExtensionArchivo(String path)
+        {
+            ILoadDataSet l;
+            String[] split = path.Split('.');
+            String ext = split[split.Length - 1];
+            if (ext.Equals(EXT_TXT))
+            {
+                 l = new LoadDataSet(path);
+            }
+            else
+            {
+                 l = new LoadCsvDataSet(path);
+            }
+            return l;
         }
 
     }
