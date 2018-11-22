@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Dominio
 {
     public class DataSet
     {
-        public Guid Id { get; set; }
+        [Key]
+        public Guid DataSet_Id { get; set; }
+        public Guid Version_Id { get; set; }
         public String nombre { get; set; }
         public List<String> nombreRegistros { get; set; }
         public List<VariablesDataSet> registros { get; set; }
@@ -16,14 +19,14 @@ namespace Dominio
 
         public DataSet()
         {
-            Id = Guid.NewGuid();
+            DataSet_Id = Guid.NewGuid();
             nombreRegistros = new List<String>();
             registros = new List<VariablesDataSet>();
         }
 
         public DataSet(String path)
         {
-            Id = Guid.NewGuid();
+            DataSet_Id = Guid.NewGuid();
             nombre = path;
             nombreRegistros = new List<String>();
             registros = new List<VariablesDataSet>();
@@ -176,7 +179,8 @@ namespace Dominio
         {
             VariablesDataSet registro = registros.Find(r => r.GetNombreVariable() == nombreRegistro);
             SiRegistroEsOredenadoValidar(registro, datoRegistro);
-            registro.AddDdatosRegistro(datoRegistro);
+            VariableDato var = new VariableDato(datoRegistro);
+            registro.AddDdatosRegistro(var);
         }
 
         private void SiRegistroEsOredenadoValidar(VariablesDataSet registro, float datoRegistro)
@@ -198,7 +202,8 @@ namespace Dominio
 
         private float ObtenerLastDatoDeRegistroDataSet(VariablesDataSet registro, float datoRegistro)
         {
-            return registro.GetDatosRegistro().LastOrDefault();
+            IEnumerable<float> lista = GetListaDatos(registro.GetDatosRegistro());
+            return lista.LastOrDefault();
         }
 
         public String GetNombre()
@@ -217,7 +222,8 @@ namespace Dominio
         public void ValidarMinimoDeRegistros()
         {
             TryGetDatosRegistro();
-            IEnumerable<float> datosRegistros = registros.ElementAt(0).GetDatosRegistro();
+            
+            IEnumerable<float> datosRegistros = GetListaDatos(registros.ElementAt(0).GetDatosRegistro());
             if (datosRegistros.Count() < MINIMO_REGISTROS)
             {
                 throw new DataSetException("ERROR: Debe tener al menos " + MINIMO_REGISTROS + "registros");
@@ -228,14 +234,29 @@ namespace Dominio
         {
             try
             {
-               IEnumerable<float> datos =  registros.ElementAt(0).GetDatosRegistro();
+               IEnumerable<VariableDato> datos =  registros.ElementAt(0).GetDatosRegistro();
             }
             catch(Exception e)
             {
                 throw new DataSetException("ERROR: No existen Datos Registros");
             }
         }
+        public void AddVariableDataSet(VariablesDataSet variableDataset)
+        {
+            nombreRegistros.Add(variableDataset.nombreVariable);
+            registros.Add(variableDataset);
+
+        }
+        public IEnumerable<float> GetListaDatos(IEnumerable<VariableDato> datos)
+        {
+            List<float> lista = new List<float>();
+            for (int i = 0; i < datos.Count(); i++)
+            {
+                lista.Add(datos.ElementAt(i).dato);
+            }
+            return lista;
+        }
     }
 
-   
+
 }

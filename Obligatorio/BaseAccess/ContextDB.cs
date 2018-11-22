@@ -21,6 +21,7 @@ namespace BaseAccess
             modelBuilder.Entity<Producto>().HasMany(producto => producto.versiones).WithRequired();
             modelBuilder.Entity<DataSet>().HasMany(dataSet => dataSet.registros).WithRequired();
             modelBuilder.Entity<Dominio.Version>().HasMany(version => version.datasets).WithRequired();
+            modelBuilder.Entity<VariablesDataSet>().HasMany(variablesDataSet => variablesDataSet.datosRegistro).WithRequired();
         }
 
         public void EmptyDataBase()

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
 { 
     public class Producto
     {
-        public Guid Id { get; set; }
+        [Key]
+        public Guid Producto_Id { get; set; }
         public String nombre { get; set; }
         public DateTime fechaInicial { get; set; }
         public List<Version> versiones { get; set; }
@@ -13,13 +16,13 @@ namespace Dominio
 
         public Producto()
         {
-            Id = Guid.NewGuid();
+            Producto_Id = Guid.NewGuid();
             this.versiones = new List<Version>();
         }
 
         public Producto(String nombre, DateTime fecha)
         {
-            Id = Guid.NewGuid();
+            Producto_Id = Guid.NewGuid();
             ValidarNoVacio(nombre);
             this.nombre = nombre;
             this.fechaInicial = fecha;

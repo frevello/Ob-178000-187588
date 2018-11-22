@@ -49,9 +49,10 @@ namespace Interfaz_de_usuario
         }
         private void CargarListaDataSets()
         {
-            for (int i = 0; i < productoService.GetVersionProducto(nombreProducto, etiquetaVersion).GetDataSets().Count(); i++)
+            List<Dominio.DataSet> listaDataSet = productoService.GetDataSets(nombreProducto, etiquetaVersion).ToList<Dominio.DataSet>();
+            for (int i = 0; i < listaDataSet.Count(); i++)
             {
-                dataSets.Add(productoService.GetVersionProducto(nombreProducto, etiquetaVersion).GetDataSets().ElementAt(i).GetNombre());
+                dataSets.Add(listaDataSet.ElementAt(i).GetNombre());
             }
         }
         private void SetListaDataSets()
@@ -76,9 +77,9 @@ namespace Interfaz_de_usuario
             Dominio.DataSet dataSet = productoService.GetDataSet(nombreProducto, etiquetaVersion, nombreDataSet);
             for (int i = 0; i < estadisticosService.GetCantidadRegistros(dataSet); i++)
             {
-                if (!dataSetService.GetNombreRegistroAtIndex(dataSet, i).Equals("TIME"))
+                if (!dataSetService.GetRegistros(dataSet).ElementAt(i).Equals("TIME"))
                 {
-                    nombresRegistros.Add(dataSetService.GetNombreRegistroAtIndex(dataSet, i));
+                    nombresRegistros.Add(dataSetService.GetRegistros(dataSet).ElementAt(i).nombreVariable);
                 }
            }
         }
@@ -101,7 +102,7 @@ namespace Interfaz_de_usuario
             {
                 String nombreRegistro = listBoxNombresRegistros.GetItemText(listBoxNombresRegistros.SelectedItems[i]);
                 VariablesDataSet registroVar = dataSetService.GetRegistro(dataSet, nombreRegistro);
-                List<float> datos = CreateList(registroVar.GetDatosRegistro());
+                List<float> datos = CreateList(GetListaDatos(registroVar.GetDatosRegistro()));
                 registros.Add(datos);
                 nombresEjeY.Add(registroVar.GetNombreVariable());
             }
@@ -109,7 +110,7 @@ namespace Interfaz_de_usuario
             
             VariablesDataSet registroTiempo = dataSetService.GetRegistro(dataSet, REGISTRO_TIME);
             
-            Grafica grafica = new Grafica(registroTiempo.GetDatosRegistro(), registros, registroTiempo.GetNombreVariable(), nombresEjeY);
+            Grafica grafica = new Grafica(GetListaDatos(registroTiempo.GetDatosRegistro()), registros, registroTiempo.GetNombreVariable(), nombresEjeY);
             grafica.Show();
         }
         private List<float> CreateList(IEnumerable<float> lista)
@@ -133,6 +134,15 @@ namespace Interfaz_de_usuario
             ListaDataSet lista = new ListaDataSet(productoService, panelPrincipal, dataSetService);
             this.panelPrincipal.Controls.Clear();
             panelPrincipal.Controls.Add(lista);
+        }
+        public IEnumerable<float> GetListaDatos(IEnumerable<VariableDato> datos)
+        {
+            List<float> lista = new List<float>();
+            for (int i = 0; i < datos.Count(); i++)
+            {
+                lista.Add(datos.ElementAt(i).dato);
+            }
+            return lista;
         }
     }
 }

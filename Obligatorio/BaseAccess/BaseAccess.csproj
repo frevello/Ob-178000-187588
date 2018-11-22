@@ -50,9 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextDB.cs" />
-    <Compile Include="Migrations\201811212124591_createDB.cs" />
-    <Compile Include="Migrations\201811212124591_createDB.Designer.cs">
-      <DependentUpon>201811212124591_createDB.cs</DependentUpon>
+    <Compile Include="Migrations\201811222315128_crearBD.cs" />
+    <Compile Include="Migrations\201811222315128_crearBD.Designer.cs">
+      <DependentUpon>201811222315128_crearBD.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,8 +68,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811212124591_createDB.resx">
-      <DependentUpon>201811212124591_createDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811222315128_crearBD.resx">
+      <DependentUpon>201811222315128_crearBD.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

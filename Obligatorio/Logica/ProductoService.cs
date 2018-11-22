@@ -133,8 +133,6 @@ namespace Logica
 
         private IEnumerable<Dominio.Version> GetListaVersiones(String nombre)
         {
-            //Producto producto = this.listaProductos.FirstOrDefault(p => p.GetNombre() == nombre);
-            // return producto.GetVersiones();
             return this.IProductoDB.GetListaVersionesProducto(nombre);
         }
 
@@ -208,9 +206,11 @@ namespace Logica
 
         public void AddDataSet(String nombreProducto, String etiquetaVersion, DataSet dataSet)
         {
+            
             Dominio.Version version = GetVersionProducto(nombreProducto, etiquetaVersion);
             ValidarExisteDataSet(dataSet);
-            version.AddDataSet(dataSet);
+            this.IProductoDB.AgregarDataSetVersion(GetProducto(nombreProducto), version, dataSet);
+            AgregarRegistrosDataSet(dataSet);
         }
 
         private void ValidarExisteDataSet(DataSet dataSet)
@@ -221,11 +221,19 @@ namespace Logica
             }
         }
 
+        private void AgregarRegistrosDataSet(DataSet dataSet)
+        {
+            foreach (VariablesDataSet variableDataSet in dataSet.GetRegistros())
+            {
+                this.IProductoDB.AgregarVariableDataSet(dataSet, variableDataSet);
+            }
+        }
+
         public DataSet GetDataSet(String nombreProducto, String etiquetaVersion, String nombreDataSet)
         {
             Dominio.Version version = GetVersionProducto(nombreProducto, etiquetaVersion);
             ValidarNombreDataSetNoVacio(nombreDataSet);
-            return version.GetDataSets().FirstOrDefault(d => d.GetNombre() == nombreDataSet);
+            return this.IProductoDB.GetDataSet(nombreProducto, etiquetaVersion, nombreDataSet);
         }
 
         private void ValidarNombreDataSetNoVacio(String nombre)
@@ -271,14 +279,14 @@ namespace Logica
    
         public IEnumerable<DataSet> GetDataSets(String nombreProducto, String etiquetaVersion)
         {
-            Dominio.Version version = GetVersionProducto(nombreProducto, etiquetaVersion);
-            TryExistenDataSets(version);
-            return version.GetDataSets();
+            List<DataSet> lDataSet = this.IProductoDB.GetListaDataSetVersion(nombreProducto, etiquetaVersion);
+            TryExistenDataSets(lDataSet);
+            return lDataSet;
         }
 
-        private void TryExistenDataSets(Dominio.Version version)
+        private void TryExistenDataSets(List<DataSet> lDataSet)
         {
-            if(version.GetDataSets() == null)
+            if(lDataSet == null)
             {
                 throw new ProductoServiceException("ERROR: No existen DataSets");
             }

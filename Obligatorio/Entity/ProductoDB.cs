@@ -81,6 +81,29 @@ namespace Entity
                 throw new Exception(m.Message);
             }
         }
+        public Dominio.Version GetVersion(string etiqueta, string nombreProducto)
+        {
+            return this.GetListaVersionesProducto(nombreProducto).FirstOrDefault(v => v.etiqueta.Equals(etiqueta));
+        }
+        public DataSet GetDataSet(string nombreProducto, string etiquetVersion, string nombreDataSet)
+        {          
+            try
+            {
+                using (ContextDB context = new ContextDB())
+                {
+                    Dominio.Version v = this.GetVersion(etiquetVersion, nombreProducto);
+                    Dominio.Version ve = new Dominio.Version();
+                    ve = context.Versiones.Include("datasets").FirstOrDefault(versionDB => versionDB.Version_Id.Equals(v.Version_Id));
+                    return ve.GetDataSets().FirstOrDefault(d => d.nombre.Equals(nombreDataSet));
+
+                }
+            }
+            catch (DbEntityValidationException m)
+            {
+                throw new Exception(m.Message);
+            }
+
+        }
         public List<Producto> GetListaProductos()
         {
             try
@@ -105,6 +128,32 @@ namespace Entity
         {
             return GetProducto(nombreProducto).versiones;
         }
+        public List<DataSet> GetListaDataSetVersion(string nombreProducto, string etiquetaVersion)
+        {
+            try
+            {
+                using (ContextDB context = new ContextDB())
+                {
+                    Dominio.Version v = this.GetVersion(etiquetaVersion, nombreProducto);
+                    Dominio.Version ve = new Dominio.Version();
+                    ve = context.Versiones.Include("datasets").FirstOrDefault(versionDB => versionDB.Version_Id.Equals(v.Version_Id));
+
+                    List<DataSet> lDataSet = new List<DataSet>();
+                  
+                    foreach (DataSet dataSet in ve.GetDataSets())
+                    {
+                        lDataSet.Add(dataSet);
+                    }
+                    context.SaveChanges();
+
+                    return lDataSet;                
+                }
+            }
+            catch (DbEntityValidationException m)
+            {
+                throw new Exception(m.Message);
+            }
+        }
         public void AgregarVersionProducto(Producto producto, Dominio.Version version)
         {
             try
@@ -112,7 +161,7 @@ namespace Entity
                 using (ContextDB context = new ContextDB())
                 {
                     Producto p = new Producto();
-                    p = context.Productos.Include("versiones").FirstOrDefault(productoDB => productoDB.Id.Equals(producto.Id));
+                    p = context.Productos.Include("versiones").FirstOrDefault(productoDB => productoDB.Producto_Id.Equals(producto.Producto_Id));
                     p.AddVersion(version);
                     context.Productos.Attach(p);
                     context.Entry(p).State = System.Data.Entity.EntityState.Modified;
@@ -139,6 +188,45 @@ namespace Entity
                     context.Versiones.Attach(versionDB);
                     context.Versiones.Remove(versionDB);
                     context.Entry(p).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
+                }
+            }
+            catch (DbEntityValidationException m)
+            {
+                throw new Exception(m.Message);
+            }
+        }
+        public void AgregarDataSetVersion(Producto producto, Dominio.Version version, DataSet dataSet)
+        {
+            try
+            {
+                using (ContextDB context = new ContextDB())
+                {
+
+                    Dominio.Version v = new Dominio.Version();
+                    v = context.Versiones.Include("datasets").FirstOrDefault(versionDB => versionDB.Producto_Id.Equals(producto.Producto_Id));
+                    v.AddDataSet(dataSet);
+                    context.Versiones.Attach(v);
+                    context.Entry(v).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
+                }
+            }
+            catch (DbEntityValidationException m)
+            {
+                throw new Exception(m.Message);
+            }
+        }
+        public void AgregarVariableDataSet(DataSet dataSet, VariablesDataSet variableDataSet)
+        {
+            try
+            {
+                using (ContextDB context = new ContextDB())
+                {
+                    DataSet dS = new DataSet();
+                    dS = context.DataSets.Include("registros").FirstOrDefault(d => d.DataSet_Id.Equals(dataSet.DataSet_Id));
+                    dS.AddVariableDataSet(variableDataSet);
+                    context.DataSets.Attach(dS);
+                    context.Entry(dS).State = System.Data.Entity.EntityState.Modified;
                     context.SaveChanges();
                 }
             }

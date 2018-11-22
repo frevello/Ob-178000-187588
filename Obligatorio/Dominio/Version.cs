@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
 
 namespace Dominio
 {
     public class Version
     {
-        public Guid Id { get; set; }
+        [Key]
+        public Guid Version_Id { get; set; }
+        public Guid Producto_Id { get; set; }
         public String etiqueta { get; set; }
         public DateTime fechaCreacion { get; set; }
         public String estado { get; set; }
@@ -16,7 +20,7 @@ namespace Dominio
 
         public Version()
         {
-            Id = Guid.NewGuid();
+            Version_Id = Guid.NewGuid();
             this.datasets = new List<DataSet>();
         }
 
@@ -24,7 +28,7 @@ namespace Dominio
         {
             ValidarFormatoEtiqueta(etiqueta, "ERROR: Formato de etiqueta invalido");
             ValidarCampoNoVacios(estado, "ERROR: Estado vacio");
-            Id = Guid.NewGuid();
+            Version_Id = Guid.NewGuid();
             this.etiqueta = etiqueta;
             this.fechaCreacion = fecha;
             this.estado = estado;

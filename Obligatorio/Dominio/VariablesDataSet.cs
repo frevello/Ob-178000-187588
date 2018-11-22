@@ -1,26 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Dominio
 {
     public class VariablesDataSet
     {
-        public Guid Id { get; set; }
+        [Key]
+        public Guid VariableDataSet_Id { get; set; }
+        public Guid DataSet_Id { get; set; }
         public String nombreVariable { get; set; }
-        public List<float> datosRegistro { get; set; }
+        public List<VariableDato> datosRegistro { get; set; }
         public Boolean ordenado { get; set; }
 
         public VariablesDataSet()
         {
-            Id = Guid.NewGuid();
-            datosRegistro = new List<float>();
+            VariableDataSet_Id = Guid.NewGuid();
+            datosRegistro = new List<VariableDato>();
         }
 
         public VariablesDataSet(String nombre, Boolean esOrdenado = false)
         {
-            Id = Guid.NewGuid();
+            VariableDataSet_Id = Guid.NewGuid();
             nombreVariable = nombre;
-            datosRegistro = new List<float>();
+            datosRegistro = new List<VariableDato>();
             ordenado = esOrdenado;
         }
 
@@ -40,13 +43,14 @@ namespace Dominio
         {
             this.ordenado = ordenado;
         }
-        public IEnumerable<float> GetDatosRegistro()
+        public IEnumerable<VariableDato> GetDatosRegistro()
         {
             return this.datosRegistro;
         }
-        public void AddDdatosRegistro(float datoRegistro)
+        public void AddDdatosRegistro(VariableDato datoRegistro)
         {
             this.datosRegistro.Add(datoRegistro);
         }
+      
     }
 }

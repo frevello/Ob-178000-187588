@@ -41,7 +41,7 @@ namespace Logica
             IDataSetService dataSetService = new DataSetService();
             VariablesDataSet variableDataSet = dataSetService.GetRegistro(dataSet, nombreRegistro);
             ValidarExistenDatosRegistro(variableDataSet);
-            return variableDataSet.GetDatosRegistro().Max();
+            return variableDataSet.GetDatosRegistro().Max(v => v.dato);
         }
 
         public float GetMinimoRegistro(DataSet dataSet, string nombreRegistro)
@@ -49,7 +49,7 @@ namespace Logica
             IDataSetService dataSetService = new DataSetService();
             VariablesDataSet variableDataSet = dataSetService.GetRegistro(dataSet, nombreRegistro);
             ValidarExistenDatosRegistro(variableDataSet);
-            return variableDataSet.GetDatosRegistro().Min();
+            return variableDataSet.GetDatosRegistro().Min(v => v.dato);
         }
 
         public float GetPromedioRegistro(DataSet dataSet, String nombreRegistro)
@@ -57,7 +57,7 @@ namespace Logica
             IDataSetService dataSetService = new DataSetService();
             VariablesDataSet variableDataSet = dataSetService.GetRegistro(dataSet, nombreRegistro);
             ValidarExistenDatosRegistro(variableDataSet);
-            return variableDataSet.GetDatosRegistro().Average();
+            return variableDataSet.GetDatosRegistro().Average(v => v.dato);
         }
         private void ValidarExistenDatosRegistro(VariablesDataSet variableDataSet)
         {
@@ -65,11 +65,11 @@ namespace Logica
             TryValidarExisteDatosRegistro(variableDataSet.GetDatosRegistro());
         }
 
-        private void TryValidarExisteDatosRegistro(IEnumerable<float> datosRegistro)
+        private void TryValidarExisteDatosRegistro(IEnumerable<VariableDato> datosRegistro)
         {
             try
             {
-                float avarage = datosRegistro.Average();
+                float avarage = datosRegistro.Average(v => v.dato);
             }
             catch (Exception)
             {
@@ -80,7 +80,7 @@ namespace Logica
         {
             try
             {
-                IEnumerable<float> datosRegistro = variableDataSet.GetDatosRegistro();
+                IEnumerable<VariableDato> datosRegistro = variableDataSet.GetDatosRegistro();
             }
             catch (Exception)
             {
@@ -113,7 +113,8 @@ namespace Logica
             VariablesDataSet variableDataSet = dataSetService.GetRegistro(dataSet, nombreRegistro);
             int indexDesde = GetIndexTimeDesde(dataSet, timeDesde);
             int indexHasta = GetIndexTimeHasta(dataSet, timeHasta);
-            return GetListaFiltrada(variableDataSet.GetDatosRegistro(), indexDesde, indexHasta);
+            IEnumerable<float> lista = GetListaDatos(variableDataSet.GetDatosRegistro());
+            return GetListaFiltrada(lista, indexDesde, indexHasta);
         }
         private void ValidarTimeDesdeMenorHasta(float timeDesde, float timeHasta)
         {
@@ -136,8 +137,9 @@ namespace Logica
             VariablesDataSet variableDataSet = dataSetService.GetRegistro(dataSet, TIME);
             if(timeDesde <= GetMaximoRegistro(dataSet, TIME))
             {
-                float desde = GetFirstIgualoMayor(variableDataSet.GetDatosRegistro(), timeDesde);
-                float[] registros = variableDataSet.GetDatosRegistro().ToArray();
+                IEnumerable<float> lista = GetListaDatos(variableDataSet.GetDatosRegistro());
+                float desde = GetFirstIgualoMayor(lista, timeDesde);
+                float[] registros = lista.ToArray();
                 return Array.IndexOf(registros, desde);
             }
             return -1;
@@ -153,8 +155,9 @@ namespace Logica
             VariablesDataSet variableDataSet = dataSetService.GetRegistro(dataSet, TIME);
             if (timeHasta >= GetMinimoRegistro(dataSet, TIME))
             {
-                float desde = GetLastIgualoMenor(variableDataSet.GetDatosRegistro(), timeHasta);
-                float[] registros = variableDataSet.GetDatosRegistro().ToArray();
+                IEnumerable<float> lista = GetListaDatos(variableDataSet.GetDatosRegistro());
+                float desde = GetLastIgualoMenor(lista, timeHasta);
+                float[] registros = lista.ToArray();
                 return Array.IndexOf(registros, desde);
             }
             return -1;
@@ -195,6 +198,15 @@ namespace Logica
             {
                 return 0;
             }
+        }
+        private IEnumerable<float> GetListaDatos(IEnumerable<VariableDato> datos)
+        {
+            List<float> lista = new List<float>();
+            for(int i=0; i < datos.Count(); i++)
+            {
+                lista.Add(datos.ElementAt(i).dato);
+            }
+            return lista;
         }
 
     }

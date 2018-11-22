@@ -40,10 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IDataSetDB.cs" />
     <Compile Include="IProductoDB.cs" />
     <Compile Include="IUsuarioDB.cs" />
-    <Compile Include="IVariablesDataSetDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
