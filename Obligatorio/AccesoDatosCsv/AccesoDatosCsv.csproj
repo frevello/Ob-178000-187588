@@ -42,9 +42,11 @@
   <ItemGroup>
     <Compile Include="CreatorCsv.cs" />
     <Compile Include="CsvReader.cs" />
+    <Compile Include="CvsReaderException.cs" />
     <Compile Include="LoadCsvDataSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidatorFormatCsv.cs" />
+    <Compile Include="ValidatorFormatCsvException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dominio\Dominio.csproj">
