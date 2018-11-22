@@ -15,6 +15,11 @@ namespace Dominio
 
         private const int MIN_LARGO_CONTRASEÑA = 3;
 
+        public Usuario()
+        {
+            Id = Guid.NewGuid();
+        }
+
         public Usuario(String nombreUsuario, String nombre, String contraseña, String apellido, String rol)
         {
             ValidarNoVacio(nombreUsuario, "ERROR: Nombre usuario vacio");
@@ -27,6 +32,7 @@ namespace Dominio
             this.contraseña = contraseña;
             this.apellido = apellido;
             this.registro = DateTime.Now;
+            this.ultimoIngreso = DateTime.Now;
             this.rol = rol;
         }
 
