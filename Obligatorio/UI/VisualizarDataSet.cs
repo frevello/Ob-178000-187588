@@ -106,7 +106,7 @@ namespace Interfaz_de_usuario
                 registros.Add(datos);
                 nombresEjeY.Add(registroVar.GetNombreVariable());
             }
-
+            
             
             VariablesDataSet registroTiempo = dataSetService.GetRegistro(dataSet, REGISTRO_TIME);
             

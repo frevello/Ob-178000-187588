@@ -85,7 +85,50 @@ namespace Entity
         {
             return this.GetListaVersionesProducto(nombreProducto).FirstOrDefault(v => v.etiqueta.Equals(etiqueta));
         }
-        public DataSet GetDataSet(string nombreProducto, string etiquetVersion, string nombreDataSet)
+        public DataSet GetDataSet(string nombreProducto, string etiquetaVersion, string nombreDataSet)
+        {
+            try
+            {
+                using (ContextDB context = new ContextDB())
+                {
+                    Dominio.DataSet d = this.GetDataSetConVariablesSinDatos(nombreProducto, etiquetaVersion, nombreDataSet);
+                    List<VariablesDataSet> lVariables = new List<VariablesDataSet>();
+                    foreach (VariablesDataSet variable in d.GetRegistros())
+                    {
+                        Dominio.VariablesDataSet va = new Dominio.VariablesDataSet();
+                        va = context.VariablesDataSets.Include("datosRegistro").FirstOrDefault(vardatasetDB => vardatasetDB.VariableDataSet_Id.Equals(variable.VariableDataSet_Id));
+                        lVariables.Add(va);
+                    }
+                    d.registros = lVariables;
+
+                    return d;
+                }
+            }
+            catch (DbEntityValidationException m)
+            {
+                throw new Exception(m.Message);
+            }
+        }
+        public DataSet GetDataSetConVariablesSinDatos(string nombreProducto, string etiquetaVersion, string nombreDataSet)
+        {
+            try
+            {
+                using (ContextDB context = new ContextDB())
+                {
+                    Dominio.DataSet d= this.GetDataSetSinVariables( nombreProducto,etiquetaVersion, nombreDataSet);
+                    Dominio.DataSet da = new Dominio.DataSet();
+                    da = context.DataSets.Include("registros").FirstOrDefault(datasetDB => datasetDB.DataSet_Id.Equals(d.DataSet_Id));
+
+                    return da;
+                }
+            }
+            catch (DbEntityValidationException m)
+            {
+                throw new Exception(m.Message);
+            }
+        }
+
+        public DataSet GetDataSetSinVariables(string nombreProducto, string etiquetVersion, string nombreDataSet)
         {          
             try
             {
@@ -128,6 +171,7 @@ namespace Entity
         {
             return GetProducto(nombreProducto).versiones;
         }
+
         public List<DataSet> GetListaDataSetVersion(string nombreProducto, string etiquetaVersion)
         {
             try
@@ -204,7 +248,7 @@ namespace Entity
                 {
 
                     Dominio.Version v = new Dominio.Version();
-                    v = context.Versiones.Include("datasets").FirstOrDefault(versionDB => versionDB.Producto_Id.Equals(producto.Producto_Id));
+                    v = context.Versiones.Include("datasets").FirstOrDefault(versionDB => versionDB.Producto_Id.Equals(producto.Producto_Id) && versionDB.Version_Id.Equals(version.Version_Id));
                     v.AddDataSet(dataSet);
                     context.Versiones.Attach(v);
                     context.Entry(v).State = System.Data.Entity.EntityState.Modified;
@@ -216,24 +260,6 @@ namespace Entity
                 throw new Exception(m.Message);
             }
         }
-        public void AgregarVariableDataSet(DataSet dataSet, VariablesDataSet variableDataSet)
-        {
-            try
-            {
-                using (ContextDB context = new ContextDB())
-                {
-                    DataSet dS = new DataSet();
-                    dS = context.DataSets.Include("registros").FirstOrDefault(d => d.DataSet_Id.Equals(dataSet.DataSet_Id));
-                    dS.AddVariableDataSet(variableDataSet);
-                    context.DataSets.Attach(dS);
-                    context.Entry(dS).State = System.Data.Entity.EntityState.Modified;
-                    context.SaveChanges();
-                }
-            }
-            catch (DbEntityValidationException m)
-            {
-                throw new Exception(m.Message);
-            }
-        }
+     
     }
 }

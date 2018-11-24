@@ -210,7 +210,6 @@ namespace Logica
             Dominio.Version version = GetVersionProducto(nombreProducto, etiquetaVersion);
             ValidarExisteDataSet(dataSet);
             this.IProductoDB.AgregarDataSetVersion(GetProducto(nombreProducto), version, dataSet);
-            AgregarRegistrosDataSet(dataSet);
         }
 
         private void ValidarExisteDataSet(DataSet dataSet)
@@ -218,14 +217,6 @@ namespace Logica
             if(dataSet == null)
             {
                 throw new ProductoServiceException("ERROR: No existe DataSet");
-            }
-        }
-
-        private void AgregarRegistrosDataSet(DataSet dataSet)
-        {
-            foreach (VariablesDataSet variableDataSet in dataSet.GetRegistros())
-            {
-                this.IProductoDB.AgregarVariableDataSet(dataSet, variableDataSet);
             }
         }
 

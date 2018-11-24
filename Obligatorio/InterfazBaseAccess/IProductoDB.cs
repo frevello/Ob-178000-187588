@@ -21,6 +21,5 @@ namespace InterfazBaseAccess
         void AgregarVersionProducto(Producto producto, Dominio.Version version);
         void EliminarVersionProducto(Producto producto, Dominio.Version version);
         void AgregarDataSetVersion(Producto producto, Dominio.Version version, DataSet dataSet);
-        void AgregarVariableDataSet(DataSet dataSet, VariablesDataSet variableDataSet);
     }
 }
