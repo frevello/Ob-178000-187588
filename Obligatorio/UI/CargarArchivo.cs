@@ -135,8 +135,6 @@ namespace Interfaz_de_usuario
             {
                 ILoadDataSet l = ExtensionArchivo(path);
                 Dominio.DataSet dataset = l.CargarDataSet();
-                Console.WriteLine(dataset.registros.ElementAt(0).datosRegistro.ElementAt(0).dato);
-                Console.WriteLine(dataset.registros.ElementAt(0).datosRegistro.ElementAt(1).dato);
                 productoService.AddDataSet(nombreProducto, etiquetaVersion, dataset);
                 MessageBox.Show("Se cargo correctamente");
             }
